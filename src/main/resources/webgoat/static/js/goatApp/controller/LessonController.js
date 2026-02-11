@@ -1,161 +1,188 @@
-define(['jquery',
+define([
+    'jquery',
     'underscore',
     'backbone',
     'goatApp/model/LessonContentModel',
     'goatApp/view/LessonContentView',
     'goatApp/view/HintView',
     'goatApp/view/HelpControlsView',
-    'goatApp/support/GoatUtils',
     'goatApp/view/UserAndInfoView',
     'goatApp/view/MenuButtonView',
     'goatApp/model/LessonInfoModel'
-    ],
-    function($,
-        _,
-        Backbone,
-        LessonContentModel,
-        LessonContentView,
-        HintView,
-        HelpControlsView,
-        GoatUtils,
-        UserAndInfoView,
-        MenuButtonView,
-        LessonInfoModel
-    ) {
-        'use strict'
+], function (
+    $,
+    _,
+    Backbone,
+    LessonContentModel,
+    LessonContentView,
+    HintView,
+    HelpControlsView,
+    UserAndInfoView,
+    MenuButtonView,
+    LessonInfoModel
+) {
+    'use strict';
 
-        var Controller = function(options) {
-            this.lessonContent = new LessonContentModel();
-            this.lessonContentView = options.lessonContentView;
-            this.titleView = options.titleView;
+    var Controller = function (options) {
+        _.extend(this, Backbone.Events);
 
-            _.extend(Controller.prototype,Backbone.Events);
+        this.lessonContent = new LessonContentModel();
+        this.lessonContentView = options.lessonContentView;
+        this.titleView = options.titleView;
 
-            this.start = function() {
-                this.listenTo(this.lessonContent,'content:loaded',this.onContentLoaded);
-                this.userAndInfoView = new UserAndInfoView();
-                this.menuButtonView = new MenuButtonView();
-                this.listenTo(this.lessonContentView, 'assignment:complete', this.updateMenu);
-                this.listenTo(this.lessonContentView, 'endpoints:filtered', this.filterPageHints);
-            };
+        this.userAndInfoView = new UserAndInfoView();
+        this.menuButtonView = new MenuButtonView();
 
-            this.filterPageHints = function(endpoints) {
-                //filter hints for page by
-                this.lessonHintView.filterHints(endpoints);
-            }
+        this.name = null;
+        this.helpsLoaded = {};
+    };
 
-            this.onHideHintsButton = function() {
-                this.helpControlsView.hideHintsButton();
-            }
+    Controller.prototype.start = function () {
+        this.listenTo(this.lessonContent, 'content:loaded', this.onContentLoaded);
+        this.listenTo(this.lessonContentView, 'assignment:complete', this.updateMenu);
+        this.listenTo(this.lessonContentView, 'endpoints:filtered', this.filterPageHints);
+    };
 
-            this.onShowHintsButton = function() {
-                this.helpControlsView.showHintsButton();
-            }
+    // ----------------------------
+    // Lesson loading
+    // ----------------------------
 
-            this.loadLesson = function(name,pageNum) {
+    Controller.prototype.loadLesson = function (name, pageNum) {
+        if (!name) return;
 
-                if (this.name === name) {
-                    this.listenToOnce(this.lessonHintView, 'hints:showButton', this.onShowHintsButton);
-                    this.listenTo(this.lessonHintView, 'hints:hideButton', this.onHideHintsButton);
-                    this.lessonContentView.navToPage(pageNum);
-                    this.lessonHintView.hideHints();
-                    this.lessonHintView.showFirstHint();
-                    this.titleView.render(this.lessonInfoModel.get('lessonTitle'));
-                    return;
-                }
+        if (this.name === name) {
+            this._resumeLesson(pageNum);
+            return;
+        }
 
-                if (pageNum && !this.name) {
-                    //placeholder
-                }
+        this.name = name;
+        this.helpsLoaded = {};
+        this.lessonContent.loadData({ name: name });
+    };
 
-                this.helpsLoaded = {};
-                if (typeof(name) === 'undefined' || name === null) {
-                    //TODO: implement lesson not found or return to welcome page?
-                }
-                this.lessonContent.loadData({'name':name});
-                this.name = name;
-            };
+    Controller.prototype._resumeLesson = function (pageNum) {
+        this.listenToOnce(this.lessonHintView, 'hints:showButton', this.onShowHintsButton);
+        this.listenTo(this.lessonHintView, 'hints:hideButton', this.onHideHintsButton);
 
-            this.onInfoLoaded = function() {
-                this.helpControlsView = new HelpControlsView();
-                this.listenTo(this.helpControlsView,'hints:show',this.showHintsView);
-                this.listenTo(this.helpControlsView,'lesson:restart',this.restartLesson);
-                this.helpControlsView.render();
+        this.lessonContentView.navToPage(pageNum);
+        this.lessonHintView.hideHints();
+        this.lessonHintView.showFirstHint();
+        this.titleView.render(this.lessonInfoModel.get('lessonTitle'));
+    };
 
-                this.showHintsView();
-                this.titleView.render(this.lessonInfoModel.get('lessonTitle'));
-            };
+    // ----------------------------
+    // Content loaded
+    // ----------------------------
 
-            this.updateMenu = function() {
-                this.trigger('menu:reload')
-            };
+    Controller.prototype.onContentLoaded = function (loadHelps) {
+        if (!loadHelps) return;
 
-            this.onContentLoaded = function(loadHelps) {
-                this.lessonInfoModel = new LessonInfoModel({'lesson':loadHelps['urlRoot']});
+        this.lessonInfoModel = new LessonInfoModel({
+            lesson: loadHelps.urlRoot
+        });
 
-                this.listenTo(this.lessonInfoModel,'info:loaded',this.onInfoLoaded);
+        this.listenTo(this.lessonInfoModel, 'info:loaded', this.onInfoLoaded);
 
-                if (loadHelps) {
-                    this.helpControlsView = null;
-                    this.lessonContentView.model = this.lessonContent;
-                    this.lessonContentView.render();
-                    //TODO: consider moving hintView as child of lessonContentView ...
-                    this.createLessonHintView();
+        this.lessonContentView.model = this.lessonContent;
+        this.lessonContentView.render();
 
-                    $('.lesson-help').hide();
-                }
-                //this.trigger('menu:reload');
-            };
+        this._createLessonHintView();
 
-            this.createLessonHintView = function () {
-                if (this.lessonHintView) {
-                    this.lessonHintView.stopListening();
-                    this.lessonHintView = null;
-                }
-                this.lessonHintView = new HintView();
-            }
+        $('.lesson-help').hide();
+    };
 
-            this.addCurHelpState = function (curHelp) {
-                this.helpsLoaded[curHelp.helpElement] = curHelp.value;
-            };
+    Controller.prototype.onInfoLoaded = function () {
+        this._createHelpControls();
+        this.showHintsView();
+        this.titleView.render(this.lessonInfoModel.get('lessonTitle'));
+    };
 
-            this.showHintsView = function() {
-                var self=this;
-                if (!this.lessonHintView) {
-                    this.createLessonHintView();
-                }
-                //
-                this.lessonHintView.render();
-                if (this.lessonHintView.getHintsCount() > 0) {
-                    this.helpControlsView.showHintsButton();
-                } else {
-                    this.helpControlsView.hideHintsButton();
-                }
-            };
+    // ----------------------------
+    // Views creation
+    // ----------------------------
 
-            this.restartLesson = function() {
-                var self=this;
-                $.ajax({
-                    url: 'service/restartlesson.mvc/' + encodeURIComponent(self.name),
-                    method:'GET'
-                }).done(function(lessonLink) {
-                    self.loadLesson(self.name);
-                    self.updateMenu();
-                    self.callPaginationUpdate();
-                    self.lessonContentView.resetLesson();
-                });
-            };
+    Controller.prototype._createHelpControls = function () {
+        if (this.helpControlsView) {
+            this.helpControlsView.remove();
+            this.stopListening(this.helpControlsView);
+        }
 
-            this.testHandler = function(param) {
-                console.log('test handler');
-                this.lessonContentView.showTestParam(param);
-            };
+        this.helpControlsView = new HelpControlsView();
 
-            this.callPaginationUpdate = function () {
-                this.lessonContentView.updatePagination();
-            }
+        this.listenTo(this.helpControlsView, 'hints:show', this.showHintsView);
+        this.listenTo(this.helpControlsView, 'lesson:restart', this.restartLesson);
 
-        };
+        this.helpControlsView.render();
+    };
 
-        return Controller;
+    Controller.prototype._createLessonHintView = function () {
+        if (this.lessonHintView) {
+            this.lessonHintView.remove();
+            this.stopListening(this.lessonHintView);
+        }
+
+        this.lessonHintView = new HintView();
+    };
+
+    // ----------------------------
+    // Hints logic
+    // ----------------------------
+
+    Controller.prototype.filterPageHints = function (endpoints) {
+        if (this.lessonHintView) {
+            this.lessonHintView.filterHints(endpoints);
+        }
+    };
+
+    Controller.prototype.showHintsView = function () {
+        if (!this.lessonHintView) {
+            this._createLessonHintView();
+        }
+
+        this.lessonHintView.render();
+
+        if (this.lessonHintView.getHintsCount() > 0) {
+            this.helpControlsView.showHintsButton();
+        } else {
+            this.helpControlsView.hideHintsButton();
+        }
+    };
+
+    Controller.prototype.onHideHintsButton = function () {
+        this.helpControlsView.hideHintsButton();
+    };
+
+    Controller.prototype.onShowHintsButton = function () {
+        this.helpControlsView.showHintsButton();
+    };
+
+    // ----------------------------
+    // Lesson actions
+    // ----------------------------
+
+    Controller.prototype.restartLesson = function () {
+        var self = this;
+
+        $.get('service/restartlesson.mvc/' + encodeURIComponent(this.name))
+            .done(function () {
+                self.loadLesson(self.name);
+                self.updateMenu();
+                self.lessonContentView.resetLesson();
+                self.lessonContentView.updatePagination();
+            });
+    };
+
+    Controller.prototype.updateMenu = function () {
+        this.trigger('menu:reload');
+    };
+
+    Controller.prototype.addCurHelpState = function (curHelp) {
+        this.helpsLoaded[curHelp.helpElement] = curHelp.value;
+    };
+
+    Controller.prototype.testHandler = function (param) {
+        this.lessonContentView.showTestParam(param);
+    };
+
+    return Controller;
 });
