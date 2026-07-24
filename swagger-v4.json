@@ -1,0 +1,1031 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "WebGoat Injection & Core API",
+    "description": "SQL Injection, XXE, SSRF, Path Traversal, and Deserialization endpoints",
+    "version": "1.0.0",
+    "contact": {
+      "name": "WebGoat Security",
+      "email": "webgoat@owasp.org"
+    },
+    "license": {
+      "name": "GPL-2.0"
+    }
+  },
+  "host": "localhost:8080",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json",
+    "application/x-www-form-urlencoded"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "BasicAuth": {
+      "type": "basic",
+      "description": "HTTP Basic authentication"
+    },
+    "ApiKeyAuth": {
+      "type": "apiKey",
+      "in": "query",
+      "name": "api_key",
+      "description": "API key passed in query string"
+    }
+  },
+  "security": [
+    {
+      "BasicAuth": []
+    }
+  ],
+  "paths": {
+    "/WebGoat/SqlInjection/attack2": {
+      "post": {
+        "summary": "SQL Injection attack 2",
+        "operationId": "v4_sqlAttack2",
+        "tags": ["SQL Injection"],
+        "security": [],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "query",
+            "type": "string",
+            "required": true,
+            "description": "SQL query string injected directly into database"
+          },
+          {
+            "in": "formData",
+            "name": "account",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Query result returned without sanitization"
+          }
+        }
+      }
+    },
+    "/WebGoat/SqlInjection/attack3": {
+      "post": {
+        "summary": "SQL Injection attack 3",
+        "operationId": "v4_sqlAttack3",
+        "tags": ["SQL Injection"],
+        "security": [],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "userid",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "operator",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Query result"
+          }
+        }
+      }
+    },
+    "/WebGoat/SqlInjection/attack4": {
+      "post": {
+        "summary": "SQL Injection attack 4",
+        "operationId": "v4_sqlAttack4",
+        "tags": ["SQL Injection"],
+        "security": [],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "userid",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "tableName",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Query result"
+          }
+        }
+      }
+    },
+    "/WebGoat/SqlInjection/attack5a": {
+      "post": {
+        "summary": "SQL Injection attack 5a - blind",
+        "operationId": "v4_sqlAttack5a",
+        "tags": ["SQL Injection"],
+        "security": [],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "account",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "operator",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Blind SQL result"
+          }
+        }
+      }
+    },
+    "/WebGoat/SqlInjection/attack6a": {
+      "post": {
+        "summary": "SQL Injection attack 6a",
+        "operationId": "v4_sqlAttack6a",
+        "tags": ["SQL Injection"],
+        "security": [],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "userid",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "injection",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result"
+          }
+        }
+      }
+    },
+    "/WebGoat/SqlInjection/attack7": {
+      "post": {
+        "summary": "SQL Injection attack 7",
+        "operationId": "v4_sqlAttack7",
+        "tags": ["SQL Injection"],
+        "security": [],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "query",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "field",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result"
+          }
+        }
+      }
+    },
+    "/WebGoat/SqlInjection/attack8": {
+      "post": {
+        "summary": "SQL Injection attack 8",
+        "operationId": "v4_sqlAttack8",
+        "tags": ["SQL Injection"],
+        "security": [],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "name",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "auth_tan",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result"
+          }
+        }
+      }
+    },
+    "/WebGoat/SqlInjection/attack9": {
+      "post": {
+        "summary": "SQL Injection attack 9",
+        "operationId": "v4_sqlAttack9",
+        "tags": ["SQL Injection"],
+        "security": [],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "name",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "salary",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result"
+          }
+        }
+      }
+    },
+    "/WebGoat/SqlInjection/attack10": {
+      "post": {
+        "summary": "SQL Injection attack 10",
+        "operationId": "v4_sqlAttack10",
+        "tags": ["SQL Injection"],
+        "security": [],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "action",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "userid",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result"
+          }
+        }
+      }
+    },
+    "/WebGoat/SqlInjectionAdvanced/attack6a": {
+      "get": {
+        "summary": "SQL Injection Advanced - column enumeration",
+        "operationId": "v4_sqlAdvancedAttack6aGet",
+        "tags": ["SQL Injection Advanced"],
+        "security": [],
+        "parameters": [
+          {
+            "name": "columnName",
+            "in": "query",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Column names"
+          }
+        }
+      },
+      "post": {
+        "summary": "SQL Injection Advanced attack 6a",
+        "operationId": "v4_sqlAdvancedAttack6aPost",
+        "tags": ["SQL Injection Advanced"],
+        "security": [],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "userid_6a",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "inject",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result"
+          }
+        }
+      }
+    },
+    "/WebGoat/SqlInjectionAdvanced/attack6b": {
+      "post": {
+        "summary": "SQL Injection Advanced attack 6b",
+        "operationId": "v4_sqlAdvancedAttack6b",
+        "tags": ["SQL Injection Advanced"],
+        "security": [],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "userid_6b",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "password_6b",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result"
+          }
+        }
+      }
+    },
+    "/WebGoat/SqlInjectionAdvanced/register": {
+      "post": {
+        "summary": "Register - SQL injection advanced lesson",
+        "operationId": "v4_sqlAdvancedRegister",
+        "tags": ["SQL Injection Advanced"],
+        "security": [],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "username_reg",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "email_reg",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "password_reg",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Registration result"
+          }
+        }
+      }
+    },
+    "/WebGoat/SqlInjectionAdvanced/login": {
+      "post": {
+        "summary": "Login - SQL injection advanced lesson",
+        "operationId": "v4_sqlAdvancedLogin",
+        "tags": ["SQL Injection Advanced"],
+        "security": [],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "username_login",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "password_login",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Login result"
+          }
+        }
+      }
+    },
+    "/WebGoat/xxe/simple": {
+      "post": {
+        "summary": "XXE simple attack",
+        "operationId": "v4_xxeSimple",
+        "tags": ["XXE"],
+        "security": [],
+        "consumes": ["application/xml"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "xmlPayload",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "XXE result"
+          }
+        }
+      }
+    },
+    "/WebGoat/xxe/blind": {
+      "post": {
+        "summary": "XXE blind attack",
+        "operationId": "v4_xxeBlind",
+        "tags": ["XXE"],
+        "security": [],
+        "consumes": ["application/xml"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "xmlPayload",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Blind XXE result"
+          }
+        }
+      }
+    },
+    "/WebGoat/xxe/content-type": {
+      "post": {
+        "summary": "XXE via content-type",
+        "operationId": "v4_xxeContentType",
+        "tags": ["XXE"],
+        "security": [],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "text",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result"
+          }
+        }
+      }
+    },
+    "/WebGoat/xxe/comments": {
+      "get": {
+        "summary": "Get XXE comments",
+        "operationId": "v4_xxeCommentsGet",
+        "tags": ["XXE"],
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Comments list",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {"type": "integer"},
+                  "text": {"type": "string"}
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Post XXE comment",
+        "operationId": "v4_xxeCommentsPost",
+        "tags": ["XXE"],
+        "security": [],
+        "consumes": ["application/xml"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "xmlPayload",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Comment posted"
+          }
+        }
+      }
+    },
+    "/WebGoat/PathTraversal/profile-picture": {
+      "post": {
+        "summary": "Upload profile picture - path traversal vulnerable",
+        "operationId": "v4_pathTraversalUpload",
+        "tags": ["Path Traversal"],
+        "security": [],
+        "consumes": ["multipart/form-data"],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "fullName",
+            "type": "string",
+            "required": false
+          },
+          {
+            "in": "formData",
+            "name": "uploadedFile",
+            "type": "file",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Upload result"
+          }
+        }
+      }
+    },
+    "/WebGoat/PathTraversal/random-picture": {
+      "get": {
+        "summary": "Get picture by name - path traversal vulnerable",
+        "operationId": "v4_pathTraversalRandomPicture",
+        "tags": ["Path Traversal"],
+        "security": [],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "type": "string",
+            "required": false,
+            "description": "File name used directly in file system path without sanitization"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Image data"
+          }
+        }
+      }
+    },
+    "/WebGoat/PathTraversal/zip-slip/": {
+      "post": {
+        "summary": "Upload zip - zip slip vulnerable",
+        "operationId": "v4_pathTraversalZipSlip",
+        "tags": ["Path Traversal"],
+        "security": [],
+        "consumes": ["multipart/form-data"],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "uploadedFile",
+            "type": "file",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Upload result"
+          }
+        }
+      }
+    },
+    "/WebGoat/SSRF/task1": {
+      "post": {
+        "summary": "SSRF task 1",
+        "operationId": "v4_ssrfTask1",
+        "tags": ["SSRF"],
+        "security": [],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "url",
+            "type": "string",
+            "required": true,
+            "description": "URL fetched by server without validation"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SSRF result"
+          }
+        }
+      }
+    },
+    "/WebGoat/SSRF/task2": {
+      "post": {
+        "summary": "SSRF task 2",
+        "operationId": "v4_ssrfTask2",
+        "tags": ["SSRF"],
+        "security": [],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "url",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "target",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SSRF result"
+          }
+        }
+      }
+    },
+    "/WebGoat/InsecureDeserialization/task": {
+      "post": {
+        "summary": "Insecure deserialization",
+        "operationId": "v4_insecureDeserializationTask",
+        "tags": ["Insecure Deserialization"],
+        "security": [],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "token",
+            "type": "string",
+            "required": true,
+            "description": "Serialized Java object passed to deserializer without validation"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deserialization result"
+          }
+        }
+      }
+    },
+    "/WebGoat/VulnerableComponents/attack1": {
+      "post": {
+        "summary": "Vulnerable components attack",
+        "operationId": "v4_vulnerableComponentsAttack",
+        "tags": ["Vulnerable Components"],
+        "security": [],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "payload",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "serialized",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result"
+          }
+        }
+      }
+    },
+    "/WebGoat/SqlOnlyInputValidation/attack": {
+      "post": {
+        "summary": "SQL input-only validation attack",
+        "operationId": "v4_sqlOnlyInputValidation",
+        "tags": ["SQL Injection"],
+        "security": [],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "userid",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "query",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result"
+          }
+        }
+      }
+    },
+    "/WebGoat/SqlOnlyInputValidationOnKeywords/attack": {
+      "post": {
+        "summary": "SQL keyword validation attack",
+        "operationId": "v4_sqlOnlyInputValidationKeywords",
+        "tags": ["SQL Injection"],
+        "security": [],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "userid",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "query",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result"
+          }
+        }
+      }
+    },
+    "/WebGoat/SqlInjectionMitigations/attack10a": {
+      "post": {
+        "summary": "SQL mitigation attack 10a",
+        "operationId": "v4_sqlMitigations10a",
+        "tags": ["SQL Injection Mitigations"],
+        "security": [],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "name",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "auth_tan",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result"
+          }
+        }
+      }
+    },
+    "/WebGoat/SqlInjectionMitigations/attack10b": {
+      "post": {
+        "summary": "SQL mitigation attack 10b",
+        "operationId": "v4_sqlMitigations10b",
+        "tags": ["SQL Injection Mitigations"],
+        "security": [],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "name",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "salary",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result"
+          }
+        }
+      }
+    },
+    "/WebGoat/SqlInjectionMitigations/attack12a": {
+      "post": {
+        "summary": "SQL mitigation attack 12a",
+        "operationId": "v4_sqlMitigations12a",
+        "tags": ["SQL Injection Mitigations"],
+        "security": [],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "userid",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "query",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result"
+          }
+        }
+      }
+    },
+    "/WebGoat/SqlInjectionMitigations/servers": {
+      "get": {
+        "summary": "Get server list - no authentication",
+        "operationId": "v4_sqlMitigationsServers",
+        "tags": ["SQL Injection Mitigations"],
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Server list including internal IP addresses",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {"type": "integer"},
+                  "ip": {"type": "string"},
+                  "hostname": {"type": "string"},
+                  "mac": {"type": "string"},
+                  "status": {"type": "string"}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/WebGoat/clientSideFiltering/salaries": {
+      "get": {
+        "summary": "Get all employee salaries - sensitive data exposure",
+        "operationId": "v4_getAllSalaries",
+        "tags": ["Client Side Filtering"],
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Full salary table for all employees",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {"type": "string"},
+                  "salary": {"type": "integer"},
+                  "ssn": {"type": "string"},
+                  "department": {"type": "string"}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/WebGoat/coupons": {
+      "get": {
+        "summary": "Get all coupon codes including secret ones",
+        "operationId": "v4_getAllCoupons",
+        "tags": ["Coupons"],
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "All coupon codes",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "code": {"type": "string"},
+                  "discount": {"type": "integer"}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/WebGoat/coupons/{code}": {
+      "get": {
+        "summary": "Get coupon by code",
+        "operationId": "v4_getCouponByCode",
+        "tags": ["Coupons"],
+        "security": [],
+        "parameters": [
+          {
+            "name": "code",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Coupon details"
+          }
+        }
+      }
+    },
+    "/WebGoat/challenge/flag/{flagNumber}": {
+      "post": {
+        "summary": "Submit challenge flag",
+        "operationId": "v4_submitFlag",
+        "tags": ["Challenges"],
+        "security": [],
+        "parameters": [
+          {
+            "name": "flagNumber",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "formData",
+            "name": "flag",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Flag result"
+          }
+        }
+      }
+    },
+    "/WebGoat/challenge/7/.git": {
+      "get": {
+        "summary": "Exposed .git directory - source code disclosure",
+        "operationId": "v4_exposedGitDir",
+        "tags": ["Challenges"],
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Git repository contents including source code and credentials"
+          }
+        }
+      }
+    },
+    "/WebGoat/BypassRestrictions/FieldRestrictions": {
+      "post": {
+        "summary": "Bypass field restrictions",
+        "operationId": "v4_bypassFieldRestrictions",
+        "tags": ["Bypass Restrictions"],
+        "security": [],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "field1",
+            "type": "string",
+            "required": false
+          },
+          {
+            "in": "formData",
+            "name": "field2",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result"
+          }
+        }
+      }
+    },
+    "/WebGoat/BypassRestrictions/frontendValidation": {
+      "post": {
+        "summary": "Bypass frontend validation",
+        "operationId": "v4_bypassFrontendValidation",
+        "tags": ["Bypass Restrictions"],
+        "security": [],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "field1",
+            "type": "string",
+            "required": false
+          },
+          {
+            "in": "formData",
+            "name": "field2",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result"
+          }
+        }
+      }
+    }
+  }
+}

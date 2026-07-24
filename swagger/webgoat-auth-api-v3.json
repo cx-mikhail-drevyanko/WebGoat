@@ -1,0 +1,920 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "WebGoat Authentication & Session API",
+    "description": "Authentication, JWT, CSRF, Password Reset, XSS, and Open Redirect endpoints",
+    "version": "1.0.0",
+    "contact": {
+      "name": "WebGoat Security",
+      "email": "webgoat@owasp.org"
+    }
+  },
+  "host": "localhost:8080",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json",
+    "application/x-www-form-urlencoded"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "BasicAuth": {
+      "type": "basic"
+    },
+    "BearerAuth": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Authorization"
+    },
+    "ApiKeyQuery": {
+      "type": "apiKey",
+      "in": "query",
+      "name": "api_key"
+    }
+  },
+  "security": [
+    {
+      "BearerAuth": []
+    }
+  ],
+  "paths": {
+    "/WebGoat/login": {
+      "post": {
+        "summary": "Login - credentials sent over HTTP plaintext",
+        "operationId": "v3_login",
+        "tags": ["Authentication"],
+        "security": [],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "username",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "password",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Login successful - session cookie set without Secure flag"
+          },
+          "302": {
+            "description": "Redirect"
+          }
+        }
+      }
+    },
+    "/WebGoat/register.mvc": {
+      "post": {
+        "summary": "Register new user",
+        "operationId": "v3_registerUser",
+        "tags": ["Authentication"],
+        "security": [],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "username",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "email",
+            "type": "string",
+            "required": false
+          },
+          {
+            "in": "formData",
+            "name": "password",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "matchingPassword",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Registration successful"
+          }
+        }
+      }
+    },
+    "/WebGoat/JWT/decode": {
+      "post": {
+        "summary": "Decode JWT without verification",
+        "operationId": "v3_jwtDecode",
+        "tags": ["JWT"],
+        "security": [],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "token",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Decoded token contents exposed without signature verification"
+          }
+        }
+      }
+    },
+    "/WebGoat/JWT/votings": {
+      "get": {
+        "summary": "Get all votes without authentication",
+        "operationId": "v3_jwtVotingsGet",
+        "tags": ["JWT"],
+        "security": [],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "query",
+            "type": "string",
+            "required": false,
+            "description": "JWT token passed in query string - sensitive data in URL"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "All voting data",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "title": {"type": "string"},
+                  "votes": {"type": "integer"}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/WebGoat/JWT/votings/{title}": {
+      "post": {
+        "summary": "Vote without authentication",
+        "operationId": "v3_jwtVote",
+        "tags": ["JWT"],
+        "security": [],
+        "parameters": [
+          {
+            "name": "title",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "token",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Vote registered"
+          }
+        }
+      }
+    },
+    "/WebGoat/JWT/votings/login": {
+      "put": {
+        "summary": "JWT votings login - credentials in body over HTTP",
+        "operationId": "v3_jwtVotingsLogin",
+        "tags": ["JWT"],
+        "security": [],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "credentials",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "user": {"type": "string"},
+                "password": {"type": "string"}
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "JWT token returned - weak signing algorithm"
+          }
+        }
+      }
+    },
+    "/WebGoat/JWT/secret/gettoken": {
+      "get": {
+        "summary": "Get JWT secret token - credentials in query string",
+        "operationId": "v3_jwtGetToken",
+        "tags": ["JWT"],
+        "security": [],
+        "parameters": [
+          {
+            "name": "user",
+            "in": "query",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "secretToken",
+            "in": "query",
+            "type": "string",
+            "required": false,
+            "description": "Secret token passed in URL - logged by proxies"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Token"
+          }
+        }
+      }
+    },
+    "/WebGoat/JWT/secret": {
+      "post": {
+        "summary": "Submit JWT secret",
+        "operationId": "v3_jwtSecret",
+        "tags": ["JWT"],
+        "security": [],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "token",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "secretKey",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Validation result"
+          }
+        }
+      }
+    },
+    "/WebGoat/JWT/refresh/checkout": {
+      "post": {
+        "summary": "JWT refresh checkout - missing token validation",
+        "operationId": "v3_jwtRefreshCheckout",
+        "tags": ["JWT"],
+        "security": [],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "token": {"type": "string"},
+                "cart": {"type": "string"}
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Checkout result"
+          }
+        }
+      }
+    },
+    "/WebGoat/JWT/refresh/newToken": {
+      "get": {
+        "summary": "Get JWT - password passed in query string",
+        "operationId": "v3_jwtNewToken",
+        "tags": ["JWT"],
+        "security": [],
+        "parameters": [
+          {
+            "name": "userName",
+            "in": "query",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "type": "string",
+            "required": false,
+            "description": "Password exposed in URL query string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "New JWT token"
+          }
+        }
+      }
+    },
+    "/WebGoat/HijackSession/login": {
+      "post": {
+        "summary": "Session hijack login - predictable session IDs",
+        "operationId": "v3_hijackSessionLogin",
+        "tags": ["Session Hijacking"],
+        "security": [],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "username",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "password",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Session cookie set with predictable value"
+          }
+        }
+      }
+    },
+    "/WebGoat/SpoofCookie/login": {
+      "post": {
+        "summary": "Cookie spoof login - cookie value predictable",
+        "operationId": "v3_spoofCookieLogin",
+        "tags": ["Cookie Spoofing"],
+        "security": [],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "username",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "password",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Login result with spoofable cookie"
+          }
+        }
+      }
+    },
+    "/WebGoat/PasswordReset/ForgotPassword/create-password-reset-link": {
+      "post": {
+        "summary": "Create password reset link - weak token generation",
+        "operationId": "v3_createPasswordResetLink",
+        "tags": ["Password Reset"],
+        "security": [],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "email",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Reset link sent with weak token"
+          }
+        }
+      }
+    },
+    "/WebGoat/PasswordReset/reset/reset-password/{link}": {
+      "get": {
+        "summary": "Get password reset form",
+        "operationId": "v3_getPasswordResetForm",
+        "tags": ["Password Reset"],
+        "security": [],
+        "parameters": [
+          {
+            "name": "link",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Reset form - no token expiry"
+          }
+        }
+      },
+      "post": {
+        "summary": "Submit password reset",
+        "operationId": "v3_submitPasswordReset",
+        "tags": ["Password Reset"],
+        "security": [],
+        "parameters": [
+          {
+            "name": "link",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "newPassword": {"type": "string"},
+                "confirmPassword": {"type": "string"}
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Password reset - no rate limiting"
+          }
+        }
+      }
+    },
+    "/WebGoat/PasswordReset/SecurityQuestions": {
+      "get": {
+        "summary": "Get security questions",
+        "operationId": "v3_getSecurityQuestions",
+        "tags": ["Password Reset"],
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Security questions",
+            "schema": {
+              "type": "array",
+              "items": {"type": "string"}
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Verify security question - brute force possible",
+        "operationId": "v3_submitSecurityQuestion",
+        "tags": ["Password Reset"],
+        "security": [],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": {"type": "string"},
+                "securityQuestion": {"type": "string"},
+                "answer": {"type": "string"}
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Answer verified"
+          }
+        }
+      }
+    },
+    "/WebGoat/PasswordReset/reset/login": {
+      "post": {
+        "summary": "Login after reset - no lockout",
+        "operationId": "v3_loginAfterReset",
+        "tags": ["Password Reset"],
+        "security": [],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "username",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "password",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Login result"
+          }
+        }
+      }
+    },
+    "/WebGoat/csrf/feedback": {
+      "post": {
+        "summary": "Submit CSRF feedback - no CSRF token",
+        "operationId": "v3_csrfFeedback",
+        "tags": ["CSRF"],
+        "security": [],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "comment": {"type": "string"},
+                "csrf": {"type": "string"},
+                "username": {"type": "string"}
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Feedback submitted without CSRF validation"
+          }
+        }
+      }
+    },
+    "/WebGoat/csrf/review": {
+      "get": {
+        "summary": "Get review page",
+        "operationId": "v3_csrfReviewGet",
+        "tags": ["CSRF"],
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Review page"
+          }
+        }
+      },
+      "post": {
+        "summary": "Submit review - CSRF vulnerable",
+        "operationId": "v3_csrfReviewPost",
+        "tags": ["CSRF"],
+        "security": [],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "reviewText",
+            "type": "string",
+            "required": false
+          },
+          {
+            "in": "formData",
+            "name": "stars",
+            "type": "integer",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Review submitted"
+          }
+        }
+      }
+    },
+    "/WebGoat/InsecureLogin/login": {
+      "post": {
+        "summary": "Insecure login - credentials transmitted in plaintext",
+        "operationId": "v3_insecureLogin",
+        "tags": ["Insecure Login"],
+        "security": [],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "credentials",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": {"type": "string"},
+                "password": {"type": "string"}
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Login result"
+          }
+        }
+      }
+    },
+    "/WebGoat/InsecureLogin/task": {
+      "get": {
+        "summary": "Insecure login with credentials in query params",
+        "operationId": "v3_insecureLoginTask",
+        "tags": ["Insecure Login"],
+        "security": [],
+        "parameters": [
+          {
+            "name": "username",
+            "in": "query",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "type": "string",
+            "required": false,
+            "description": "Password transmitted in URL - logged by servers and proxies"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result"
+          }
+        }
+      }
+    },
+    "/WebGoat/OpenRedirect/realRedirect": {
+      "get": {
+        "summary": "Open redirect - redirect to any external URL",
+        "operationId": "v3_openRedirectReal",
+        "tags": ["Open Redirect"],
+        "security": [],
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "type": "string",
+            "required": false,
+            "description": "Destination URL not validated - open redirect"
+          }
+        ],
+        "responses": {
+          "302": {
+            "description": "Redirect to untrusted URL"
+          }
+        }
+      }
+    },
+    "/WebGoat/OpenRedirect/task1": {
+      "get": {
+        "summary": "Open redirect task 1",
+        "operationId": "v3_openRedirectTask1",
+        "tags": ["Open Redirect"],
+        "security": [],
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "302": {
+            "description": "Redirect"
+          }
+        }
+      }
+    },
+    "/WebGoat/OpenRedirect/task2": {
+      "post": {
+        "summary": "Open redirect task 2",
+        "operationId": "v3_openRedirectTask2",
+        "tags": ["Open Redirect"],
+        "security": [],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "redirect",
+            "type": "string",
+            "required": false
+          },
+          {
+            "in": "formData",
+            "name": "returnUrl",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result"
+          }
+        }
+      }
+    },
+    "/WebGoat/CrossSiteScripting/attack1": {
+      "post": {
+        "summary": "XSS reflected - input reflected without encoding",
+        "operationId": "v3_xssAttack1",
+        "tags": ["XSS"],
+        "security": [],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "text",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response with unescaped user input"
+          }
+        }
+      }
+    },
+    "/WebGoat/CrossSiteScripting/attack3": {
+      "post": {
+        "summary": "XSS attack 3",
+        "operationId": "v3_xssAttack3",
+        "tags": ["XSS"],
+        "security": [],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "text",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response with XSS"
+          }
+        }
+      }
+    },
+    "/WebGoat/CrossSiteScripting/attack4": {
+      "post": {
+        "summary": "XSS attack 4",
+        "operationId": "v3_xssAttack4",
+        "tags": ["XSS"],
+        "security": [],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "text",
+            "type": "string",
+            "required": false
+          },
+          {
+            "in": "formData",
+            "name": "param",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response"
+          }
+        }
+      }
+    },
+    "/WebGoat/CrossSiteScriptingStored/stored-xss": {
+      "get": {
+        "summary": "Get stored XSS entries",
+        "operationId": "v3_storedXssGet",
+        "tags": ["XSS"],
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Stored entries with unescaped user content",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {"type": "integer"},
+                  "text": {"type": "string"}
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Submit stored XSS content",
+        "operationId": "v3_storedXssPost",
+        "tags": ["XSS"],
+        "security": [],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "text": {"type": "string"}
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Content stored without sanitization"
+          }
+        }
+      }
+    },
+    "/WebGoat/LogSpoofing/log-spoofing": {
+      "post": {
+        "summary": "Log injection attack",
+        "operationId": "v3_logSpoofing",
+        "tags": ["Log Spoofing"],
+        "security": [],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "username",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Log entry created with injected content"
+          }
+        }
+      }
+    },
+    "/WebGoat/LogSpoofing/log-bleeding": {
+      "post": {
+        "summary": "Log4Shell bleeding",
+        "operationId": "v3_logBleeding",
+        "tags": ["Log Spoofing"],
+        "security": [],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "username",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result"
+          }
+        }
+      }
+    },
+    "/WebGoat/crypto/signing/getprivate": {
+      "get": {
+        "summary": "Get private signing key - critical data exposure",
+        "operationId": "v3_cryptoGetPrivateKey",
+        "tags": ["Cryptography"],
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Private key returned in response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "privateKey": {"type": "string"},
+                "algorithm": {"type": "string"}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/WebGoat/crypto/hashing": {
+      "get": {
+        "summary": "Hash password passed in query string",
+        "operationId": "v3_cryptoHashing",
+        "tags": ["Cryptography"],
+        "security": [],
+        "parameters": [
+          {
+            "name": "password",
+            "in": "query",
+            "type": "string",
+            "required": false,
+            "description": "Password exposed in query string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Hash result"
+          }
+        }
+      }
+    }
+  }
+}
