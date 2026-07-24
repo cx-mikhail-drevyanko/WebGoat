@@ -1,43 +1,60 @@
 {
-  "openapi": "3.0.0",
+  "swagger": "2.0",
   "info": {
-    "title": "WebGoat Authentication API",
-    "description": "API endpoints for Authentication, JWT, Session Hijacking, CSRF, and Password Reset lessons",
+    "title": "WebGoat Authentication & Session API",
+    "description": "Authentication, JWT, CSRF, Password Reset, and XSS lesson endpoints",
     "version": "1.0.0",
     "contact": {
-      "name": "WebGoat"
+      "name": "WebGoat Security"
     }
   },
-  "servers": [
-    {
-      "url": "http://localhost:8080/WebGoat",
-      "description": "Local WebGoat instance"
-    }
+  "host": "localhost:8080",
+  "basePath": "/WebGoat",
+  "schemes": [
+    "http"
   ],
+  "consumes": [
+    "application/json",
+    "application/x-www-form-urlencoded"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "BasicAuth": {
+      "type": "basic"
+    },
+    "ApiKeyAuth": {
+      "type": "apiKey",
+      "in": "query",
+      "name": "api_key"
+    },
+    "BearerAuth": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Authorization"
+    }
+  },
   "paths": {
     "/login": {
       "post": {
-        "summary": "User login",
+        "summary": "User login - credentials sent over HTTP",
         "operationId": "login",
         "tags": ["Authentication"],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "username": {
-                    "type": "string"
-                  },
-                  "password": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "username",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "password",
+            "type": "string",
+            "required": true
           }
-        },
+        ],
         "responses": {
           "200": {
             "description": "Login successful"
@@ -53,30 +70,32 @@
         "summary": "Register new user",
         "operationId": "registerUser",
         "tags": ["Authentication"],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "username": {
-                    "type": "string"
-                  },
-                  "email": {
-                    "type": "string"
-                  },
-                  "password": {
-                    "type": "string"
-                  },
-                  "matchingPassword": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "username",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "email",
+            "type": "string",
+            "required": false
+          },
+          {
+            "in": "formData",
+            "name": "password",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "matchingPassword",
+            "type": "string",
+            "required": true
           }
-        },
+        ],
         "responses": {
           "200": {
             "description": "Registration successful"
@@ -89,21 +108,14 @@
         "summary": "Decode JWT token",
         "operationId": "jwtDecode",
         "tags": ["JWT"],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "token": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "token",
+            "type": "string",
+            "required": true
           }
-        },
+        ],
         "responses": {
           "200": {
             "description": "Decoded token contents"
@@ -113,35 +125,30 @@
     },
     "/JWT/votings": {
       "get": {
-        "summary": "Get all votes",
+        "summary": "Get all voting items",
         "operationId": "jwtVotingsGet",
         "tags": ["JWT"],
         "parameters": [
           {
             "name": "Authorization",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            }
+            "in": "query",
+            "type": "string",
+            "required": false
           }
         ],
         "responses": {
           "200": {
-            "description": "List of all votes",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "title": {
-                        "type": "string"
-                      },
-                      "votes": {
-                        "type": "integer"
-                      }
-                    }
+            "description": "Voting list",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string"
+                  },
+                  "votes": {
+                    "type": "integer"
                   }
                 }
               }
@@ -152,7 +159,7 @@
     },
     "/JWT/votings/{title}": {
       "post": {
-        "summary": "Vote for item",
+        "summary": "Vote for an item",
         "operationId": "jwtVote",
         "tags": ["JWT"],
         "parameters": [
@@ -160,26 +167,15 @@
             "name": "title",
             "in": "path",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "token",
+            "type": "string",
+            "required": false
           }
         ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "token": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "Vote registered"
@@ -192,27 +188,27 @@
         "summary": "JWT votings login",
         "operationId": "jwtVotingsLogin",
         "tags": ["JWT"],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "user": {
-                    "type": "string"
-                  },
-                  "password": {
-                    "type": "string"
-                  }
+        "parameters": [
+          {
+            "in": "body",
+            "name": "credentials",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "user": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
                 }
               }
             }
           }
-        },
+        ],
         "responses": {
           "200": {
-            "description": "Login with JWT"
+            "description": "JWT token returned"
           }
         }
       }
@@ -226,78 +222,72 @@
           {
             "name": "user",
             "in": "query",
-            "schema": {
-              "type": "string"
-            }
+            "type": "string",
+            "required": false
           },
           {
             "name": "secretToken",
             "in": "query",
-            "schema": {
-              "type": "string"
-            }
+            "type": "string",
+            "required": false
           }
         ],
         "responses": {
           "200": {
-            "description": "Token returned"
+            "description": "Token"
           }
         }
       }
     },
     "/JWT/secret": {
       "post": {
-        "summary": "Submit JWT secret",
+        "summary": "Submit JWT secret for verification",
         "operationId": "jwtSecret",
         "tags": ["JWT"],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "token": {
-                    "type": "string"
-                  },
-                  "secretKey": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "token",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "secretKey",
+            "type": "string",
+            "required": false
           }
-        },
+        ],
         "responses": {
           "200": {
-            "description": "Secret validation result"
+            "description": "Validation result"
           }
         }
       }
     },
     "/JWT/refresh/checkout": {
       "post": {
-        "summary": "JWT refresh checkout",
+        "summary": "JWT refresh - checkout",
         "operationId": "jwtRefreshCheckout",
         "tags": ["JWT"],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "token": {
-                    "type": "string"
-                  },
-                  "cart": {
-                    "type": "string"
-                  }
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "token": {
+                  "type": "string"
+                },
+                "cart": {
+                  "type": "string"
                 }
               }
             }
           }
-        },
+        ],
         "responses": {
           "200": {
             "description": "Checkout result"
@@ -307,23 +297,21 @@
     },
     "/JWT/refresh/newToken": {
       "get": {
-        "summary": "Get new JWT refresh token",
+        "summary": "Get new JWT via credentials in query",
         "operationId": "jwtNewToken",
         "tags": ["JWT"],
         "parameters": [
           {
             "name": "userName",
             "in": "query",
-            "schema": {
-              "type": "string"
-            }
+            "type": "string",
+            "required": false
           },
           {
             "name": "password",
             "in": "query",
-            "schema": {
-              "type": "string"
-            }
+            "type": "string",
+            "required": false
           }
         ],
         "responses": {
@@ -338,57 +326,49 @@
         "summary": "Session hijack login",
         "operationId": "hijackSessionLogin",
         "tags": ["Session Hijacking"],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "username": {
-                    "type": "string"
-                  },
-                  "password": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "username",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "password",
+            "type": "string",
+            "required": true
           }
-        },
+        ],
         "responses": {
           "200": {
-            "description": "Session cookie set"
+            "description": "Session set"
           }
         }
       }
     },
     "/SpoofCookie/login": {
       "post": {
-        "summary": "Spoof cookie login",
+        "summary": "Cookie spoofing login",
         "operationId": "spoofCookieLogin",
         "tags": ["Cookie Spoofing"],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "username": {
-                    "type": "string"
-                  },
-                  "password": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "username",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "password",
+            "type": "string",
+            "required": true
           }
-        },
+        ],
         "responses": {
           "200": {
-            "description": "Login result"
+            "description": "Login result with cookie"
           }
         }
       }
@@ -398,21 +378,14 @@
         "summary": "Create password reset link",
         "operationId": "createPasswordResetLink",
         "tags": ["Password Reset"],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "email": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "email",
+            "type": "string",
+            "required": true
           }
-        },
+        ],
         "responses": {
           "200": {
             "description": "Reset link sent"
@@ -422,7 +395,7 @@
     },
     "/PasswordReset/reset/reset-password/{link}": {
       "get": {
-        "summary": "Get password reset form",
+        "summary": "Get reset form",
         "operationId": "getPasswordResetForm",
         "tags": ["Password Reset"],
         "parameters": [
@@ -430,9 +403,7 @@
             "name": "link",
             "in": "path",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           }
         ],
         "responses": {
@@ -450,29 +421,25 @@
             "name": "link",
             "in": "path",
             "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
             "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "newPassword": {
-                    "type": "string"
-                  },
-                  "confirmPassword": {
-                    "type": "string"
-                  }
+              "type": "object",
+              "properties": {
+                "newPassword": {
+                  "type": "string"
+                },
+                "confirmPassword": {
+                  "type": "string"
                 }
               }
             }
           }
-        },
+        ],
         "responses": {
           "200": {
             "description": "Password reset"
@@ -487,48 +454,70 @@
         "tags": ["Password Reset"],
         "responses": {
           "200": {
-            "description": "Security questions list",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                }
+            "description": "Security questions",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
               }
             }
           }
         }
       },
       "post": {
-        "summary": "Submit security question answer",
+        "summary": "Verify security question",
         "operationId": "submitSecurityQuestion",
         "tags": ["Password Reset"],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "username": {
-                    "type": "string"
-                  },
-                  "securityQuestion": {
-                    "type": "string"
-                  },
-                  "answer": {
-                    "type": "string"
-                  }
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "type": "string"
+                },
+                "securityQuestion": {
+                  "type": "string"
+                },
+                "answer": {
+                  "type": "string"
                 }
               }
             }
           }
-        },
+        ],
         "responses": {
           "200": {
-            "description": "Answer verification result"
+            "description": "Verification result"
+          }
+        }
+      }
+    },
+    "/PasswordReset/reset/login": {
+      "post": {
+        "summary": "Login after password reset",
+        "operationId": "loginAfterReset",
+        "tags": ["Password Reset"],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "username",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "password",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Login result"
           }
         }
       }
@@ -538,27 +527,27 @@
         "summary": "Submit CSRF feedback",
         "operationId": "csrfFeedback",
         "tags": ["CSRF"],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "comment": {
-                    "type": "string"
-                  },
-                  "csrf": {
-                    "type": "string"
-                  },
-                  "username": {
-                    "type": "string"
-                  }
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "comment": {
+                  "type": "string"
+                },
+                "csrf": {
+                  "type": "string"
+                },
+                "username": {
+                  "type": "string"
                 }
               }
             }
           }
-        },
+        ],
         "responses": {
           "200": {
             "description": "Feedback submitted"
@@ -578,27 +567,23 @@
         }
       },
       "post": {
-        "summary": "Submit CSRF review",
+        "summary": "Submit review",
         "operationId": "csrfReviewPost",
         "tags": ["CSRF"],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "reviewText": {
-                    "type": "string"
-                  },
-                  "stars": {
-                    "type": "integer"
-                  }
-                }
-              }
-            }
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "reviewText",
+            "type": "string",
+            "required": false
+          },
+          {
+            "in": "formData",
+            "name": "stars",
+            "type": "integer",
+            "required": false
           }
-        },
+        ],
         "responses": {
           "200": {
             "description": "Review submitted"
@@ -608,27 +593,27 @@
     },
     "/InsecureLogin/login": {
       "post": {
-        "summary": "Insecure login",
+        "summary": "Insecure login - plaintext credentials",
         "operationId": "insecureLogin",
         "tags": ["Insecure Login"],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "username": {
-                    "type": "string"
-                  },
-                  "password": {
-                    "type": "string"
-                  }
+        "parameters": [
+          {
+            "in": "body",
+            "name": "credentials",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
                 }
               }
             }
           }
-        },
+        ],
         "responses": {
           "200": {
             "description": "Login result"
@@ -638,28 +623,46 @@
     },
     "/InsecureLogin/task": {
       "get": {
-        "summary": "Get insecure login task",
+        "summary": "Insecure login with credentials in query",
         "operationId": "insecureLoginTask",
         "tags": ["Insecure Login"],
         "parameters": [
           {
             "name": "username",
             "in": "query",
-            "schema": {
-              "type": "string"
-            }
+            "type": "string",
+            "required": false
           },
           {
             "name": "password",
             "in": "query",
-            "schema": {
-              "type": "string"
-            }
+            "type": "string",
+            "required": false
           }
         ],
         "responses": {
           "200": {
             "description": "Task result"
+          }
+        }
+      }
+    },
+    "/OpenRedirect/realRedirect": {
+      "get": {
+        "summary": "Redirect to any URL",
+        "operationId": "openRedirectReal",
+        "tags": ["Open Redirect"],
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "302": {
+            "description": "Redirect"
           }
         }
       }
@@ -673,9 +676,8 @@
           {
             "name": "url",
             "in": "query",
-            "schema": {
-              "type": "string"
-            }
+            "type": "string",
+            "required": false
           }
         ],
         "responses": {
@@ -686,49 +688,24 @@
       }
     },
     "/OpenRedirect/task2": {
-      "get": {
+      "post": {
         "summary": "Open redirect task 2",
         "operationId": "openRedirectTask2",
         "tags": ["Open Redirect"],
         "parameters": [
           {
+            "in": "formData",
             "name": "redirect",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
+            "type": "string",
+            "required": false
+          },
+          {
+            "in": "formData",
+            "name": "returnUrl",
+            "type": "string",
+            "required": false
           }
         ],
-        "responses": {
-          "302": {
-            "description": "Redirect"
-          }
-        }
-      }
-    },
-    "/OpenRedirect/task3": {
-      "post": {
-        "summary": "Open redirect task 3",
-        "operationId": "openRedirectTask3",
-        "tags": ["Open Redirect"],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "url": {
-                    "type": "string"
-                  },
-                  "returnUrl": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "Result"
@@ -738,27 +715,20 @@
     },
     "/CrossSiteScripting/attack1": {
       "post": {
-        "summary": "XSS attack 1",
+        "summary": "XSS reflected attack 1",
         "operationId": "xssAttack1",
         "tags": ["XSS"],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "text": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "text",
+            "type": "string",
+            "required": false
           }
-        },
+        ],
         "responses": {
           "200": {
-            "description": "XSS result"
+            "description": "Response with reflected XSS"
           }
         }
       }
@@ -768,24 +738,63 @@
         "summary": "XSS attack 3",
         "operationId": "xssAttack3",
         "tags": ["XSS"],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "text": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "text",
+            "type": "string",
+            "required": false
           }
-        },
+        ],
         "responses": {
           "200": {
-            "description": "XSS result"
+            "description": "Response with XSS"
+          }
+        }
+      }
+    },
+    "/CrossSiteScripting/attack4": {
+      "post": {
+        "summary": "XSS attack 4",
+        "operationId": "xssAttack4",
+        "tags": ["XSS"],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "text",
+            "type": "string",
+            "required": false
+          },
+          {
+            "in": "formData",
+            "name": "param",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response"
+          }
+        }
+      }
+    },
+    "/CrossSiteScripting/attack5a": {
+      "post": {
+        "summary": "XSS attack 5a - DOM based",
+        "operationId": "xssAttack5a",
+        "tags": ["XSS"],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "text",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "DOM XSS response"
           }
         }
       }
@@ -798,20 +807,16 @@
         "responses": {
           "200": {
             "description": "Stored XSS entries",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "integer"
-                      },
-                      "text": {
-                        "type": "string"
-                      }
-                    }
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "text": {
+                    "type": "string"
                   }
                 }
               }
@@ -820,27 +825,27 @@
         }
       },
       "post": {
-        "summary": "Submit stored XSS entry",
+        "summary": "Submit stored XSS",
         "operationId": "storedXssPost",
         "tags": ["XSS"],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "text": {
-                    "type": "string"
-                  }
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "text": {
+                  "type": "string"
                 }
               }
             }
           }
-        },
+        ],
         "responses": {
           "200": {
-            "description": "Entry stored"
+            "description": "Stored"
           }
         }
       }
@@ -850,24 +855,126 @@
         "summary": "Log spoofing attack",
         "operationId": "logSpoofing",
         "tags": ["Log Spoofing"],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "username": {
-                    "type": "string"
-                  }
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "username",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Log entry created"
+          }
+        }
+      }
+    },
+    "/LogSpoofing/log-bleeding": {
+      "post": {
+        "summary": "Log bleeding attack",
+        "operationId": "logBleeding",
+        "tags": ["Log Spoofing"],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "username",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Log result"
+          }
+        }
+      }
+    },
+    "/crypto/encoding/basic": {
+      "post": {
+        "summary": "Basic encoding",
+        "operationId": "cryptoEncodingBasic",
+        "tags": ["Cryptography"],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "text",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Encoded value"
+          }
+        }
+      }
+    },
+    "/crypto/encoding/basic-auth": {
+      "post": {
+        "summary": "Basic auth encoding",
+        "operationId": "cryptoEncodingBasicAuth",
+        "tags": ["Cryptography"],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "username",
+            "type": "string",
+            "required": false
+          },
+          {
+            "in": "formData",
+            "name": "password",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Encoded credentials"
+          }
+        }
+      }
+    },
+    "/crypto/signing/getprivate": {
+      "get": {
+        "summary": "Get private signing key - sensitive exposure",
+        "operationId": "cryptoGetPrivateKey",
+        "tags": ["Cryptography"],
+        "responses": {
+          "200": {
+            "description": "Private key data",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "privateKey": {
+                  "type": "string"
+                },
+                "algorithm": {
+                  "type": "string"
                 }
               }
             }
           }
-        },
+        }
+      }
+    },
+    "/crypto/hashing": {
+      "get": {
+        "summary": "Hash a password via query param",
+        "operationId": "cryptoHashing",
+        "tags": ["Cryptography"],
+        "parameters": [
+          {
+            "name": "password",
+            "in": "query",
+            "type": "string",
+            "required": false
+          }
+        ],
         "responses": {
           "200": {
-            "description": "Log entry created"
+            "description": "Hash result"
           }
         }
       }

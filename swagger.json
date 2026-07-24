@@ -1,0 +1,1232 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "WebGoat Injection & Core API",
+    "description": "SQL Injection, XXE, SSRF, Path Traversal, and Deserialization endpoints",
+    "version": "1.0.0",
+    "contact": {
+      "name": "WebGoat Security"
+    }
+  },
+  "host": "localhost:8080",
+  "basePath": "/WebGoat",
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json",
+    "application/x-www-form-urlencoded"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "BasicAuth": {
+      "type": "basic"
+    },
+    "ApiKeyAuth": {
+      "type": "apiKey",
+      "in": "query",
+      "name": "api_key"
+    }
+  },
+  "paths": {
+    "/SqlInjection/attack2": {
+      "post": {
+        "summary": "SQL Injection attack 2",
+        "operationId": "sqlAttack2",
+        "tags": ["SQL Injection"],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "query",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "account",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Query result"
+          }
+        }
+      }
+    },
+    "/SqlInjection/attack3": {
+      "post": {
+        "summary": "SQL Injection attack 3",
+        "operationId": "sqlAttack3",
+        "tags": ["SQL Injection"],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "userid",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "operator",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Query result"
+          }
+        }
+      }
+    },
+    "/SqlInjection/attack4": {
+      "post": {
+        "summary": "SQL Injection attack 4",
+        "operationId": "sqlAttack4",
+        "tags": ["SQL Injection"],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "userid",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "tableName",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Query result"
+          }
+        }
+      }
+    },
+    "/SqlInjection/attack5a": {
+      "post": {
+        "summary": "SQL Injection attack 5a - blind",
+        "operationId": "sqlAttack5a",
+        "tags": ["SQL Injection"],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "account",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "operator",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result"
+          }
+        }
+      }
+    },
+    "/SqlInjection/attack6a": {
+      "post": {
+        "summary": "SQL Injection attack 6a",
+        "operationId": "sqlAttack6a",
+        "tags": ["SQL Injection"],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "userid",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "injection",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result"
+          }
+        }
+      }
+    },
+    "/SqlInjection/attack7": {
+      "post": {
+        "summary": "SQL Injection attack 7",
+        "operationId": "sqlAttack7",
+        "tags": ["SQL Injection"],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "query",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "field",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result"
+          }
+        }
+      }
+    },
+    "/SqlInjection/attack8": {
+      "post": {
+        "summary": "SQL Injection attack 8",
+        "operationId": "sqlAttack8",
+        "tags": ["SQL Injection"],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "name",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "auth_tan",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result"
+          }
+        }
+      }
+    },
+    "/SqlInjection/attack9": {
+      "post": {
+        "summary": "SQL Injection attack 9",
+        "operationId": "sqlAttack9",
+        "tags": ["SQL Injection"],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "name",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "salary",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result"
+          }
+        }
+      }
+    },
+    "/SqlInjection/attack10": {
+      "post": {
+        "summary": "SQL Injection attack 10",
+        "operationId": "sqlAttack10",
+        "tags": ["SQL Injection"],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "action",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "userid",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result"
+          }
+        }
+      }
+    },
+    "/SqlInjectionAdvanced/attack6a": {
+      "get": {
+        "summary": "SQL Injection Advanced - column enumeration",
+        "operationId": "sqlAdvancedAttack6aGet",
+        "tags": ["SQL Injection Advanced"],
+        "parameters": [
+          {
+            "name": "columnName",
+            "in": "query",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Column names"
+          }
+        }
+      },
+      "post": {
+        "summary": "SQL Injection Advanced attack 6a",
+        "operationId": "sqlAdvancedAttack6aPost",
+        "tags": ["SQL Injection Advanced"],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "userid_6a",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "inject",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result"
+          }
+        }
+      }
+    },
+    "/SqlInjectionAdvanced/attack6b": {
+      "post": {
+        "summary": "SQL Injection Advanced attack 6b",
+        "operationId": "sqlAdvancedAttack6b",
+        "tags": ["SQL Injection Advanced"],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "userid_6b",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "password_6b",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result"
+          }
+        }
+      }
+    },
+    "/SqlInjectionAdvanced/register": {
+      "post": {
+        "summary": "Register a user - SQL advanced",
+        "operationId": "sqlAdvancedRegister",
+        "tags": ["SQL Injection Advanced"],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "username_reg",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "email_reg",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "password_reg",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Registration result"
+          }
+        }
+      }
+    },
+    "/SqlInjectionAdvanced/login": {
+      "post": {
+        "summary": "Login - SQL advanced lesson",
+        "operationId": "sqlAdvancedLogin",
+        "tags": ["SQL Injection Advanced"],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "username_login",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "password_login",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Login result"
+          }
+        }
+      }
+    },
+    "/xxe/simple": {
+      "post": {
+        "summary": "XXE simple attack",
+        "operationId": "xxeSimple",
+        "tags": ["XXE"],
+        "consumes": ["application/xml"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "xmlPayload",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "XXE result"
+          }
+        }
+      }
+    },
+    "/xxe/blind": {
+      "post": {
+        "summary": "XXE blind attack",
+        "operationId": "xxeBlind",
+        "tags": ["XXE"],
+        "consumes": ["application/xml"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "xmlPayload",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Blind XXE result"
+          }
+        }
+      }
+    },
+    "/xxe/content-type": {
+      "post": {
+        "summary": "XXE via content-type",
+        "operationId": "xxeContentType",
+        "tags": ["XXE"],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "text",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result"
+          }
+        }
+      }
+    },
+    "/xxe/comments": {
+      "get": {
+        "summary": "Get XXE comments",
+        "operationId": "xxeCommentsGet",
+        "tags": ["XXE"],
+        "responses": {
+          "200": {
+            "description": "List of comments",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "text": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Post XXE comment",
+        "operationId": "xxeCommentsPost",
+        "tags": ["XXE"],
+        "consumes": ["application/xml"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "xmlPayload",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Comment posted"
+          }
+        }
+      }
+    },
+    "/PathTraversal/profile-picture": {
+      "post": {
+        "summary": "Upload profile picture - path traversal vulnerable",
+        "operationId": "pathTraversalUpload",
+        "tags": ["Path Traversal"],
+        "consumes": ["multipart/form-data"],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "fullName",
+            "type": "string",
+            "required": false
+          },
+          {
+            "in": "formData",
+            "name": "uploadedFile",
+            "type": "file",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Upload result"
+          }
+        }
+      }
+    },
+    "/PathTraversal/random-picture": {
+      "get": {
+        "summary": "Get picture by name - path traversal vulnerable",
+        "operationId": "pathTraversalRandomPicture",
+        "tags": ["Path Traversal"],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Image data"
+          }
+        }
+      }
+    },
+    "/PathTraversal/zip-slip/": {
+      "post": {
+        "summary": "Upload zip - zip slip vulnerable",
+        "operationId": "pathTraversalZipSlip",
+        "tags": ["Path Traversal"],
+        "consumes": ["multipart/form-data"],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "uploadedFile",
+            "type": "file",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Upload result"
+          }
+        }
+      }
+    },
+    "/SSRF/task1": {
+      "post": {
+        "summary": "SSRF task 1",
+        "operationId": "ssrfTask1",
+        "tags": ["SSRF"],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "url",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SSRF result"
+          }
+        }
+      }
+    },
+    "/SSRF/task2": {
+      "post": {
+        "summary": "SSRF task 2",
+        "operationId": "ssrfTask2",
+        "tags": ["SSRF"],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "url",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "target",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SSRF result"
+          }
+        }
+      }
+    },
+    "/InsecureDeserialization/task": {
+      "post": {
+        "summary": "Insecure deserialization",
+        "operationId": "insecureDeserializationTask",
+        "tags": ["Insecure Deserialization"],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "token",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deserialization result"
+          }
+        }
+      }
+    },
+    "/VulnerableComponents/attack1": {
+      "post": {
+        "summary": "Vulnerable components attack",
+        "operationId": "vulnerableComponentsAttack",
+        "tags": ["Vulnerable Components"],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "payload",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "serialized",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result"
+          }
+        }
+      }
+    },
+    "/SqlOnlyInputValidation/attack": {
+      "post": {
+        "summary": "SQL input-only validation attack",
+        "operationId": "sqlOnlyInputValidation",
+        "tags": ["SQL Injection"],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "userid",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "query",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result"
+          }
+        }
+      }
+    },
+    "/SqlOnlyInputValidationOnKeywords/attack": {
+      "post": {
+        "summary": "SQL keyword validation attack",
+        "operationId": "sqlOnlyInputValidationKeywords",
+        "tags": ["SQL Injection"],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "userid",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "query",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result"
+          }
+        }
+      }
+    },
+    "/SqlInjectionMitigations/attack10a": {
+      "post": {
+        "summary": "SQL mitigation attack 10a",
+        "operationId": "sqlMitigations10a",
+        "tags": ["SQL Injection Mitigations"],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "name",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "auth_tan",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result"
+          }
+        }
+      }
+    },
+    "/SqlInjectionMitigations/attack10b": {
+      "post": {
+        "summary": "SQL mitigation attack 10b",
+        "operationId": "sqlMitigations10b",
+        "tags": ["SQL Injection Mitigations"],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "name",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "salary",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result"
+          }
+        }
+      }
+    },
+    "/SqlInjectionMitigations/attack12a": {
+      "post": {
+        "summary": "SQL mitigation attack 12a",
+        "operationId": "sqlMitigations12a",
+        "tags": ["SQL Injection Mitigations"],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "userid",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "query",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result"
+          }
+        }
+      }
+    },
+    "/SqlInjectionMitigations/servers": {
+      "get": {
+        "summary": "Get server list",
+        "operationId": "sqlMitigationsServers",
+        "tags": ["SQL Injection Mitigations"],
+        "responses": {
+          "200": {
+            "description": "Server list",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "ip": {
+                    "type": "string"
+                  },
+                  "hostname": {
+                    "type": "string"
+                  },
+                  "mac": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/BypassRestrictions/FieldRestrictions": {
+      "post": {
+        "summary": "Bypass field restrictions",
+        "operationId": "bypassFieldRestrictions",
+        "tags": ["Bypass Restrictions"],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "field1",
+            "type": "string",
+            "required": false
+          },
+          {
+            "in": "formData",
+            "name": "field2",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result"
+          }
+        }
+      }
+    },
+    "/BypassRestrictions/frontendValidation": {
+      "post": {
+        "summary": "Bypass frontend validation",
+        "operationId": "bypassFrontendValidation",
+        "tags": ["Bypass Restrictions"],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "field1",
+            "type": "string",
+            "required": false
+          },
+          {
+            "in": "formData",
+            "name": "field2",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result"
+          }
+        }
+      }
+    },
+    "/HtmlTampering/task": {
+      "post": {
+        "summary": "HTML tampering task",
+        "operationId": "htmlTamperingTask",
+        "tags": ["HTML Tampering"],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "price",
+            "type": "string",
+            "required": false
+          },
+          {
+            "in": "formData",
+            "name": "item",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result"
+          }
+        }
+      }
+    },
+    "/HttpBasics/attack1": {
+      "post": {
+        "summary": "HTTP basics attack 1",
+        "operationId": "httpBasicsAttack1",
+        "tags": ["HTTP Basics"],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "person",
+            "type": "string",
+            "required": false
+          },
+          {
+            "in": "formData",
+            "name": "method",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result"
+          }
+        }
+      }
+    },
+    "/HttpBasics/attack2": {
+      "post": {
+        "summary": "HTTP basics attack 2",
+        "operationId": "httpBasicsAttack2",
+        "tags": ["HTTP Basics"],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "answer",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result"
+          }
+        }
+      }
+    },
+    "/clientSideFiltering/attack1": {
+      "post": {
+        "summary": "Client side filtering attack",
+        "operationId": "clientSideFilteringAttack",
+        "tags": ["Client Side Filtering"],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "answer",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result"
+          }
+        }
+      }
+    },
+    "/clientSideFiltering/getItForFree": {
+      "get": {
+        "summary": "Get coupon for free",
+        "operationId": "clientSideFilteringFree",
+        "tags": ["Client Side Filtering"],
+        "parameters": [
+          {
+            "name": "coupon_code",
+            "in": "query",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Coupon result"
+          }
+        }
+      }
+    },
+    "/clientSideFiltering/salaries": {
+      "get": {
+        "summary": "Get all salaries - sensitive data",
+        "operationId": "clientSideFilteringSalaries",
+        "tags": ["Client Side Filtering"],
+        "responses": {
+          "200": {
+            "description": "Salary data for all employees",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "salary": {
+                    "type": "integer"
+                  },
+                  "ssn": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/challenge/1": {
+      "post": {
+        "summary": "Challenge 1",
+        "operationId": "challenge1",
+        "tags": ["Challenges"],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "username",
+            "type": "string",
+            "required": false
+          },
+          {
+            "in": "formData",
+            "name": "password",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Challenge result"
+          }
+        }
+      }
+    },
+    "/challenge/5": {
+      "post": {
+        "summary": "Challenge 5",
+        "operationId": "challenge5",
+        "tags": ["Challenges"],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "answer",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Challenge result"
+          }
+        }
+      }
+    },
+    "/challenge/flag/{flagNumber}": {
+      "post": {
+        "summary": "Submit challenge flag",
+        "operationId": "challengeSubmitFlag",
+        "tags": ["Challenges"],
+        "parameters": [
+          {
+            "name": "flagNumber",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "formData",
+            "name": "flag",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Flag result"
+          }
+        }
+      }
+    },
+    "/SecurePasswords/assignment": {
+      "post": {
+        "summary": "Password strength check",
+        "operationId": "securePasswordsAssignment",
+        "tags": ["Secure Passwords"],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "password",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Password analysis"
+          }
+        }
+      }
+    },
+    "/cia/quiz": {
+      "post": {
+        "summary": "CIA quiz",
+        "operationId": "ciaQuiz",
+        "tags": ["CIA"],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "question",
+            "type": "string",
+            "required": false
+          },
+          {
+            "in": "formData",
+            "name": "answer",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Quiz result"
+          }
+        }
+      }
+    },
+    "/lesson-template/shop/{user}": {
+      "get": {
+        "summary": "Get shop for user",
+        "operationId": "lessonTemplateShop",
+        "tags": ["Lesson Template"],
+        "parameters": [
+          {
+            "name": "user",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Shop data"
+          }
+        }
+      }
+    },
+    "/lesson-template/sample-attack": {
+      "post": {
+        "summary": "Sample attack lesson",
+        "operationId": "lessonTemplateSampleAttack",
+        "tags": ["Lesson Template"],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "attack",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Attack result"
+          }
+        }
+      }
+    },
+    "/coupons": {
+      "get": {
+        "summary": "Get all coupon codes",
+        "operationId": "getAllCoupons",
+        "tags": ["Coupons"],
+        "responses": {
+          "200": {
+            "description": "All coupon codes including secret ones",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "code": {
+                    "type": "string"
+                  },
+                  "discount": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/coupons/{code}": {
+      "get": {
+        "summary": "Get coupon by code",
+        "operationId": "getCouponByCode",
+        "tags": ["Coupons"],
+        "parameters": [
+          {
+            "name": "code",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Coupon details"
+          }
+        }
+      }
+    }
+  }
+}
