@@ -1,0 +1,1032 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "WebGoat Admin & Access Control API",
+    "description": "API endpoints for Admin, Actuator, IDOR, Access Control, and Challenge lessons",
+    "version": "1.0.0",
+    "contact": {
+      "name": "WebGoat"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080/WebGoat",
+      "description": "Local WebGoat instance"
+    }
+  ],
+  "paths": {
+    "/actuator/env": {
+      "get": {
+        "summary": "Get all environment variables and configuration",
+        "operationId": "actuatorEnv",
+        "tags": ["Actuator"],
+        "responses": {
+          "200": {
+            "description": "Full environment configuration including secrets",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "activeProfiles": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "propertySources": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string"
+                          },
+                          "properties": {
+                            "type": "object"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/actuator/health": {
+      "get": {
+        "summary": "Get application health",
+        "operationId": "actuatorHealth",
+        "tags": ["Actuator"],
+        "responses": {
+          "200": {
+            "description": "Health status",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "components": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/actuator/configprops": {
+      "get": {
+        "summary": "Get all configuration properties",
+        "operationId": "actuatorConfigProps",
+        "tags": ["Actuator"],
+        "responses": {
+          "200": {
+            "description": "All configuration properties including sensitive values",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "contexts": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/actuator/beans": {
+      "get": {
+        "summary": "Get all Spring beans",
+        "operationId": "actuatorBeans",
+        "tags": ["Actuator"],
+        "responses": {
+          "200": {
+            "description": "Bean definitions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/actuator/mappings": {
+      "get": {
+        "summary": "Get all request mappings",
+        "operationId": "actuatorMappings",
+        "tags": ["Actuator"],
+        "responses": {
+          "200": {
+            "description": "All request handler mappings",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/access-control/users": {
+      "get": {
+        "summary": "Get all users - missing access control",
+        "operationId": "getAllUsers",
+        "tags": ["Access Control"],
+        "responses": {
+          "200": {
+            "description": "List of all users including sensitive data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "username": {
+                        "type": "string"
+                      },
+                      "email": {
+                        "type": "string"
+                      },
+                      "password": {
+                        "type": "string"
+                      },
+                      "role": {
+                        "type": "string"
+                      },
+                      "secretKey": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create user - no admin check",
+        "operationId": "createUser",
+        "tags": ["Access Control"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  },
+                  "role": {
+                    "type": "string"
+                  },
+                  "isAdmin": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User created"
+          }
+        }
+      }
+    },
+    "/access-control/users/{userId}": {
+      "delete": {
+        "summary": "Delete user - no authorization",
+        "operationId": "deleteUser",
+        "tags": ["Access Control"],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User deleted"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update user role - privilege escalation possible",
+        "operationId": "updateUserRole",
+        "tags": ["Access Control"],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "role": {
+                    "type": "string"
+                  },
+                  "isAdmin": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User updated"
+          }
+        }
+      }
+    },
+    "/IDOR/profile/{userId}": {
+      "get": {
+        "summary": "Get user profile by ID - IDOR vulnerable",
+        "operationId": "getProfileById",
+        "tags": ["IDOR"],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User profile including sensitive data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "userId": {
+                      "type": "integer"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "address": {
+                      "type": "string"
+                    },
+                    "phone": {
+                      "type": "string"
+                    },
+                    "ssn": {
+                      "type": "string"
+                    },
+                    "creditCard": {
+                      "type": "string"
+                    },
+                    "salary": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update user profile - no ownership check",
+        "operationId": "updateProfileById",
+        "tags": ["IDOR"],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "address": {
+                    "type": "string"
+                  },
+                  "phone": {
+                    "type": "string"
+                  },
+                  "role": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Profile updated"
+          }
+        }
+      }
+    },
+    "/IDOR/profile/alt-path": {
+      "get": {
+        "summary": "Get profile via alternate path",
+        "operationId": "getProfileAltPath",
+        "tags": ["IDOR"],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Profile data"
+          }
+        }
+      }
+    },
+    "/clientSideFiltering/salaries": {
+      "get": {
+        "summary": "Get all employee salaries - sensitive data exposure",
+        "operationId": "getAllSalaries",
+        "tags": ["Client Side Filtering"],
+        "responses": {
+          "200": {
+            "description": "Full salary list including all employees",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "salary": {
+                        "type": "integer"
+                      },
+                      "ssn": {
+                        "type": "string"
+                      },
+                      "department": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/clientSideFiltering/attack1": {
+      "post": {
+        "summary": "Client side filtering attack",
+        "operationId": "clientSideFilteringAttack",
+        "tags": ["Client Side Filtering"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "answer": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Attack result"
+          }
+        }
+      }
+    },
+    "/challenge/7/.git": {
+      "get": {
+        "summary": "Access exposed .git directory",
+        "operationId": "challengeGitDir",
+        "tags": ["Challenges"],
+        "responses": {
+          "200": {
+            "description": "Git repository contents"
+          }
+        }
+      }
+    },
+    "/challenge/7/reset-password/{link}": {
+      "get": {
+        "summary": "Password reset via challenge",
+        "operationId": "challengeResetPassword",
+        "tags": ["Challenges"],
+        "parameters": [
+          {
+            "name": "link",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Password reset page"
+          }
+        }
+      },
+      "post": {
+        "summary": "Submit password reset for challenge",
+        "operationId": "challengeSubmitResetPassword",
+        "tags": ["Challenges"],
+        "parameters": [
+          {
+            "name": "link",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "newPassword": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Password changed"
+          }
+        }
+      }
+    },
+    "/challenge/8/votes/{stars}": {
+      "post": {
+        "summary": "Submit vote",
+        "operationId": "challengeVote",
+        "tags": ["Challenges"],
+        "parameters": [
+          {
+            "name": "stars",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Vote recorded"
+          }
+        }
+      }
+    },
+    "/challenge/8/votes/": {
+      "get": {
+        "summary": "Get all votes",
+        "operationId": "challengeGetVotes",
+        "tags": ["Challenges"],
+        "responses": {
+          "200": {
+            "description": "All votes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "user": {
+                        "type": "string"
+                      },
+                      "stars": {
+                        "type": "integer"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/challenge/flag/{flagNumber}": {
+      "post": {
+        "summary": "Submit challenge flag",
+        "operationId": "submitFlag",
+        "tags": ["Challenges"],
+        "parameters": [
+          {
+            "name": "flagNumber",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "flag": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Flag submission result"
+          }
+        }
+      }
+    },
+    "/service/reportcard.mvc": {
+      "get": {
+        "summary": "Get full report card for all users",
+        "operationId": "getReportCard",
+        "tags": ["Service"],
+        "responses": {
+          "200": {
+            "description": "Report card data for all users",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "lessonStatistics": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "lessonName": {
+                            "type": "string"
+                          },
+                          "solved": {
+                            "type": "boolean"
+                          },
+                          "attempts": {
+                            "type": "integer"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/SqlInjectionMitigations/servers": {
+      "get": {
+        "summary": "Get server list",
+        "operationId": "getServers",
+        "tags": ["SQL Injection Mitigations"],
+        "responses": {
+          "200": {
+            "description": "Server list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "ip": {
+                        "type": "string"
+                      },
+                      "hostname": {
+                        "type": "string"
+                      },
+                      "mac": {
+                        "type": "string"
+                      },
+                      "status": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/coupons": {
+      "get": {
+        "summary": "Get all coupons - sensitive discount data",
+        "operationId": "getAllCoupons",
+        "tags": ["Coupons"],
+        "responses": {
+          "200": {
+            "description": "All coupon codes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "code": {
+                        "type": "string"
+                      },
+                      "discount": {
+                        "type": "integer"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/coupons/{code}": {
+      "get": {
+        "summary": "Get coupon by code",
+        "operationId": "getCouponByCode",
+        "tags": ["Coupons"],
+        "parameters": [
+          {
+            "name": "code",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Coupon details"
+          }
+        }
+      }
+    },
+    "/SecurityMisconfiguration/task2/config": {
+      "get": {
+        "summary": "Get sensitive configuration - security misconfiguration",
+        "operationId": "getSecurityConfig",
+        "tags": ["Security Misconfiguration"],
+        "responses": {
+          "200": {
+            "description": "Application configuration details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "dbHost": {
+                      "type": "string"
+                    },
+                    "dbPassword": {
+                      "type": "string"
+                    },
+                    "apiKey": {
+                      "type": "string"
+                    },
+                    "adminToken": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/SecurityMisconfiguration/task2/trigger": {
+      "get": {
+        "summary": "Trigger misconfiguration",
+        "operationId": "triggerMisconfiguration",
+        "tags": ["Security Misconfiguration"],
+        "responses": {
+          "200": {
+            "description": "Stack trace and internal details exposed"
+          },
+          "500": {
+            "description": "Verbose error with stack trace"
+          }
+        }
+      }
+    },
+    "/missingac/users": {
+      "get": {
+        "summary": "Get users without access control",
+        "operationId": "missingAcUsers",
+        "tags": ["Missing Access Control"],
+        "responses": {
+          "200": {
+            "description": "All users",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "username": {
+                        "type": "string"
+                      },
+                      "password": {
+                        "type": "string"
+                      },
+                      "role": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/missingac/addUser": {
+      "post": {
+        "summary": "Add user without authorization check",
+        "operationId": "missingAcAddUser",
+        "tags": ["Missing Access Control"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  },
+                  "admin": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User added"
+          }
+        }
+      }
+    },
+    "/missingac/deleteUser/{userId}": {
+      "delete": {
+        "summary": "Delete any user without authorization",
+        "operationId": "missingAcDeleteUser",
+        "tags": ["Missing Access Control"],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User deleted"
+          }
+        }
+      }
+    },
+    "/service/lessonmenu.mvc": {
+      "get": {
+        "summary": "Get lesson menu",
+        "operationId": "getLessonMenu",
+        "tags": ["Service"],
+        "responses": {
+          "200": {
+            "description": "Lesson menu items",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "link": {
+                        "type": "string"
+                      },
+                      "category": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/service/lessoninfo.mvc/{lesson}": {
+      "get": {
+        "summary": "Get lesson info",
+        "operationId": "getLessonInfo",
+        "tags": ["Service"],
+        "parameters": [
+          {
+            "name": "lesson",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lesson details"
+          }
+        }
+      }
+    },
+    "/service/restartlesson.mvc/{lesson}": {
+      "post": {
+        "summary": "Restart lesson for any user",
+        "operationId": "restartLesson",
+        "tags": ["Service"],
+        "parameters": [
+          {
+            "name": "lesson",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lesson restarted"
+          }
+        }
+      }
+    },
+    "/crypto/signing/getprivate": {
+      "get": {
+        "summary": "Get private key - sensitive data exposure",
+        "operationId": "getPrivateKey",
+        "tags": ["Cryptography"],
+        "responses": {
+          "200": {
+            "description": "Private key returned",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "privateKey": {
+                      "type": "string"
+                    },
+                    "algorithm": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/crypto/hashing": {
+      "get": {
+        "summary": "Get hash values",
+        "operationId": "getCryptoHash",
+        "tags": ["Cryptography"],
+        "parameters": [
+          {
+            "name": "password",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Hash values"
+          }
+        }
+      }
+    }
+  }
+}

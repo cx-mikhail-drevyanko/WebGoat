@@ -1,0 +1,881 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "WebGoat Injection API",
+    "description": "API endpoints for SQL Injection, XXE, and Path Traversal lessons",
+    "version": "1.0.0",
+    "contact": {
+      "name": "WebGoat"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080/WebGoat",
+      "description": "Local WebGoat instance"
+    }
+  ],
+  "paths": {
+    "/SqlInjection/attack2": {
+      "post": {
+        "summary": "SQL Injection attack 2",
+        "operationId": "sqlInjectionAttack2",
+        "tags": ["SQL Injection"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "query": {
+                    "type": "string"
+                  },
+                  "account": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Query result"
+          }
+        }
+      }
+    },
+    "/SqlInjection/attack3": {
+      "post": {
+        "summary": "SQL Injection attack 3",
+        "operationId": "sqlInjectionAttack3",
+        "tags": ["SQL Injection"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userid": {
+                    "type": "string"
+                  },
+                  "operator": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Query result"
+          }
+        }
+      }
+    },
+    "/SqlInjection/attack4": {
+      "post": {
+        "summary": "SQL Injection attack 4",
+        "operationId": "sqlInjectionAttack4",
+        "tags": ["SQL Injection"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userid": {
+                    "type": "string"
+                  },
+                  "table": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Query result"
+          }
+        }
+      }
+    },
+    "/SqlInjection/attack5a": {
+      "post": {
+        "summary": "SQL Injection attack 5a - blind",
+        "operationId": "sqlInjectionAttack5a",
+        "tags": ["SQL Injection"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "account": {
+                    "type": "string"
+                  },
+                  "operator": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Result"
+          }
+        }
+      }
+    },
+    "/SqlInjection/attack6a": {
+      "post": {
+        "summary": "SQL Injection attack 6a",
+        "operationId": "sqlInjectionAttack6a",
+        "tags": ["SQL Injection"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userid": {
+                    "type": "string"
+                  },
+                  "injection": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Result"
+          }
+        }
+      }
+    },
+    "/SqlInjection/attack7": {
+      "post": {
+        "summary": "SQL Injection attack 7",
+        "operationId": "sqlInjectionAttack7",
+        "tags": ["SQL Injection"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "query": {
+                    "type": "string"
+                  },
+                  "field": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Result"
+          }
+        }
+      }
+    },
+    "/SqlInjection/attack8": {
+      "post": {
+        "summary": "SQL Injection attack 8",
+        "operationId": "sqlInjectionAttack8",
+        "tags": ["SQL Injection"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "auth_tan": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Result"
+          }
+        }
+      }
+    },
+    "/SqlInjection/attack9": {
+      "post": {
+        "summary": "SQL Injection attack 9",
+        "operationId": "sqlInjectionAttack9",
+        "tags": ["SQL Injection"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "salary": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Result"
+          }
+        }
+      }
+    },
+    "/SqlInjection/attack10": {
+      "post": {
+        "summary": "SQL Injection attack 10",
+        "operationId": "sqlInjectionAttack10",
+        "tags": ["SQL Injection"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "action": {
+                    "type": "string"
+                  },
+                  "userid": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Result"
+          }
+        }
+      }
+    },
+    "/SqlInjectionAdvanced/attack6a": {
+      "get": {
+        "summary": "SQL Injection Advanced - get columns",
+        "operationId": "sqlInjectionAdvancedAttack6aGet",
+        "tags": ["SQL Injection Advanced"],
+        "parameters": [
+          {
+            "name": "columnName",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Column names"
+          }
+        }
+      },
+      "post": {
+        "summary": "SQL Injection Advanced attack 6a",
+        "operationId": "sqlInjectionAdvancedAttack6aPost",
+        "tags": ["SQL Injection Advanced"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userid_6a": {
+                    "type": "string"
+                  },
+                  "inject": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Result"
+          }
+        }
+      }
+    },
+    "/SqlInjectionAdvanced/attack6b": {
+      "post": {
+        "summary": "SQL Injection Advanced attack 6b",
+        "operationId": "sqlInjectionAdvancedAttack6b",
+        "tags": ["SQL Injection Advanced"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userid_6b": {
+                    "type": "string"
+                  },
+                  "password_6b": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Result"
+          }
+        }
+      }
+    },
+    "/SqlInjectionAdvanced/register": {
+      "post": {
+        "summary": "Register a user",
+        "operationId": "sqlInjectionAdvancedRegister",
+        "tags": ["SQL Injection Advanced"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username_reg": {
+                    "type": "string"
+                  },
+                  "email_reg": {
+                    "type": "string"
+                  },
+                  "password_reg": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Registration result"
+          }
+        }
+      }
+    },
+    "/SqlInjectionAdvanced/login": {
+      "post": {
+        "summary": "Login",
+        "operationId": "sqlInjectionAdvancedLogin",
+        "tags": ["SQL Injection Advanced"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username_login": {
+                    "type": "string"
+                  },
+                  "password_login": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Login result"
+          }
+        }
+      }
+    },
+    "/xxe/simple": {
+      "post": {
+        "summary": "XXE simple attack",
+        "operationId": "xxeSimple",
+        "tags": ["XXE"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/xml": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "XXE result"
+          }
+        }
+      }
+    },
+    "/xxe/blind": {
+      "post": {
+        "summary": "XXE blind attack",
+        "operationId": "xxeBlind",
+        "tags": ["XXE"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/xml": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Blind XXE result"
+          }
+        }
+      }
+    },
+    "/xxe/content-type": {
+      "post": {
+        "summary": "XXE content type",
+        "operationId": "xxeContentType",
+        "tags": ["XXE"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Result"
+          }
+        }
+      }
+    },
+    "/xxe/comments": {
+      "get": {
+        "summary": "Get XXE comments",
+        "operationId": "xxeCommentsGet",
+        "tags": ["XXE"],
+        "responses": {
+          "200": {
+            "description": "List of comments"
+          }
+        }
+      },
+      "post": {
+        "summary": "Post XXE comment",
+        "operationId": "xxeCommentsPost",
+        "tags": ["XXE"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/xml": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Comment posted"
+          }
+        }
+      }
+    },
+    "/PathTraversal/profile-picture": {
+      "post": {
+        "summary": "Upload profile picture - path traversal vulnerable",
+        "operationId": "pathTraversalUpload",
+        "tags": ["Path Traversal"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "uploadedFile": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "uploadedFileRemoveAttribute": {
+                    "type": "string"
+                  },
+                  "fullName": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Upload result"
+          }
+        }
+      }
+    },
+    "/PathTraversal/zip-slip/": {
+      "post": {
+        "summary": "Upload zip file - zip slip vulnerable",
+        "operationId": "pathTraversalZipSlip",
+        "tags": ["Path Traversal"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "uploadedFile": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Upload result"
+          }
+        }
+      }
+    },
+    "/PathTraversal/random-picture": {
+      "get": {
+        "summary": "Get random picture - path traversal vulnerable",
+        "operationId": "pathTraversalRandomPicture",
+        "tags": ["Path Traversal"],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Image data"
+          }
+        }
+      }
+    },
+    "/SqlOnlyInputValidation/attack": {
+      "post": {
+        "summary": "SQL input validation attack",
+        "operationId": "sqlOnlyInputValidation",
+        "tags": ["SQL Injection"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userid": {
+                    "type": "string"
+                  },
+                  "query": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Result"
+          }
+        }
+      }
+    },
+    "/SqlOnlyInputValidationOnKeywords/attack": {
+      "post": {
+        "summary": "SQL keyword input validation attack",
+        "operationId": "sqlOnlyInputValidationKeywords",
+        "tags": ["SQL Injection"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userid": {
+                    "type": "string"
+                  },
+                  "query": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Result"
+          }
+        }
+      }
+    },
+    "/SqlInjectionMitigations/attack10a": {
+      "post": {
+        "summary": "SQL injection mitigations attack 10a",
+        "operationId": "sqlInjectionMitigations10a",
+        "tags": ["SQL Injection Mitigations"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "auth_tan": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Result"
+          }
+        }
+      }
+    },
+    "/SqlInjectionMitigations/attack10b": {
+      "post": {
+        "summary": "SQL injection mitigations attack 10b",
+        "operationId": "sqlInjectionMitigations10b",
+        "tags": ["SQL Injection Mitigations"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "salary": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Result"
+          }
+        }
+      }
+    },
+    "/SqlInjectionMitigations/attack12a": {
+      "post": {
+        "summary": "SQL injection mitigations attack 12a",
+        "operationId": "sqlInjectionMitigations12a",
+        "tags": ["SQL Injection Mitigations"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userid": {
+                    "type": "string"
+                  },
+                  "query": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Result"
+          }
+        }
+      }
+    },
+    "/VulnerableComponents/attack1": {
+      "post": {
+        "summary": "Vulnerable components attack",
+        "operationId": "vulnerableComponentsAttack",
+        "tags": ["Vulnerable Components"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "payload": {
+                    "type": "string"
+                  },
+                  "serialized": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Result"
+          }
+        }
+      }
+    },
+    "/InsecureDeserialization/task": {
+      "post": {
+        "summary": "Insecure deserialization task",
+        "operationId": "insecureDeserializationTask",
+        "tags": ["Insecure Deserialization"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "token": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Deserialization result"
+          }
+        }
+      }
+    },
+    "/SSRF/task1": {
+      "post": {
+        "summary": "SSRF task 1",
+        "operationId": "ssrfTask1",
+        "tags": ["SSRF"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "url": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "SSRF result"
+          }
+        }
+      }
+    },
+    "/SSRF/task2": {
+      "post": {
+        "summary": "SSRF task 2",
+        "operationId": "ssrfTask2",
+        "tags": ["SSRF"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "url": {
+                    "type": "string"
+                  },
+                  "target": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "SSRF result"
+          }
+        }
+      }
+    }
+  }
+}
