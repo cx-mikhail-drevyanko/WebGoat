@@ -2,14 +2,15 @@
   "swagger": "2.0",
   "info": {
     "title": "WebGoat Admin & Access Control API",
-    "description": "Admin endpoints, Actuator, IDOR, Missing Access Control, and Challenge endpoints",
+    "description": "Admin, Actuator, IDOR, Missing Access Control, and Challenge endpoints",
     "version": "1.0.0",
     "contact": {
-      "name": "WebGoat Security"
+      "name": "WebGoat Security",
+      "email": "webgoat@owasp.org"
     }
   },
   "host": "localhost:8080",
-  "basePath": "/WebGoat",
+  "basePath": "/",
   "schemes": [
     "http"
   ],
@@ -24,41 +25,41 @@
     "BasicAuth": {
       "type": "basic"
     },
-    "AdminApiKey": {
+    "AdminToken": {
       "type": "apiKey",
       "in": "header",
-      "name": "X-Admin-Key"
+      "name": "X-Admin-Token"
     }
   },
+  "security": [
+    {
+      "BasicAuth": []
+    }
+  ],
   "paths": {
-    "/actuator/env": {
+    "/WebGoat/actuator/env": {
       "get": {
-        "summary": "Expose all environment variables",
+        "summary": "Expose all environment variables including secrets",
         "operationId": "actuatorEnv",
         "tags": ["Actuator"],
+        "security": [],
         "responses": {
           "200": {
-            "description": "Full env including DB passwords, API keys, secrets",
+            "description": "Full environment config including DB passwords, API keys, and secrets",
             "schema": {
               "type": "object",
               "properties": {
                 "activeProfiles": {
                   "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
+                  "items": {"type": "string"}
                 },
                 "propertySources": {
                   "type": "array",
                   "items": {
                     "type": "object",
                     "properties": {
-                      "name": {
-                        "type": "string"
-                      },
-                      "properties": {
-                        "type": "object"
-                      }
+                      "name": {"type": "string"},
+                      "properties": {"type": "object"}
                     }
                   }
                 }
@@ -68,43 +69,44 @@
         }
       }
     },
-    "/actuator/health": {
+    "/WebGoat/actuator/health": {
       "get": {
-        "summary": "Get application health details",
+        "summary": "Get application health with internals",
         "operationId": "actuatorHealth",
         "tags": ["Actuator"],
+        "security": [],
         "responses": {
           "200": {
-            "description": "Health status with internal details"
+            "description": "Health status including database and disk details"
           }
         }
       }
     },
-    "/actuator/configprops": {
+    "/WebGoat/actuator/configprops": {
       "get": {
-        "summary": "Get all config properties including secrets",
+        "summary": "Expose all config properties including secrets",
         "operationId": "actuatorConfigProps",
         "tags": ["Actuator"],
+        "security": [],
         "responses": {
           "200": {
-            "description": "Full config properties",
+            "description": "All configuration properties",
             "schema": {
               "type": "object",
               "properties": {
-                "contexts": {
-                  "type": "object"
-                }
+                "contexts": {"type": "object"}
               }
             }
           }
         }
       }
     },
-    "/actuator/beans": {
+    "/WebGoat/actuator/beans": {
       "get": {
-        "summary": "Get all Spring beans",
+        "summary": "Get all Spring beans - internal architecture exposed",
         "operationId": "actuatorBeans",
         "tags": ["Actuator"],
+        "security": [],
         "responses": {
           "200": {
             "description": "All Spring bean definitions"
@@ -112,49 +114,40 @@
         }
       }
     },
-    "/actuator/mappings": {
+    "/WebGoat/actuator/mappings": {
       "get": {
         "summary": "Get all request handler mappings",
         "operationId": "actuatorMappings",
         "tags": ["Actuator"],
+        "security": [],
         "responses": {
           "200": {
-            "description": "All HTTP request mappings exposed"
+            "description": "All HTTP handler mappings exposed"
           }
         }
       }
     },
-    "/access-control/users": {
+    "/WebGoat/access-control/users": {
       "get": {
-        "summary": "Get all users - no access control",
+        "summary": "Get all users including passwords - broken access control",
         "operationId": "getAllUsers",
         "tags": ["Access Control"],
+        "security": [],
         "responses": {
           "200": {
-            "description": "All users including passwords and secrets",
+            "description": "Full user list with sensitive fields",
             "schema": {
               "type": "array",
               "items": {
                 "type": "object",
                 "properties": {
-                  "id": {
-                    "type": "integer"
-                  },
-                  "username": {
-                    "type": "string"
-                  },
-                  "email": {
-                    "type": "string"
-                  },
-                  "password": {
-                    "type": "string"
-                  },
-                  "role": {
-                    "type": "string"
-                  },
-                  "secretKey": {
-                    "type": "string"
-                  }
+                  "id": {"type": "integer"},
+                  "username": {"type": "string"},
+                  "email": {"type": "string"},
+                  "password": {"type": "string"},
+                  "role": {"type": "string"},
+                  "secretKey": {"type": "string"},
+                  "apiToken": {"type": "string"}
                 }
               }
             }
@@ -162,9 +155,10 @@
         }
       },
       "post": {
-        "summary": "Create user - no admin check",
+        "summary": "Create user with admin flag - mass assignment",
         "operationId": "createUser",
         "tags": ["Access Control"],
+        "security": [],
         "parameters": [
           {
             "in": "body",
@@ -173,37 +167,29 @@
             "schema": {
               "type": "object",
               "properties": {
-                "username": {
-                  "type": "string"
-                },
-                "email": {
-                  "type": "string"
-                },
-                "password": {
-                  "type": "string"
-                },
-                "role": {
-                  "type": "string"
-                },
-                "isAdmin": {
-                  "type": "boolean"
-                }
+                "username": {"type": "string"},
+                "email": {"type": "string"},
+                "password": {"type": "string"},
+                "role": {"type": "string"},
+                "isAdmin": {"type": "boolean"},
+                "secretKey": {"type": "string"}
               }
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "User created"
+            "description": "User created - any role can be assigned"
           }
         }
       }
     },
-    "/access-control/users/{userId}": {
+    "/WebGoat/access-control/users/{userId}": {
       "delete": {
         "summary": "Delete any user without authorization",
         "operationId": "deleteUser",
         "tags": ["Access Control"],
+        "security": [],
         "parameters": [
           {
             "name": "userId",
@@ -219,9 +205,10 @@
         }
       },
       "put": {
-        "summary": "Update user role - privilege escalation",
+        "summary": "Update any user role - privilege escalation",
         "operationId": "updateUserRole",
         "tags": ["Access Control"],
+        "security": [],
         "parameters": [
           {
             "name": "userId",
@@ -236,28 +223,26 @@
             "schema": {
               "type": "object",
               "properties": {
-                "role": {
-                  "type": "string"
-                },
-                "isAdmin": {
-                  "type": "boolean"
-                }
+                "role": {"type": "string"},
+                "isAdmin": {"type": "boolean"},
+                "permissions": {"type": "string"}
               }
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "User updated"
+            "description": "Role updated - privilege escalation achieved"
           }
         }
       }
     },
-    "/IDOR/login": {
+    "/WebGoat/IDOR/login": {
       "post": {
         "summary": "IDOR lesson login",
         "operationId": "idorLogin",
         "tags": ["IDOR"],
+        "security": [],
         "parameters": [
           {
             "in": "formData",
@@ -279,49 +264,38 @@
         }
       }
     },
-    "/IDOR/profile/{userId}": {
+    "/WebGoat/IDOR/profile/{userId}": {
       "get": {
-        "summary": "Get any user profile by ID - IDOR",
+        "summary": "Get any user profile by ID - BOLA/IDOR",
         "operationId": "getProfileById",
         "tags": ["IDOR"],
+        "security": [],
         "parameters": [
           {
             "name": "userId",
             "in": "path",
             "required": true,
-            "type": "integer"
+            "type": "integer",
+            "description": "Any user ID - no object level authorization check"
           }
         ],
         "responses": {
           "200": {
-            "description": "User profile with sensitive fields",
+            "description": "Full profile including sensitive data for any user",
             "schema": {
               "type": "object",
               "properties": {
-                "userId": {
-                  "type": "integer"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "email": {
-                  "type": "string"
-                },
-                "address": {
-                  "type": "string"
-                },
-                "phone": {
-                  "type": "string"
-                },
-                "ssn": {
-                  "type": "string"
-                },
-                "creditCard": {
-                  "type": "string"
-                },
-                "salary": {
-                  "type": "integer"
-                }
+                "userId": {"type": "integer"},
+                "name": {"type": "string"},
+                "email": {"type": "string"},
+                "address": {"type": "string"},
+                "phone": {"type": "string"},
+                "ssn": {"type": "string"},
+                "creditCard": {"type": "string"},
+                "salary": {"type": "integer"},
+                "password": {"type": "string"},
+                "secretQuestion": {"type": "string"},
+                "secretAnswer": {"type": "string"}
               }
             }
           }
@@ -331,6 +305,7 @@
         "summary": "Update any user profile - no ownership check",
         "operationId": "updateProfileById",
         "tags": ["IDOR"],
+        "security": [],
         "parameters": [
           {
             "name": "userId",
@@ -345,37 +320,29 @@
             "schema": {
               "type": "object",
               "properties": {
-                "name": {
-                  "type": "string"
-                },
-                "email": {
-                  "type": "string"
-                },
-                "address": {
-                  "type": "string"
-                },
-                "phone": {
-                  "type": "string"
-                },
-                "role": {
-                  "type": "string"
-                }
+                "name": {"type": "string"},
+                "email": {"type": "string"},
+                "address": {"type": "string"},
+                "phone": {"type": "string"},
+                "role": {"type": "string"},
+                "isAdmin": {"type": "boolean"}
               }
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Profile updated"
+            "description": "Profile updated for any user"
           }
         }
       }
     },
-    "/IDOR/diff-attributes": {
+    "/WebGoat/IDOR/diff-attributes": {
       "get": {
-        "summary": "Get diff attributes - mass assignment",
+        "summary": "Get attributes - mass assignment possible",
         "operationId": "idorDiffAttributes",
         "tags": ["IDOR"],
+        "security": [],
         "parameters": [
           {
             "name": "userId",
@@ -386,16 +353,17 @@
         ],
         "responses": {
           "200": {
-            "description": "Attributes"
+            "description": "Attributes including internal fields"
           }
         }
       }
     },
-    "/IDOR/profile/alt-path": {
+    "/WebGoat/IDOR/profile/alt-path": {
       "get": {
-        "summary": "Access profile via alt path",
+        "summary": "Alternate path to access any profile",
         "operationId": "getProfileAltPath",
         "tags": ["IDOR"],
+        "security": [],
         "parameters": [
           {
             "name": "userId",
@@ -406,63 +374,57 @@
         ],
         "responses": {
           "200": {
-            "description": "Profile"
+            "description": "Profile data without authorization"
           }
         }
       }
     },
-    "/SecurityMisconfiguration/task2/config": {
+    "/WebGoat/SecurityMisconfiguration/task2/config": {
       "get": {
-        "summary": "Expose sensitive configuration",
+        "summary": "Expose sensitive configuration data",
         "operationId": "getConfig",
         "tags": ["Security Misconfiguration"],
+        "security": [],
         "responses": {
           "200": {
-            "description": "Sensitive config exposed",
+            "description": "Sensitive configuration exposed",
             "schema": {
               "type": "object",
               "properties": {
-                "dbHost": {
-                  "type": "string"
-                },
-                "dbPassword": {
-                  "type": "string"
-                },
-                "apiKey": {
-                  "type": "string"
-                },
-                "adminToken": {
-                  "type": "string"
-                },
-                "secretKey": {
-                  "type": "string"
-                }
+                "dbHost": {"type": "string"},
+                "dbPassword": {"type": "string"},
+                "apiKey": {"type": "string"},
+                "adminToken": {"type": "string"},
+                "secretKey": {"type": "string"},
+                "jwtSecret": {"type": "string"}
               }
             }
           }
         }
       }
     },
-    "/SecurityMisconfiguration/task2/trigger": {
+    "/WebGoat/SecurityMisconfiguration/task2/trigger": {
       "get": {
         "summary": "Trigger verbose error with stack trace",
         "operationId": "triggerMisconfiguration",
         "tags": ["Security Misconfiguration"],
+        "security": [],
         "responses": {
           "200": {
             "description": "Result"
           },
           "500": {
-            "description": "Stack trace and internal details exposed"
+            "description": "Full stack trace and internal details exposed to client"
           }
         }
       }
     },
-    "/service/reportcard.mvc": {
+    "/WebGoat/service/reportcard.mvc": {
       "get": {
-        "summary": "Get report card for all users",
+        "summary": "Get report card for any user",
         "operationId": "getReportCard",
         "tags": ["Service"],
+        "security": [],
         "parameters": [
           {
             "name": "userId",
@@ -473,7 +435,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Report card data",
+            "description": "Report card data for any user without authorization",
             "schema": {
               "type": "object",
               "properties": {
@@ -482,15 +444,9 @@
                   "items": {
                     "type": "object",
                     "properties": {
-                      "lessonName": {
-                        "type": "string"
-                      },
-                      "solved": {
-                        "type": "boolean"
-                      },
-                      "attempts": {
-                        "type": "integer"
-                      }
+                      "lessonName": {"type": "string"},
+                      "solved": {"type": "boolean"},
+                      "attempts": {"type": "integer"}
                     }
                   }
                 }
@@ -500,11 +456,12 @@
         }
       }
     },
-    "/service/restartlesson.mvc/{lesson}": {
+    "/WebGoat/service/restartlesson.mvc/{lesson}": {
       "post": {
-        "summary": "Restart any user's lesson",
+        "summary": "Restart any user lesson - horizontal privilege escalation",
         "operationId": "restartLesson",
         "tags": ["Service"],
+        "security": [],
         "parameters": [
           {
             "name": "lesson",
@@ -521,16 +478,17 @@
         ],
         "responses": {
           "200": {
-            "description": "Lesson restarted"
+            "description": "Lesson restarted for any user"
           }
         }
       }
     },
-    "/service/enable-security.mvc": {
+    "/WebGoat/service/enable-security.mvc": {
       "get": {
-        "summary": "Toggle security settings",
+        "summary": "Toggle security settings without auth",
         "operationId": "enableSecurity",
         "tags": ["Service"],
+        "security": [],
         "parameters": [
           {
             "name": "enabled",
@@ -541,28 +499,30 @@
         ],
         "responses": {
           "200": {
-            "description": "Security toggled"
+            "description": "Security configuration changed"
           }
         }
       }
     },
-    "/challenge/7/.git": {
+    "/WebGoat/challenge/7/.git": {
       "get": {
-        "summary": "Exposed git repository",
+        "summary": "Exposed .git directory - source code and credential disclosure",
         "operationId": "challengeGitDir",
         "tags": ["Challenges"],
+        "security": [],
         "responses": {
           "200": {
-            "description": "Git repository contents including source code and secrets"
+            "description": "Git repository including commit history, secrets, and source code"
           }
         }
       }
     },
-    "/challenge/7/reset-password/{link}": {
+    "/WebGoat/challenge/7/reset-password/{link}": {
       "post": {
-        "summary": "Reset password for any account",
+        "summary": "Password reset for any account",
         "operationId": "challengeResetPassword",
         "tags": ["Challenges"],
+        "security": [],
         "parameters": [
           {
             "name": "link",
@@ -577,9 +537,7 @@
             "schema": {
               "type": "object",
               "properties": {
-                "newPassword": {
-                  "type": "string"
-                }
+                "newPassword": {"type": "string"}
               }
             }
           }
@@ -591,11 +549,12 @@
         }
       }
     },
-    "/challenge/8/votes/{stars}": {
+    "/WebGoat/challenge/8/votes/{stars}": {
       "post": {
-        "summary": "Vote without auth",
+        "summary": "Vote without authentication or rate limiting",
         "operationId": "challengeVote",
         "tags": ["Challenges"],
+        "security": [],
         "parameters": [
           {
             "name": "stars",
@@ -611,11 +570,12 @@
         }
       }
     },
-    "/challenge/8/votes/": {
+    "/WebGoat/challenge/8/votes/": {
       "get": {
-        "summary": "Get all votes",
+        "summary": "Get all votes without authentication",
         "operationId": "challengeGetVotes",
         "tags": ["Challenges"],
+        "security": [],
         "responses": {
           "200": {
             "description": "All votes",
@@ -624,12 +584,8 @@
               "items": {
                 "type": "object",
                 "properties": {
-                  "user": {
-                    "type": "string"
-                  },
-                  "stars": {
-                    "type": "integer"
-                  }
+                  "user": {"type": "string"},
+                  "stars": {"type": "integer"}
                 }
               }
             }
@@ -637,11 +593,12 @@
         }
       }
     },
-    "/missingac/users": {
+    "/WebGoat/missingac/users": {
       "get": {
-        "summary": "All users without access control",
+        "summary": "All users without access control - includes passwords",
         "operationId": "missingAcUsers",
         "tags": ["Missing Access Control"],
+        "security": [],
         "responses": {
           "200": {
             "description": "Full user list",
@@ -650,18 +607,11 @@
               "items": {
                 "type": "object",
                 "properties": {
-                  "id": {
-                    "type": "integer"
-                  },
-                  "username": {
-                    "type": "string"
-                  },
-                  "password": {
-                    "type": "string"
-                  },
-                  "role": {
-                    "type": "string"
-                  }
+                  "id": {"type": "integer"},
+                  "username": {"type": "string"},
+                  "password": {"type": "string"},
+                  "role": {"type": "string"},
+                  "apiKey": {"type": "string"}
                 }
               }
             }
@@ -669,11 +619,12 @@
         }
       }
     },
-    "/missingac/addUser": {
+    "/WebGoat/missingac/addUser": {
       "post": {
-        "summary": "Add user with admin flag - no auth",
+        "summary": "Add user with admin privileges - no auth required",
         "operationId": "missingAcAddUser",
         "tags": ["Missing Access Control"],
+        "security": [],
         "parameters": [
           {
             "in": "body",
@@ -682,31 +633,27 @@
             "schema": {
               "type": "object",
               "properties": {
-                "username": {
-                  "type": "string"
-                },
-                "password": {
-                  "type": "string"
-                },
-                "admin": {
-                  "type": "boolean"
-                }
+                "username": {"type": "string"},
+                "password": {"type": "string"},
+                "admin": {"type": "boolean"},
+                "role": {"type": "string"}
               }
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "User added"
+            "description": "User added with any role"
           }
         }
       }
     },
-    "/missingac/deleteUser/{userId}": {
+    "/WebGoat/missingac/deleteUser/{userId}": {
       "delete": {
-        "summary": "Delete any user - no auth check",
+        "summary": "Delete any user without authorization check",
         "operationId": "missingAcDeleteUser",
         "tags": ["Missing Access Control"],
+        "security": [],
         "parameters": [
           {
             "name": "userId",
@@ -722,11 +669,39 @@
         }
       }
     },
-    "/HttpProxies/intercept-request": {
+    "/WebGoat/clientSideFiltering/salaries": {
       "get": {
-        "summary": "Intercept HTTP request",
+        "summary": "Get full salary table - excessive data exposure",
+        "operationId": "getAllSalaries",
+        "tags": ["Client Side Filtering"],
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "All employee salaries and SSNs",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {"type": "string"},
+                  "salary": {"type": "integer"},
+                  "ssn": {"type": "string"},
+                  "department": {"type": "string"},
+                  "dob": {"type": "string"},
+                  "creditCard": {"type": "string"}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/WebGoat/HttpProxies/intercept-request": {
+      "get": {
+        "summary": "Intercept HTTP request - sensitive data in transit",
         "operationId": "httpProxiesGet",
         "tags": ["HTTP Proxies"],
+        "security": [],
         "parameters": [
           {
             "name": "changeMe",
@@ -745,6 +720,7 @@
         "summary": "Intercept and modify POST request",
         "operationId": "httpProxiesPost",
         "tags": ["HTTP Proxies"],
+        "security": [],
         "parameters": [
           {
             "in": "formData",
@@ -760,49 +736,12 @@
         }
       }
     },
-    "/ChromeDevTools/dummy": {
+    "/WebGoat/ChromeDevTools/network": {
       "get": {
-        "summary": "Chrome DevTools dummy endpoint",
-        "operationId": "chromeDevToolsDummyGet",
-        "tags": ["Chrome DevTools"],
-        "parameters": [
-          {
-            "name": "devtools",
-            "in": "query",
-            "type": "string",
-            "required": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Response"
-          }
-        }
-      },
-      "post": {
-        "summary": "Chrome DevTools dummy POST",
-        "operationId": "chromeDevToolsDummyPost",
-        "tags": ["Chrome DevTools"],
-        "parameters": [
-          {
-            "in": "formData",
-            "name": "devtools",
-            "type": "string",
-            "required": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Response"
-          }
-        }
-      }
-    },
-    "/ChromeDevTools/network": {
-      "get": {
-        "summary": "Get network request data",
+        "summary": "Expose network request data",
         "operationId": "chromeDevToolsNetwork",
         "tags": ["Chrome DevTools"],
+        "security": [],
         "parameters": [
           {
             "name": "networkNum",
@@ -813,7 +752,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Network data"
+            "description": "Network request details including credentials"
           }
         }
       }
