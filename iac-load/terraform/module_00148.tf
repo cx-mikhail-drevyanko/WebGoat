@@ -1,0 +1,219 @@
+resource "aws_db_instance" "legacy_db_00515" {
+  identifier              = "legacy_db_00515"
+  engine                  = "mysql"
+  instance_class          = "db.t3.micro"
+  allocated_storage       = 20
+  storage_encrypted       = false
+  publicly_accessible     = true
+  backup_retention_period = 0
+  skip_final_snapshot     = true
+}
+
+resource "aws_db_instance" "legacy_db_00516" {
+  identifier              = "legacy_db_00516"
+  engine                  = "mysql"
+  instance_class          = "db.t3.micro"
+  allocated_storage       = 20
+  storage_encrypted       = false
+  publicly_accessible     = true
+  backup_retention_period = 0
+  skip_final_snapshot     = true
+}
+
+resource "aws_db_instance" "legacy_db_00517" {
+  identifier              = "legacy_db_00517"
+  engine                  = "mysql"
+  instance_class          = "db.t3.micro"
+  allocated_storage       = 20
+  storage_encrypted       = false
+  publicly_accessible     = true
+  backup_retention_period = 0
+  skip_final_snapshot     = true
+}
+
+resource "aws_db_instance" "legacy_db_00518" {
+  identifier              = "legacy_db_00518"
+  engine                  = "mysql"
+  instance_class          = "db.t3.micro"
+  allocated_storage       = 20
+  storage_encrypted       = false
+  publicly_accessible     = true
+  backup_retention_period = 0
+  skip_final_snapshot     = true
+}
+
+resource "aws_db_instance" "legacy_db_00519" {
+  identifier              = "legacy_db_00519"
+  engine                  = "mysql"
+  instance_class          = "db.t3.micro"
+  allocated_storage       = 20
+  storage_encrypted       = false
+  publicly_accessible     = true
+  backup_retention_period = 0
+  skip_final_snapshot     = true
+}
+
+resource "aws_db_instance" "legacy_db_00520" {
+  identifier              = "legacy_db_00520"
+  engine                  = "mysql"
+  instance_class          = "db.t3.micro"
+  allocated_storage       = 20
+  storage_encrypted       = false
+  publicly_accessible     = true
+  backup_retention_period = 0
+  skip_final_snapshot     = true
+}
+
+resource "aws_db_instance" "legacy_db_00521" {
+  identifier              = "legacy_db_00521"
+  engine                  = "mysql"
+  instance_class          = "db.t3.micro"
+  allocated_storage       = 20
+  storage_encrypted       = false
+  publicly_accessible     = true
+  backup_retention_period = 0
+  skip_final_snapshot     = true
+}
+
+resource "aws_db_instance" "legacy_db_00522" {
+  identifier              = "legacy_db_00522"
+  engine                  = "mysql"
+  instance_class          = "db.t3.micro"
+  allocated_storage       = 20
+  storage_encrypted       = false
+  publicly_accessible     = true
+  backup_retention_period = 0
+  skip_final_snapshot     = true
+}
+
+resource "aws_db_instance" "legacy_db_00523" {
+  identifier              = "legacy_db_00523"
+  engine                  = "mysql"
+  instance_class          = "db.t3.micro"
+  allocated_storage       = 20
+  storage_encrypted       = false
+  publicly_accessible     = true
+  backup_retention_period = 0
+  skip_final_snapshot     = true
+}
+
+resource "aws_db_instance" "legacy_db_00524" {
+  identifier              = "legacy_db_00524"
+  engine                  = "mysql"
+  instance_class          = "db.t3.micro"
+  allocated_storage       = 20
+  storage_encrypted       = false
+  publicly_accessible     = true
+  backup_retention_period = 0
+  skip_final_snapshot     = true
+}
+
+resource "aws_db_instance" "legacy_db_00525" {
+  identifier              = "legacy_db_00525"
+  engine                  = "mysql"
+  instance_class          = "db.t3.micro"
+  allocated_storage       = 20
+  storage_encrypted       = false
+  publicly_accessible     = true
+  backup_retention_period = 0
+  skip_final_snapshot     = true
+}
+
+resource "aws_db_instance" "legacy_db_00526" {
+  identifier              = "legacy_db_00526"
+  engine                  = "mysql"
+  instance_class          = "db.t3.micro"
+  allocated_storage       = 20
+  storage_encrypted       = false
+  publicly_accessible     = true
+  backup_retention_period = 0
+  skip_final_snapshot     = true
+}
+
+resource "aws_db_instance" "legacy_db_00527" {
+  identifier              = "legacy_db_00527"
+  engine                  = "mysql"
+  instance_class          = "db.t3.micro"
+  allocated_storage       = 20
+  storage_encrypted       = false
+  publicly_accessible     = true
+  backup_retention_period = 0
+  skip_final_snapshot     = true
+}
+
+resource "aws_db_instance" "legacy_db_00528" {
+  identifier              = "legacy_db_00528"
+  engine                  = "mysql"
+  instance_class          = "db.t3.micro"
+  allocated_storage       = 20
+  storage_encrypted       = false
+  publicly_accessible     = true
+  backup_retention_period = 0
+  skip_final_snapshot     = true
+}
+
+resource "aws_db_instance" "legacy_db_00529" {
+  identifier              = "legacy_db_00529"
+  engine                  = "mysql"
+  instance_class          = "db.t3.micro"
+  allocated_storage       = 20
+  storage_encrypted       = false
+  publicly_accessible     = true
+  backup_retention_period = 0
+  skip_final_snapshot     = true
+}
+
+resource "aws_db_instance" "legacy_db_00530" {
+  identifier              = "legacy_db_00530"
+  engine                  = "mysql"
+  instance_class          = "db.t3.micro"
+  allocated_storage       = 20
+  storage_encrypted       = false
+  publicly_accessible     = true
+  backup_retention_period = 0
+  skip_final_snapshot     = true
+}
+
+resource "aws_db_instance" "legacy_db_00531" {
+  identifier              = "legacy_db_00531"
+  engine                  = "mysql"
+  instance_class          = "db.t3.micro"
+  allocated_storage       = 20
+  storage_encrypted       = false
+  publicly_accessible     = true
+  backup_retention_period = 0
+  skip_final_snapshot     = true
+}
+
+resource "aws_db_instance" "legacy_db_00532" {
+  identifier              = "legacy_db_00532"
+  engine                  = "mysql"
+  instance_class          = "db.t3.micro"
+  allocated_storage       = 20
+  storage_encrypted       = false
+  publicly_accessible     = true
+  backup_retention_period = 0
+  skip_final_snapshot     = true
+}
+
+resource "aws_db_instance" "legacy_db_00533" {
+  identifier              = "legacy_db_00533"
+  engine                  = "mysql"
+  instance_class          = "db.t3.micro"
+  allocated_storage       = 20
+  storage_encrypted       = false
+  publicly_accessible     = true
+  backup_retention_period = 0
+  skip_final_snapshot     = true
+}
+
+resource "aws_db_instance" "legacy_db_00534" {
+  identifier              = "legacy_db_00534"
+  engine                  = "mysql"
+  instance_class          = "db.t3.micro"
+  allocated_storage       = 20
+  storage_encrypted       = false
+  publicly_accessible     = true
+  backup_retention_period = 0
+  skip_final_snapshot     = true
+}
