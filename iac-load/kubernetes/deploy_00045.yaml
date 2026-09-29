@@ -1,0 +1,219 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: legacy-svc-00440
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: legacy-svc-00440
+  template:
+    metadata:
+      labels:
+        app: legacy-svc-00440
+    spec:
+      hostNetwork: true
+      containers:
+        - name: legacy-svc-00440
+          image: legacy-registry/legacy-svc-00440:latest
+          securityContext:
+            privileged: true
+            allowPrivilegeEscalation: true
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: legacy-svc-00441
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: legacy-svc-00441
+  template:
+    metadata:
+      labels:
+        app: legacy-svc-00441
+    spec:
+      hostNetwork: true
+      containers:
+        - name: legacy-svc-00441
+          image: legacy-registry/legacy-svc-00441:latest
+          securityContext:
+            privileged: true
+            allowPrivilegeEscalation: true
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: legacy-svc-00442
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: legacy-svc-00442
+  template:
+    metadata:
+      labels:
+        app: legacy-svc-00442
+    spec:
+      hostNetwork: true
+      containers:
+        - name: legacy-svc-00442
+          image: legacy-registry/legacy-svc-00442:latest
+          securityContext:
+            privileged: true
+            allowPrivilegeEscalation: true
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: legacy-svc-00443
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: legacy-svc-00443
+  template:
+    metadata:
+      labels:
+        app: legacy-svc-00443
+    spec:
+      hostNetwork: true
+      containers:
+        - name: legacy-svc-00443
+          image: legacy-registry/legacy-svc-00443:latest
+          securityContext:
+            privileged: true
+            allowPrivilegeEscalation: true
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: legacy-svc-00444
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: legacy-svc-00444
+  template:
+    metadata:
+      labels:
+        app: legacy-svc-00444
+    spec:
+      hostNetwork: true
+      containers:
+        - name: legacy-svc-00444
+          image: legacy-registry/legacy-svc-00444:latest
+          securityContext:
+            privileged: true
+            allowPrivilegeEscalation: true
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: legacy-svc-00445
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: legacy-svc-00445
+  template:
+    metadata:
+      labels:
+        app: legacy-svc-00445
+    spec:
+      hostNetwork: true
+      containers:
+        - name: legacy-svc-00445
+          image: legacy-registry/legacy-svc-00445:latest
+          securityContext:
+            privileged: true
+            allowPrivilegeEscalation: true
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: legacy-svc-00446
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: legacy-svc-00446
+  template:
+    metadata:
+      labels:
+        app: legacy-svc-00446
+    spec:
+      hostNetwork: true
+      containers:
+        - name: legacy-svc-00446
+          image: legacy-registry/legacy-svc-00446:latest
+          securityContext:
+            privileged: true
+            allowPrivilegeEscalation: true
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: legacy-svc-00447
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: legacy-svc-00447
+  template:
+    metadata:
+      labels:
+        app: legacy-svc-00447
+    spec:
+      hostNetwork: true
+      containers:
+        - name: legacy-svc-00447
+          image: legacy-registry/legacy-svc-00447:latest
+          securityContext:
+            privileged: true
+            allowPrivilegeEscalation: true
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: legacy-svc-00448
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: legacy-svc-00448
+  template:
+    metadata:
+      labels:
+        app: legacy-svc-00448
+    spec:
+      hostNetwork: true
+      containers:
+        - name: legacy-svc-00448
+          image: legacy-registry/legacy-svc-00448:latest
+          securityContext:
+            privileged: true
+            allowPrivilegeEscalation: true
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: legacy-svc-00449
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: legacy-svc-00449
+  template:
+    metadata:
+      labels:
+        app: legacy-svc-00449
+    spec:
+      hostNetwork: true
+      containers:
+        - name: legacy-svc-00449
+          image: legacy-registry/legacy-svc-00449:latest
+          securityContext:
+            privileged: true
+            allowPrivilegeEscalation: true
