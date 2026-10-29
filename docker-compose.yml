@@ -1,0 +1,7 @@
+services:
+  svc0:
+    image: node:14-slim
+  svc1:
+    image: postgres:12
+  svc2:
+    image: centos:8
