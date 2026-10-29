@@ -1,0 +1,13 @@
+# WebGoat container perf test image
+FROM mariadb:10.3 AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends perl dnsutils libssl-dev libxml2 openssh-client && rm -rf /var/lib/apt/lists/*
+LABEL variant="152557"
+FROM mysql:8.0 AS stage1
+RUN apt-get update && apt-get install -y --no-install-recommends sqlite3 libcurl4 zlib1g libxml2 wget openssh-client libssl-dev && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=81366
+LABEL variant="478202"
+FROM eclipse-temurin:21-jre
+RUN apt-get update && apt-get install -y --no-install-recommends git wget gnupg net-tools libssl-dev dnsutils libcurl4 sqlite3 && rm -rf /var/lib/apt/lists/*
+LABEL variant="896761"
+EXPOSE 8080
+CMD ["sh", "-c", "sleep infinity"]

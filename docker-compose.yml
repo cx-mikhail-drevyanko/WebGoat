@@ -1,0 +1,5 @@
+services:
+  svc0:
+    image: php:8.0-cli
+  svc1:
+    image: node:12-slim

@@ -1,0 +1,6 @@
+# WebGoat container perf test image
+FROM ruby:3.0-alpine
+ENV APP_ID=96532
+LABEL variant="577700"
+EXPOSE 9090
+CMD ["sh", "-c", "sleep infinity"]

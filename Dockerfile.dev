@@ -1,0 +1,6 @@
+# WebGoat container perf test image
+FROM debian:bullseye
+RUN apt-get update && apt-get install -y --no-install-recommends wget curl perl unzip libcurl4 ca-certificates openssh-client git && rm -rf /var/lib/apt/lists/*
+LABEL variant="628222"
+EXPOSE 3000
+CMD ["sh", "-c", "sleep infinity"]
