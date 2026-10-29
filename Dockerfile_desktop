@@ -1,0 +1,15 @@
+# WebGoat container perf test image
+FROM python:3.11-slim AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends git openssh-client && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=10749
+LABEL variant="417144"
+FROM tomcat:9.0-jre11 AS stage1
+RUN apt-get update && apt-get install -y --no-install-recommends libxml2 wget openssh-client vim unzip && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=98471
+LABEL variant="44089"
+FROM fedora:34
+RUN yum install -y tar openssl wget unzip && yum clean all
+ENV APP_ID=68034
+LABEL variant="695857"
+EXPOSE 80
+CMD ["sh", "-c", "sleep infinity"]
