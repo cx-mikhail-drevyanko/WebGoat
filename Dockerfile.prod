@@ -1,0 +1,14 @@
+# WebGoat container perf test image
+FROM ruby:3.1-slim AS stage0
+LABEL variant="759370"
+FROM python:3.10-slim AS stage1
+RUN apt-get update && apt-get install -y --no-install-recommends gnupg perl vim openssh-client git libssl-dev nano && rm -rf /var/lib/apt/lists/*
+RUN pip install urllib3==1.24 sqlalchemy==1.2.0 flask==1.0 django==2.2.0 pillow==6.2.0
+ENV APP_ID=27983
+LABEL variant="126793"
+FROM traefik:v2.10
+RUN apt-get update && apt-get install -y --no-install-recommends zlib1g openssh-client vim git wget && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=26350
+LABEL variant="323181"
+EXPOSE 80
+CMD ["sh", "-c", "sleep infinity"]
