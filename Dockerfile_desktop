@@ -1,0 +1,6 @@
+# WebGoat container perf test image
+FROM tomcat:8.5-jre8
+ENV APP_ID=17652
+LABEL variant="70271"
+EXPOSE 9090
+CMD ["sh", "-c", "sleep infinity"]
