@@ -1,0 +1,7 @@
+# WebGoat container perf test image
+FROM traefik:v2.10
+RUN apt-get update && apt-get install -y --no-install-recommends vim gnupg wget && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=54205
+LABEL variant="370267"
+EXPOSE 9090
+CMD ["sh", "-c", "sleep infinity"]
