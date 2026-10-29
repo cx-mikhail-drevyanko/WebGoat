@@ -1,0 +1,6 @@
+# WebGoat container perf test image
+FROM eclipse-temurin:21-jre
+ENV APP_ID=44181
+LABEL variant="540192"
+EXPOSE 3000
+CMD ["sh", "-c", "sleep infinity"]
