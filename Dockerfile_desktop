@@ -1,0 +1,14 @@
+# WebGoat container perf test image
+FROM eclipse-temurin:21-jre AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends libcurl4 dnsutils libxml2 && rm -rf /var/lib/apt/lists/*
+LABEL variant="636973"
+FROM debian:11-slim AS stage1
+RUN apt-get update && apt-get install -y --no-install-recommends git && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=61692
+LABEL variant="389215"
+FROM fedora:38
+RUN yum install -y libxml2 git unzip && yum clean all
+ENV APP_ID=41621
+LABEL variant="406748"
+EXPOSE 80
+CMD ["sh", "-c", "sleep infinity"]
