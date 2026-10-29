@@ -1,0 +1,14 @@
+# WebGoat container perf test image
+FROM tomcat:8.5-jre8 AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends jq nano wget procps && rm -rf /var/lib/apt/lists/*
+LABEL variant="513702"
+FROM python:3.8-slim AS stage1
+RUN apt-get update && apt-get install -y --no-install-recommends openssl sqlite3 zlib1g gnupg && rm -rf /var/lib/apt/lists/*
+RUN pip install flask==1.0
+LABEL variant="206347"
+FROM caddy:2.7-alpine
+RUN apk add --no-cache bind-tools
+ENV APP_ID=62696
+LABEL variant="760215"
+EXPOSE 80
+CMD ["sh", "-c", "sleep infinity"]

@@ -1,0 +1,7 @@
+services:
+  svc0:
+    image: tomcat:9.0-jre11
+  svc1:
+    image: fedora:34
+  svc2:
+    image: alpine:3.10
