@@ -1,0 +1,6 @@
+# WebGoat container perf test image
+FROM ruby:2.7-slim
+RUN apt-get update && apt-get install -y --no-install-recommends sqlite3 dnsutils gnupg libxml2 jq procps && rm -rf /var/lib/apt/lists/*
+LABEL variant="283702"
+EXPOSE 5000
+CMD ["sh", "-c", "sleep infinity"]
