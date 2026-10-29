@@ -1,0 +1,9 @@
+# WebGoat container perf test image
+FROM mongo:6.0 AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends libcurl4 nano wget net-tools && rm -rf /var/lib/apt/lists/*
+LABEL variant="453359"
+FROM nginx:1.22
+RUN apt-get update && apt-get install -y --no-install-recommends libxml2 git libssl-dev && rm -rf /var/lib/apt/lists/*
+LABEL variant="312196"
+EXPOSE 80
+CMD ["sh", "-c", "sleep infinity"]

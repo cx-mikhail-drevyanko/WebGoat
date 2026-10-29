@@ -1,0 +1,7 @@
+services:
+  svc0:
+    image: nginx:1.22
+  svc1:
+    image: mysql:5.7
+  svc2:
+    image: postgres:13-alpine

@@ -1,0 +1,10 @@
+# WebGoat container perf test image
+FROM postgres:13-alpine AS stage0
+RUN apk add --no-cache sqlite
+LABEL variant="731876"
+FROM debian:9-slim
+RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates jq git sqlite3 && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=27733
+LABEL variant="346376"
+EXPOSE 3000
+CMD ["sh", "-c", "sleep infinity"]
