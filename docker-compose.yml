@@ -1,0 +1,7 @@
+services:
+  svc0:
+    image: tomcat:8.5-jre8
+  svc1:
+    image: nginx:1.24-alpine
+  svc2:
+    image: nginx:1.24-alpine
