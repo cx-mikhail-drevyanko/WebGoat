@@ -1,0 +1,13 @@
+# WebGoat container perf test image
+FROM mongo:5.0 AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates vim unzip sqlite3 libxml2 libcurl4 curl && rm -rf /var/lib/apt/lists/*
+LABEL variant="388734"
+FROM alpine:3.12 AS stage1
+RUN apk add --no-cache git bash tar ca-certificates curl zlib wget
+LABEL variant="617465"
+FROM mariadb:10.3
+RUN apt-get update && apt-get install -y --no-install-recommends dnsutils && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=12687
+LABEL variant="160406"
+EXPOSE 8443
+CMD ["sh", "-c", "sleep infinity"]

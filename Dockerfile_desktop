@@ -1,0 +1,10 @@
+# WebGoat container perf test image
+FROM debian:10-slim AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends wget vim openssh-client curl perl zlib1g libxml2 openssl && rm -rf /var/lib/apt/lists/*
+LABEL variant="693102"
+FROM rabbitmq:3.11 AS stage1
+LABEL variant="380931"
+FROM debian:11-slim
+LABEL variant="695046"
+EXPOSE 8443
+CMD ["sh", "-c", "sleep infinity"]
