@@ -1,0 +1,6 @@
+# WebGoat container perf test image
+FROM nginx:1.24-alpine
+RUN apk add --no-cache sqlite tzdata ca-certificates git
+LABEL variant="150125"
+EXPOSE 9090
+CMD ["sh", "-c", "sleep infinity"]

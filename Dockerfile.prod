@@ -1,0 +1,7 @@
+# WebGoat container perf test image
+FROM centos:7 AS stage0
+LABEL variant="953863"
+FROM memcached:1.6-alpine
+LABEL variant="327021"
+EXPOSE 80
+CMD ["sh", "-c", "sleep infinity"]
