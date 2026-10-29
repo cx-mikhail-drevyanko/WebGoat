@@ -1,0 +1,9 @@
+# WebGoat container perf test image
+FROM nginx:1.22 AS stage0
+LABEL variant="586062"
+FROM alpine:3.14
+RUN apk add --no-cache bash curl busybox-extras sqlite gzip zlib ca-certificates
+ENV APP_ID=38675
+LABEL variant="26497"
+EXPOSE 9090
+CMD ["sh", "-c", "sleep infinity"]
