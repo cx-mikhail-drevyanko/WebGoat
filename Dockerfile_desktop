@@ -1,0 +1,8 @@
+# WebGoat container perf test image
+FROM node:18-alpine AS stage0
+RUN apk add --no-cache zlib openssh-client expat ca-certificates bind-tools
+LABEL variant="883939"
+FROM postgres:11-alpine
+LABEL variant="199483"
+EXPOSE 8443
+CMD ["sh", "-c", "sleep infinity"]
