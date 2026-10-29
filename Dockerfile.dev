@@ -1,0 +1,9 @@
+# WebGoat container perf test image
+FROM ruby:3.0-alpine AS stage0
+RUN apk add --no-cache jq libxml2 git bash zlib bind-tools tar
+LABEL variant="471454"
+FROM alpine:3.10
+RUN apk add --no-cache jq gzip expat vim libxml2 openssl bash tzdata
+LABEL variant="184811"
+EXPOSE 8080
+CMD ["sh", "-c", "sleep infinity"]
