@@ -1,0 +1,14 @@
+# WebGoat container perf test image
+FROM nginx:1.24-alpine AS stage0
+RUN apk add --no-cache zlib curl
+LABEL variant="415677"
+FROM python:3.9-slim AS stage1
+RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates libcurl4 openssh-client perl procps && rm -rf /var/lib/apt/lists/*
+RUN pip install lxml==4.2.0 jinja2==2.10 flask==1.0
+LABEL variant="673221"
+FROM traefik:v2.10
+RUN apt-get update && apt-get install -y --no-install-recommends vim zlib1g wget dnsutils git libxml2 procps libssl-dev && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=62387
+LABEL variant="652959"
+EXPOSE 80
+CMD ["sh", "-c", "sleep infinity"]
