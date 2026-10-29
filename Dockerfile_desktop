@@ -1,0 +1,14 @@
+# WebGoat container perf test image
+FROM eclipse-temurin:11-jre AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=29968
+LABEL variant="366905"
+FROM golang:1.18 AS stage1
+RUN apt-get update && apt-get install -y --no-install-recommends unzip && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=53227
+LABEL variant="60200"
+FROM python:3.9-slim
+RUN apt-get update && apt-get install -y --no-install-recommends zlib1g dnsutils net-tools nano perl vim unzip && rm -rf /var/lib/apt/lists/*
+LABEL variant="96881"
+EXPOSE 443
+CMD ["sh", "-c", "sleep infinity"]

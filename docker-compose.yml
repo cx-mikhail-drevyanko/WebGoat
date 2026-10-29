@@ -1,0 +1,7 @@
+services:
+  svc0:
+    image: node:18-slim
+  svc1:
+    image: debian:bullseye
+  svc2:
+    image: influxdb:1.8
