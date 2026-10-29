@@ -1,0 +1,11 @@
+# WebGoat container perf test image
+FROM node:16-alpine AS stage0
+RUN apk add --no-cache bash vim jq zlib libxml2 bind-tools expat tar
+RUN npm install axios@0.18.0 minimist@1.2.0 handlebars@4.0.5
+LABEL variant="271517"
+FROM nginx:1.24-alpine AS stage1
+LABEL variant="708145"
+FROM eclipse-temurin:21-jre
+LABEL variant="808892"
+EXPOSE 3000
+CMD ["sh", "-c", "sleep infinity"]
