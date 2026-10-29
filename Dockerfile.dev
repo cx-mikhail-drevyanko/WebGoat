@@ -1,0 +1,13 @@
+# WebGoat container perf test image
+FROM httpd:2.4.54 AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=57267
+LABEL variant="770725"
+FROM busybox:1.36 AS stage1
+RUN apk add --no-cache vim jq nano git openssh-client gzip sqlite
+LABEL variant="204000"
+FROM debian:9-slim
+RUN apt-get update && apt-get install -y --no-install-recommends unzip jq dnsutils ca-certificates net-tools libxml2 && rm -rf /var/lib/apt/lists/*
+LABEL variant="812358"
+EXPOSE 8443
+CMD ["sh", "-c", "sleep infinity"]
