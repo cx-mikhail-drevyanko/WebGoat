@@ -1,0 +1,9 @@
+# WebGoat container perf test image
+FROM golang:1.16-alpine AS stage0
+RUN apk add --no-cache tar
+LABEL variant="572842"
+FROM mariadb:10.6
+RUN apt-get update && apt-get install -y --no-install-recommends wget && rm -rf /var/lib/apt/lists/*
+LABEL variant="145960"
+EXPOSE 5000
+CMD ["sh", "-c", "sleep infinity"]

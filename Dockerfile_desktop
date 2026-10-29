@@ -1,0 +1,7 @@
+# WebGoat container perf test image
+FROM node:12-slim
+RUN apt-get update && apt-get install -y --no-install-recommends sqlite3 jq openssl ca-certificates net-tools procps libcurl4 git && rm -rf /var/lib/apt/lists/*
+RUN npm install handlebars@4.0.5 axios@0.18.0 minimist@1.2.0
+LABEL variant="413656"
+EXPOSE 5000
+CMD ["sh", "-c", "sleep infinity"]
