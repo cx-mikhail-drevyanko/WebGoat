@@ -1,0 +1,10 @@
+# WebGoat container perf test image
+FROM python:3.12-alpine AS stage0
+RUN apk add --no-cache expat nano zlib sqlite ca-certificates busybox-extras tar wget
+RUN pip install cryptography==2.3 paramiko==2.4.0
+LABEL variant="849132"
+FROM memcached:1.6-alpine
+ENV APP_ID=25616
+LABEL variant="119773"
+EXPOSE 5000
+CMD ["sh", "-c", "sleep infinity"]

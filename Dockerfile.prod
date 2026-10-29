@@ -1,0 +1,13 @@
+# WebGoat container perf test image
+FROM memcached:1.5 AS stage0
+ENV APP_ID=68320
+LABEL variant="684926"
+FROM node:18-slim AS stage1
+RUN apt-get update && apt-get install -y --no-install-recommends libssl-dev zlib1g net-tools perl unzip libcurl4 && rm -rf /var/lib/apt/lists/*
+RUN npm install request@2.88.0 jquery@2.2.4
+LABEL variant="435597"
+FROM alpine:3.10
+RUN apk add --no-cache libcurl
+LABEL variant="764187"
+EXPOSE 3000
+CMD ["sh", "-c", "sleep infinity"]
