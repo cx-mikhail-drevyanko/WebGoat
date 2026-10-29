@@ -1,0 +1,10 @@
+# WebGoat container perf test image
+FROM ubuntu:22.04 AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends wget nano openssh-client procps libxml2 && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=50268
+LABEL variant="603479"
+FROM httpd:2.4.46
+RUN apt-get update && apt-get install -y --no-install-recommends zlib1g sqlite3 ca-certificates wget nano && rm -rf /var/lib/apt/lists/*
+LABEL variant="726190"
+EXPOSE 8443
+CMD ["sh", "-c", "sleep infinity"]

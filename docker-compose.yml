@@ -1,0 +1,7 @@
+services:
+  svc0:
+    image: alpine:3.14
+  svc1:
+    image: busybox:1.31
+  svc2:
+    image: ruby:3.1-slim
