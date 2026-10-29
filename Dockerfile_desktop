@@ -1,0 +1,7 @@
+# WebGoat container perf test image
+FROM node:16-slim
+RUN apt-get update && apt-get install -y --no-install-recommends procps jq unzip && rm -rf /var/lib/apt/lists/*
+RUN npm install moment@2.19.0 minimist@1.2.0 axios@0.18.0
+LABEL variant="857097"
+EXPOSE 8080
+CMD ["sh", "-c", "sleep infinity"]
