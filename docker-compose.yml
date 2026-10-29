@@ -1,0 +1,7 @@
+services:
+  svc0:
+    image: traefik:v2.10
+  svc1:
+    image: traefik:v2.10
+  svc2:
+    image: node:16-alpine
