@@ -1,0 +1,5 @@
+services:
+  svc0:
+    image: haproxy:2.0
+  svc1:
+    image: alpine:3.22
