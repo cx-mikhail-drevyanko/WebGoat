@@ -1,0 +1,7 @@
+services:
+  svc0:
+    image: mysql:5.7
+  svc1:
+    image: alpine:3.10
+  svc2:
+    image: traefik:v2.10
