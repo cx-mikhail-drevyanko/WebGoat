@@ -1,0 +1,5 @@
+# WebGoat container perf test image
+FROM ruby:2.7-slim
+LABEL variant="843779"
+EXPOSE 8443
+CMD ["sh", "-c", "sleep infinity"]
