@@ -1,0 +1,6 @@
+# WebGoat container perf test image
+FROM centos:7
+RUN yum install -y curl gzip jq zlib openssl git unzip && yum clean all
+LABEL variant="875692"
+EXPOSE 8080
+CMD ["sh", "-c", "sleep infinity"]

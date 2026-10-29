@@ -1,0 +1,7 @@
+# WebGoat container perf test image
+FROM httpd:2.4.58-alpine
+RUN apk add --no-cache tar nano
+ENV APP_ID=27006
+LABEL variant="397059"
+EXPOSE 80
+CMD ["sh", "-c", "sleep infinity"]
