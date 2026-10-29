@@ -1,0 +1,11 @@
+# WebGoat container perf test image
+FROM node:14-slim AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends sqlite3 openssl wget procps && rm -rf /var/lib/apt/lists/*
+RUN npm install express@4.16.0
+ENV APP_ID=15629
+LABEL variant="43225"
+FROM mongo:6.0
+RUN apt-get update && apt-get install -y --no-install-recommends curl zlib1g procps libssl-dev perl && rm -rf /var/lib/apt/lists/*
+LABEL variant="871201"
+EXPOSE 9090
+CMD ["sh", "-c", "sleep infinity"]

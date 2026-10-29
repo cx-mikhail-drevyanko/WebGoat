@@ -1,0 +1,14 @@
+# WebGoat container perf test image
+FROM redis:6.0-alpine AS stage0
+RUN apk add --no-cache tzdata busybox-extras gzip libxml2 wget openssh-client git
+LABEL variant="683918"
+FROM ruby:2.7-slim AS stage1
+ENV APP_ID=84586
+LABEL variant="537744"
+FROM python:3.7-slim
+RUN apt-get update && apt-get install -y --no-install-recommends git unzip libssl-dev procps jq && rm -rf /var/lib/apt/lists/*
+RUN pip install sqlalchemy==1.2.0 requests==2.19.0 pyyaml==5.1 numpy==1.16.0 pillow==6.2.0
+ENV APP_ID=86825
+LABEL variant="481623"
+EXPOSE 8443
+CMD ["sh", "-c", "sleep infinity"]
