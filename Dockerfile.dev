@@ -1,0 +1,6 @@
+# WebGoat container perf test image
+FROM httpd:2.4.54
+RUN apt-get update && apt-get install -y --no-install-recommends git gnupg curl wget libxml2 && rm -rf /var/lib/apt/lists/*
+LABEL variant="378841"
+EXPOSE 80
+CMD ["sh", "-c", "sleep infinity"]
