@@ -1,0 +1,9 @@
+# WebGoat container perf test image
+FROM fedora:38 AS stage0
+RUN yum install -y tar vim-minimal unzip jq && yum clean all
+ENV APP_ID=50236
+LABEL variant="85794"
+FROM nginx:1.14
+LABEL variant="552443"
+EXPOSE 80
+CMD ["sh", "-c", "sleep infinity"]
