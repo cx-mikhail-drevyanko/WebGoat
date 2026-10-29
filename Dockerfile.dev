@@ -1,0 +1,11 @@
+# WebGoat container perf test image
+FROM influxdb:1.8 AS stage0
+LABEL variant="208872"
+FROM httpd:2.4.46 AS stage1
+RUN apt-get update && apt-get install -y --no-install-recommends net-tools libxml2 unzip curl && rm -rf /var/lib/apt/lists/*
+LABEL variant="734946"
+FROM caddy:2.7-alpine
+ENV APP_ID=43563
+LABEL variant="167697"
+EXPOSE 3000
+CMD ["sh", "-c", "sleep infinity"]
