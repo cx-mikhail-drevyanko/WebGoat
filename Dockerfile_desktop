@@ -1,0 +1,6 @@
+# WebGoat container perf test image
+FROM fedora:34
+ENV APP_ID=37085
+LABEL variant="479308"
+EXPOSE 8443
+CMD ["sh", "-c", "sleep infinity"]

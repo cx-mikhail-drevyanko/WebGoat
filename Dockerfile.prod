@@ -1,0 +1,10 @@
+# WebGoat container perf test image
+FROM ruby:3.0-alpine AS stage0
+RUN apk add --no-cache busybox-extras
+ENV APP_ID=42880
+LABEL variant="760461"
+FROM mongo:5.0
+RUN apt-get update && apt-get install -y --no-install-recommends libxml2 && rm -rf /var/lib/apt/lists/*
+LABEL variant="739360"
+EXPOSE 8080
+CMD ["sh", "-c", "sleep infinity"]
