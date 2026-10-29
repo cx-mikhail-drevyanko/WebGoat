@@ -1,0 +1,8 @@
+# WebGoat container perf test image
+FROM alpine:3.10 AS stage0
+RUN apk add --no-cache tar sqlite git libxml2 nano openssl bind-tools tzdata
+LABEL variant="48270"
+FROM debian:11-slim
+LABEL variant="203891"
+EXPOSE 8443
+CMD ["sh", "-c", "sleep infinity"]

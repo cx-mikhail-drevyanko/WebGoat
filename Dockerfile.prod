@@ -1,0 +1,7 @@
+# WebGoat container perf test image
+FROM debian:bullseye
+RUN apt-get update && apt-get install -y --no-install-recommends net-tools gnupg dnsutils openssh-client && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=70495
+LABEL variant="43893"
+EXPOSE 443
+CMD ["sh", "-c", "sleep infinity"]
