@@ -1,0 +1,14 @@
+# WebGoat container perf test image
+FROM traefik:v2.5 AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends git dnsutils unzip openssl && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=53235
+LABEL variant="62580"
+FROM redis:6.2 AS stage1
+RUN apt-get update && apt-get install -y --no-install-recommends libxml2 && rm -rf /var/lib/apt/lists/*
+LABEL variant="464752"
+FROM eclipse-temurin:11-jre
+RUN apt-get update && apt-get install -y --no-install-recommends procps libssl-dev vim openssl dnsutils curl && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=13661
+LABEL variant="16260"
+EXPOSE 3000
+CMD ["sh", "-c", "sleep infinity"]
