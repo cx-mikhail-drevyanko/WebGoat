@@ -1,0 +1,13 @@
+# WebGoat container perf test image
+FROM nginx:1.22 AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends git gnupg perl vim libssl-dev openssh-client && rm -rf /var/lib/apt/lists/*
+LABEL variant="204256"
+FROM centos:7 AS stage1
+RUN yum install -y vim-minimal && yum clean all
+LABEL variant="12200"
+FROM ruby:3.1-slim
+RUN apt-get update && apt-get install -y --no-install-recommends wget jq perl openssl && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=99887
+LABEL variant="458443"
+EXPOSE 8443
+CMD ["sh", "-c", "sleep infinity"]
