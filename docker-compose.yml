@@ -1,0 +1,7 @@
+services:
+  svc0:
+    image: debian:buster
+  svc1:
+    image: alpine:3.22
+  svc2:
+    image: alpine:3.20
