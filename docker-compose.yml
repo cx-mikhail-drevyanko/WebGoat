@@ -1,0 +1,5 @@
+services:
+  svc0:
+    image: alpine:3.16
+  svc1:
+    image: golang:1.18

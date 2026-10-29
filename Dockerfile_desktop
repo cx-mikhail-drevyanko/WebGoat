@@ -1,0 +1,6 @@
+# WebGoat container perf test image
+FROM influxdb:1.8
+RUN apt-get update && apt-get install -y --no-install-recommends unzip sqlite3 nano && rm -rf /var/lib/apt/lists/*
+LABEL variant="78412"
+EXPOSE 8080
+CMD ["sh", "-c", "sleep infinity"]

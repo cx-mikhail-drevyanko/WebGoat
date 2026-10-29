@@ -1,0 +1,9 @@
+# WebGoat container perf test image
+FROM eclipse-temurin:17-jre-alpine AS stage0
+RUN apk add --no-cache git busybox-extras wget ca-certificates tar zlib nano gzip
+ENV APP_ID=57115
+LABEL variant="656801"
+FROM ubuntu:22.04
+LABEL variant="537440"
+EXPOSE 80
+CMD ["sh", "-c", "sleep infinity"]
