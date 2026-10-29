@@ -1,0 +1,11 @@
+# WebGoat container perf test image
+FROM elasticsearch:7.17.9 AS stage0
+LABEL variant="804487"
+FROM httpd:2.4.46 AS stage1
+RUN apt-get update && apt-get install -y --no-install-recommends git libssl-dev libcurl4 dnsutils wget vim zlib1g gnupg && rm -rf /var/lib/apt/lists/*
+LABEL variant="675514"
+FROM rabbitmq:3.8-alpine
+ENV APP_ID=47665
+LABEL variant="966106"
+EXPOSE 8080
+CMD ["sh", "-c", "sleep infinity"]

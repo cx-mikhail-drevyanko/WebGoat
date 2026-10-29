@@ -1,0 +1,13 @@
+# WebGoat container perf test image
+FROM fedora:38 AS stage0
+ENV APP_ID=44900
+LABEL variant="110413"
+FROM node:12-slim AS stage1
+RUN apt-get update && apt-get install -y --no-install-recommends zlib1g libxml2 gnupg vim git libssl-dev curl perl && rm -rf /var/lib/apt/lists/*
+RUN npm install express@4.16.0 request@2.88.0 moment@2.19.0
+LABEL variant="751258"
+FROM nginx:1.24-alpine
+RUN apk add --no-cache tar libxml2 vim openssh-client tzdata
+LABEL variant="377881"
+EXPOSE 3000
+CMD ["sh", "-c", "sleep infinity"]

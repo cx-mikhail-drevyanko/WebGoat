@@ -1,0 +1,5 @@
+services:
+  svc0:
+    image: amazonlinux:2
+  svc1:
+    image: tomcat:8.5-jre8
