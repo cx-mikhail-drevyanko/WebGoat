@@ -1,0 +1,7 @@
+services:
+  svc0:
+    image: ubuntu:24.04
+  svc1:
+    image: debian:10-slim
+  svc2:
+    image: alpine:3.10

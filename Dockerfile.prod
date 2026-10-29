@@ -1,0 +1,6 @@
+# WebGoat container perf test image
+FROM fedora:38
+RUN yum install -y unzip jq wget libxml2 vim-minimal && yum clean all
+LABEL variant="49773"
+EXPOSE 3000
+CMD ["sh", "-c", "sleep infinity"]
