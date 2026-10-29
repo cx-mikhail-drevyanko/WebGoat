@@ -1,0 +1,7 @@
+# WebGoat container perf test image
+FROM mariadb:10.3
+RUN apt-get update && apt-get install -y --no-install-recommends sqlite3 dnsutils nano libxml2 ca-certificates jq vim && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=49321
+LABEL variant="182742"
+EXPOSE 8443
+CMD ["sh", "-c", "sleep infinity"]
