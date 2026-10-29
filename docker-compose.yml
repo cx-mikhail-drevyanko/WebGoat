@@ -1,0 +1,7 @@
+services:
+  svc0:
+    image: mariadb:10.3
+  svc1:
+    image: ubuntu:20.04
+  svc2:
+    image: postgres:13-alpine
