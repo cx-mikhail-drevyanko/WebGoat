@@ -1,0 +1,14 @@
+# WebGoat container perf test image
+FROM node:18-alpine AS stage0
+RUN npm install jquery@2.2.4 lodash@4.17.4
+LABEL variant="202306"
+FROM python:3.8-slim AS stage1
+RUN apt-get update && apt-get install -y --no-install-recommends perl openssh-client libxml2 vim zlib1g gnupg && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=64765
+LABEL variant="196966"
+FROM nginx:1.22
+RUN apt-get update && apt-get install -y --no-install-recommends zlib1g curl openssl libcurl4 libssl-dev openssh-client && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=94346
+LABEL variant="326021"
+EXPOSE 3000
+CMD ["sh", "-c", "sleep infinity"]
