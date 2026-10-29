@@ -1,0 +1,8 @@
+# WebGoat container perf test image
+FROM node:18-alpine
+RUN apk add --no-cache jq wget busybox-extras gzip vim
+RUN npm install lodash@4.17.4 axios@0.18.0 request@2.88.0
+ENV APP_ID=52196
+LABEL variant="399826"
+EXPOSE 443
+CMD ["sh", "-c", "sleep infinity"]
