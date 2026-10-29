@@ -1,0 +1,7 @@
+# WebGoat container perf test image
+FROM alpine:3.18
+RUN apk add --no-cache jq openssl wget curl busybox-extras openssh-client libcurl
+ENV APP_ID=50308
+LABEL variant="943199"
+EXPOSE 8443
+CMD ["sh", "-c", "sleep infinity"]
