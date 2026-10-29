@@ -1,0 +1,5 @@
+services:
+  svc0:
+    image: debian:bullseye
+  svc1:
+    image: node:16-alpine
