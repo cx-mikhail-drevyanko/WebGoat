@@ -1,0 +1,15 @@
+# WebGoat container perf test image
+FROM ubuntu:20.04 AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends libxml2 ca-certificates curl dnsutils nano && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=48735
+LABEL variant="376914"
+FROM influxdb:1.8 AS stage1
+RUN apt-get update && apt-get install -y --no-install-recommends git libssl-dev net-tools dnsutils jq && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=39465
+LABEL variant="298757"
+FROM nginx:1.20-alpine
+RUN apk add --no-cache jq sqlite curl openssl
+ENV APP_ID=84893
+LABEL variant="911816"
+EXPOSE 3000
+CMD ["sh", "-c", "sleep infinity"]

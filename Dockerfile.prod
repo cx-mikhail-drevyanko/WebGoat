@@ -1,0 +1,10 @@
+# WebGoat container perf test image
+FROM fedora:38 AS stage0
+RUN yum install -y vim-minimal curl && yum clean all
+LABEL variant="196165"
+FROM fedora:34
+RUN yum install -y curl && yum clean all
+ENV APP_ID=71983
+LABEL variant="365426"
+EXPOSE 8080
+CMD ["sh", "-c", "sleep infinity"]
