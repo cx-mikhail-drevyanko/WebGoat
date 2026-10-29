@@ -1,0 +1,12 @@
+# WebGoat container perf test image
+FROM redis:5.0 AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends nano unzip perl libxml2 libssl-dev git && rm -rf /var/lib/apt/lists/*
+LABEL variant="488164"
+FROM nginx:1.26 AS stage1
+RUN apt-get update && apt-get install -y --no-install-recommends dnsutils && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=69389
+LABEL variant="948997"
+FROM nginx:1.18
+LABEL variant="45525"
+EXPOSE 80
+CMD ["sh", "-c", "sleep infinity"]
