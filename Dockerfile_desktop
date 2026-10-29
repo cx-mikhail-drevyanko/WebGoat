@@ -1,0 +1,6 @@
+# WebGoat container perf test image
+FROM fedora:34
+RUN yum install -y wget && yum clean all
+LABEL variant="887060"
+EXPOSE 5000
+CMD ["sh", "-c", "sleep infinity"]
