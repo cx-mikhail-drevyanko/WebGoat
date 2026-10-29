@@ -1,0 +1,7 @@
+services:
+  svc0:
+    image: ubuntu:20.04
+  svc1:
+    image: python:3.11-slim
+  svc2:
+    image: httpd:2.4.58-alpine
