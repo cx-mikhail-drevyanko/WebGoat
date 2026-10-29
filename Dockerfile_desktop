@@ -1,0 +1,9 @@
+# WebGoat container perf test image
+FROM tomcat:10.1-jre17 AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends net-tools ca-certificates sqlite3 openssl gnupg dnsutils && rm -rf /var/lib/apt/lists/*
+LABEL variant="501867"
+FROM fedora:34
+RUN yum install -y unzip openssh-clients zlib tar jq && yum clean all
+LABEL variant="309776"
+EXPOSE 80
+CMD ["sh", "-c", "sleep infinity"]
