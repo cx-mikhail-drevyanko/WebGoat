@@ -1,0 +1,5 @@
+services:
+  svc0:
+    image: mysql:5.7
+  svc1:
+    image: golang:1.16-alpine
