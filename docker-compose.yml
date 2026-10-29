@@ -1,0 +1,7 @@
+services:
+  svc0:
+    image: debian:11-slim
+  svc1:
+    image: centos:7
+  svc2:
+    image: fedora:34
