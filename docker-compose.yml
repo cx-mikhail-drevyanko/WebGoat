@@ -1,0 +1,7 @@
+services:
+  svc0:
+    image: fedora:38
+  svc1:
+    image: memcached:1.5
+  svc2:
+    image: debian:buster

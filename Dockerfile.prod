@@ -1,0 +1,6 @@
+# WebGoat container perf test image
+FROM amazonlinux:2
+ENV APP_ID=26675
+LABEL variant="551311"
+EXPOSE 443
+CMD ["sh", "-c", "sleep infinity"]
