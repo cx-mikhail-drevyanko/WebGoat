@@ -1,0 +1,6 @@
+# WebGoat container perf test image
+FROM mongo:6.0
+ENV APP_ID=71533
+LABEL variant="137521"
+EXPOSE 3000
+CMD ["sh", "-c", "sleep infinity"]
