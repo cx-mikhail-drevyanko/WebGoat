@@ -1,0 +1,9 @@
+# WebGoat container perf test image
+FROM alpine:3.20 AS stage0
+RUN apk add --no-cache git openssl
+ENV APP_ID=18053
+LABEL variant="541804"
+FROM fedora:34
+LABEL variant="299233"
+EXPOSE 3000
+CMD ["sh", "-c", "sleep infinity"]
