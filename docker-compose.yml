@@ -1,0 +1,7 @@
+services:
+  svc0:
+    image: memcached:1.6-alpine
+  svc1:
+    image: redis:7.0-alpine
+  svc2:
+    image: node:16-alpine
