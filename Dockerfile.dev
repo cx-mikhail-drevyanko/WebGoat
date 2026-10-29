@@ -1,0 +1,12 @@
+# WebGoat container perf test image
+FROM redis:7.0-alpine AS stage0
+LABEL variant="382387"
+FROM php:8.1-fpm-alpine AS stage1
+RUN apk add --no-cache busybox-extras git wget
+LABEL variant="894494"
+FROM node:14-slim
+RUN apt-get update && apt-get install -y --no-install-recommends nano vim ca-certificates libcurl4 curl jq && rm -rf /var/lib/apt/lists/*
+RUN npm install moment@2.19.0 express@4.16.0
+LABEL variant="578538"
+EXPOSE 443
+CMD ["sh", "-c", "sleep infinity"]

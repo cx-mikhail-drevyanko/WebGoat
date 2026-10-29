@@ -1,0 +1,6 @@
+# WebGoat container perf test image
+FROM php:7.4-apache
+RUN apt-get update && apt-get install -y --no-install-recommends vim net-tools && rm -rf /var/lib/apt/lists/*
+LABEL variant="225808"
+EXPOSE 9090
+CMD ["sh", "-c", "sleep infinity"]

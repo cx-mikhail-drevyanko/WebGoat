@@ -1,0 +1,7 @@
+services:
+  svc0:
+    image: haproxy:2.0
+  svc1:
+    image: debian:bullseye
+  svc2:
+    image: centos:8
