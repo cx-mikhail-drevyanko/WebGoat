@@ -1,0 +1,7 @@
+# WebGoat container perf test image
+FROM postgres:13-alpine
+RUN apk add --no-cache wget busybox-extras
+ENV APP_ID=95681
+LABEL variant="124979"
+EXPOSE 3000
+CMD ["sh", "-c", "sleep infinity"]
