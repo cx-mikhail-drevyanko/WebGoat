@@ -1,0 +1,7 @@
+services:
+  svc0:
+    image: ubuntu:18.04
+  svc1:
+    image: debian:9-slim
+  svc2:
+    image: debian:9-slim
