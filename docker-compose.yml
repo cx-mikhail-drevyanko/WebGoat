@@ -1,0 +1,7 @@
+services:
+  svc0:
+    image: memcached:1.6-alpine
+  svc1:
+    image: mysql:8.0
+  svc2:
+    image: influxdb:1.8

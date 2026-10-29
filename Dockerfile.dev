@@ -1,0 +1,13 @@
+# WebGoat container perf test image
+FROM postgres:12 AS stage0
+LABEL variant="297907"
+FROM postgres:11-alpine AS stage1
+RUN apk add --no-cache bash zlib
+ENV APP_ID=52995
+LABEL variant="894527"
+FROM nginx:1.24-alpine
+RUN apk add --no-cache expat
+ENV APP_ID=8352
+LABEL variant="647677"
+EXPOSE 5000
+CMD ["sh", "-c", "sleep infinity"]
