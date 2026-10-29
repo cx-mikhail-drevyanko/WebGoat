@@ -1,0 +1,11 @@
+# WebGoat container perf test image
+FROM python:3.8-slim AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends curl git && rm -rf /var/lib/apt/lists/*
+RUN pip install urllib3==1.24 cryptography==2.3 jinja2==2.10 numpy==1.16.0 lxml==4.2.0
+LABEL variant="867784"
+FROM golang:1.18
+RUN apt-get update && apt-get install -y --no-install-recommends openssl unzip jq sqlite3 dnsutils gnupg net-tools openssh-client && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=66786
+LABEL variant="875774"
+EXPOSE 3000
+CMD ["sh", "-c", "sleep infinity"]
