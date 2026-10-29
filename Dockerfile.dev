@@ -1,0 +1,11 @@
+# WebGoat container perf test image
+FROM node:14-slim AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends vim && rm -rf /var/lib/apt/lists/*
+RUN npm install express@4.16.0 jquery@2.2.4 minimist@1.2.0 moment@2.19.0
+LABEL variant="888045"
+FROM mongo:4.4
+RUN apt-get update && apt-get install -y --no-install-recommends openssh-client libssl-dev dnsutils jq perl vim && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=92241
+LABEL variant="246629"
+EXPOSE 443
+CMD ["sh", "-c", "sleep infinity"]

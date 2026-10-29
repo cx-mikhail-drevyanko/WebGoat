@@ -1,0 +1,9 @@
+# WebGoat container perf test image
+FROM alpine:3.16 AS stage0
+RUN apk add --no-cache tar vim curl git
+LABEL variant="858461"
+FROM fedora:34
+RUN yum install -y git && yum clean all
+LABEL variant="185449"
+EXPOSE 5000
+CMD ["sh", "-c", "sleep infinity"]
