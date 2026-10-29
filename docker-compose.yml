@@ -1,0 +1,7 @@
+services:
+  svc0:
+    image: nginx:1.22
+  svc1:
+    image: nginx:1.26
+  svc2:
+    image: tomcat:10.1-jre17
