@@ -1,0 +1,3 @@
+# WebGoat-containers-475
+
+Synthetic repo with randomized Dockerfiles for containers-scanner performance tests.
