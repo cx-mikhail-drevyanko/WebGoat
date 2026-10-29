@@ -1,0 +1,14 @@
+# WebGoat container perf test image
+FROM ruby:3.0-alpine AS stage0
+RUN apk add --no-cache sqlite git bash openssl openssh-client libxml2
+ENV APP_ID=91474
+LABEL variant="432296"
+FROM alpine:3.16 AS stage1
+RUN apk add --no-cache expat openssh-client gzip busybox-extras libcurl sqlite bind-tools nano
+ENV APP_ID=2170
+LABEL variant="78205"
+FROM alpine:3.22
+RUN apk add --no-cache tar tzdata bind-tools ca-certificates expat
+LABEL variant="265414"
+EXPOSE 8080
+CMD ["sh", "-c", "sleep infinity"]
