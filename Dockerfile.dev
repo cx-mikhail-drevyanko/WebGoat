@@ -1,0 +1,7 @@
+# WebGoat container perf test image
+FROM rabbitmq:3.11
+RUN apt-get update && apt-get install -y --no-install-recommends openssl nano && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=36105
+LABEL variant="745898"
+EXPOSE 80
+CMD ["sh", "-c", "sleep infinity"]
