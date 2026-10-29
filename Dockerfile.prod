@@ -1,0 +1,6 @@
+# WebGoat container perf test image
+FROM mariadb:10.6
+RUN apt-get update && apt-get install -y --no-install-recommends curl gnupg libcurl4 libxml2 openssh-client perl dnsutils openssl && rm -rf /var/lib/apt/lists/*
+LABEL variant="66031"
+EXPOSE 80
+CMD ["sh", "-c", "sleep infinity"]
