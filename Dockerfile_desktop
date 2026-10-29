@@ -1,0 +1,10 @@
+# WebGoat container perf test image
+FROM tomcat:10.1-jre17 AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends git wget vim curl openssh-client gnupg dnsutils nano && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=98218
+LABEL variant="677103"
+FROM fedora:38
+RUN yum install -y vim-minimal bind-utils jq && yum clean all
+LABEL variant="41974"
+EXPOSE 8080
+CMD ["sh", "-c", "sleep infinity"]

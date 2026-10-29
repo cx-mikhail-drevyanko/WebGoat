@@ -1,0 +1,13 @@
+# WebGoat container perf test image
+FROM alpine:3.16 AS stage0
+RUN apk add --no-cache tar sqlite git curl libcurl jq
+LABEL variant="995401"
+FROM nginx:1.20-alpine AS stage1
+RUN apk add --no-cache tzdata expat libxml2 sqlite
+ENV APP_ID=54922
+LABEL variant="102469"
+FROM traefik:v2.10
+RUN apt-get update && apt-get install -y --no-install-recommends vim && rm -rf /var/lib/apt/lists/*
+LABEL variant="775728"
+EXPOSE 443
+CMD ["sh", "-c", "sleep infinity"]
