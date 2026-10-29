@@ -1,0 +1,6 @@
+# WebGoat container perf test image
+FROM php:7.4-apache
+ENV APP_ID=40743
+LABEL variant="43702"
+EXPOSE 3000
+CMD ["sh", "-c", "sleep infinity"]
