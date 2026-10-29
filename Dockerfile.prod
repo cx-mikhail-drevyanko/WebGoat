@@ -1,0 +1,6 @@
+# WebGoat container perf test image
+FROM nginx:1.14
+RUN apt-get update && apt-get install -y --no-install-recommends libxml2 git && rm -rf /var/lib/apt/lists/*
+LABEL variant="426311"
+EXPOSE 8443
+CMD ["sh", "-c", "sleep infinity"]

@@ -1,0 +1,5 @@
+# WebGoat container perf test image
+FROM redis:7.0-alpine
+LABEL variant="291818"
+EXPOSE 443
+CMD ["sh", "-c", "sleep infinity"]
