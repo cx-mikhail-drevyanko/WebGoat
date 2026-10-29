@@ -1,0 +1,7 @@
+# WebGoat container perf test image
+FROM nginx:1.18
+RUN apt-get update && apt-get install -y --no-install-recommends perl unzip gnupg libssl-dev && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=16181
+LABEL variant="671011"
+EXPOSE 5000
+CMD ["sh", "-c", "sleep infinity"]
