@@ -1,0 +1,5 @@
+# WebGoat container perf test image
+FROM fedora:34
+LABEL variant="419391"
+EXPOSE 3000
+CMD ["sh", "-c", "sleep infinity"]

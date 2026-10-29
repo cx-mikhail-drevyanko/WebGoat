@@ -1,0 +1,6 @@
+# WebGoat container perf test image
+FROM alpine:3.14
+RUN apk add --no-cache tar jq openssl tzdata bash gzip curl expat
+LABEL variant="391410"
+EXPOSE 9090
+CMD ["sh", "-c", "sleep infinity"]
