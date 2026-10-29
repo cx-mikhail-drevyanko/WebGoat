@@ -1,0 +1,7 @@
+# WebGoat container perf test image
+FROM node:18-alpine
+RUN npm install axios@0.18.0
+ENV APP_ID=32361
+LABEL variant="57684"
+EXPOSE 5000
+CMD ["sh", "-c", "sleep infinity"]

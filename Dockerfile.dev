@@ -1,0 +1,6 @@
+# WebGoat container perf test image
+FROM eclipse-temurin:17-jre-alpine
+RUN apk add --no-cache jq openssh-client gzip zlib bind-tools libxml2
+LABEL variant="728697"
+EXPOSE 9090
+CMD ["sh", "-c", "sleep infinity"]
