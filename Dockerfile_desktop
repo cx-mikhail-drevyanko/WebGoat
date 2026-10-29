@@ -1,0 +1,11 @@
+# WebGoat container perf test image
+FROM fedora:38 AS stage0
+RUN yum install -y curl jq && yum clean all
+LABEL variant="921643"
+FROM debian:11-slim AS stage1
+LABEL variant="751938"
+FROM golang:1.18
+ENV APP_ID=76962
+LABEL variant="623557"
+EXPOSE 443
+CMD ["sh", "-c", "sleep infinity"]

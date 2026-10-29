@@ -1,0 +1,5 @@
+services:
+  svc0:
+    image: tomcat:10.1-jre17
+  svc1:
+    image: mongo:5.0
