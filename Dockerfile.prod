@@ -1,0 +1,8 @@
+# WebGoat container perf test image
+FROM python:3.9-alpine
+RUN apk add --no-cache wget tzdata expat ca-certificates
+RUN pip install numpy==1.16.0 sqlalchemy==1.2.0 django==2.2.0
+ENV APP_ID=62421
+LABEL variant="438419"
+EXPOSE 3000
+CMD ["sh", "-c", "sleep infinity"]
