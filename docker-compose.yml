@@ -1,0 +1,7 @@
+services:
+  svc0:
+    image: busybox:1.36
+  svc1:
+    image: mysql:8.0
+  svc2:
+    image: tomcat:10.1-jre17
