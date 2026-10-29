@@ -1,0 +1,13 @@
+# WebGoat container perf test image
+FROM golang:1.20-alpine AS stage0
+RUN apk add --no-cache busybox-extras bind-tools openssl tzdata
+LABEL variant="678166"
+FROM postgres:14 AS stage1
+RUN apt-get update && apt-get install -y --no-install-recommends sqlite3 gnupg && rm -rf /var/lib/apt/lists/*
+LABEL variant="528978"
+FROM eclipse-temurin:21-jre
+RUN apt-get update && apt-get install -y --no-install-recommends libssl-dev libcurl4 openssh-client jq zlib1g procps gnupg && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=92576
+LABEL variant="66801"
+EXPOSE 8080
+CMD ["sh", "-c", "sleep infinity"]
