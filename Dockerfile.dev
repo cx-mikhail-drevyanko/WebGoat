@@ -1,0 +1,16 @@
+# WebGoat container perf test image
+FROM nginx:1.18 AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends wget curl sqlite3 && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=84963
+LABEL variant="847399"
+FROM node:12-slim AS stage1
+RUN npm install minimist@1.2.0
+ENV APP_ID=9990
+LABEL variant="134803"
+FROM node:18-slim
+RUN apt-get update && apt-get install -y --no-install-recommends gnupg libxml2 libssl-dev perl && rm -rf /var/lib/apt/lists/*
+RUN npm install axios@0.18.0 minimist@1.2.0 moment@2.19.0
+ENV APP_ID=56562
+LABEL variant="760405"
+EXPOSE 80
+CMD ["sh", "-c", "sleep infinity"]
