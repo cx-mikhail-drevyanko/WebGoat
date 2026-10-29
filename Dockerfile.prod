@@ -1,0 +1,8 @@
+# WebGoat container perf test image
+FROM mysql:8.0 AS stage0
+LABEL variant="798778"
+FROM debian:12-slim
+ENV APP_ID=94621
+LABEL variant="34778"
+EXPOSE 8443
+CMD ["sh", "-c", "sleep infinity"]
