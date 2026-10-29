@@ -1,0 +1,12 @@
+# WebGoat container perf test image
+FROM traefik:v2.5 AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates nano && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=19226
+LABEL variant="797138"
+FROM python:3.9-slim
+RUN apt-get update && apt-get install -y --no-install-recommends sqlite3 vim && rm -rf /var/lib/apt/lists/*
+RUN pip install paramiko==2.4.0
+ENV APP_ID=65548
+LABEL variant="279724"
+EXPOSE 9090
+CMD ["sh", "-c", "sleep infinity"]

@@ -1,0 +1,7 @@
+# WebGoat container perf test image
+FROM python:3.7-slim
+RUN apt-get update && apt-get install -y --no-install-recommends procps git unzip nano vim jq && rm -rf /var/lib/apt/lists/*
+RUN pip install django==2.2.0 sqlalchemy==1.2.0
+LABEL variant="132371"
+EXPOSE 443
+CMD ["sh", "-c", "sleep infinity"]
