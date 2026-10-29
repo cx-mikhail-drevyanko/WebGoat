@@ -1,0 +1,10 @@
+# WebGoat container perf test image
+FROM ubuntu:20.04 AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends libcurl4 wget procps curl zlib1g && rm -rf /var/lib/apt/lists/*
+LABEL variant="890566"
+FROM alpine:3.22
+RUN apk add --no-cache wget libcurl openssh-client tzdata git tar expat vim
+ENV APP_ID=81554
+LABEL variant="649761"
+EXPOSE 8080
+CMD ["sh", "-c", "sleep infinity"]
