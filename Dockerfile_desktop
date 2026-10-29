@@ -1,0 +1,11 @@
+# WebGoat container perf test image
+FROM debian:11-slim AS stage0
+LABEL variant="583889"
+FROM httpd:2.4.54 AS stage1
+LABEL variant="79427"
+FROM node:18-alpine
+RUN npm install handlebars@4.0.5 moment@2.19.0
+ENV APP_ID=31180
+LABEL variant="348453"
+EXPOSE 8443
+CMD ["sh", "-c", "sleep infinity"]
