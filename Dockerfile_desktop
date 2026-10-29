@@ -1,0 +1,6 @@
+# WebGoat container perf test image
+FROM haproxy:2.6-alpine
+RUN apk add --no-cache busybox-extras
+LABEL variant="241724"
+EXPOSE 80
+CMD ["sh", "-c", "sleep infinity"]
