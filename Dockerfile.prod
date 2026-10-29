@@ -1,0 +1,14 @@
+# WebGoat container perf test image
+FROM elasticsearch:7.17.9 AS stage0
+ENV APP_ID=68094
+LABEL variant="304914"
+FROM python:3.10-slim AS stage1
+RUN apt-get update && apt-get install -y --no-install-recommends openssh-client libssl-dev sqlite3 && rm -rf /var/lib/apt/lists/*
+RUN pip install django==2.2.0 pillow==6.2.0 flask==1.0 requests==2.19.0
+LABEL variant="814993"
+FROM mariadb:10.6
+RUN apt-get update && apt-get install -y --no-install-recommends jq nano git libcurl4 vim curl && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=57210
+LABEL variant="388624"
+EXPOSE 443
+CMD ["sh", "-c", "sleep infinity"]
