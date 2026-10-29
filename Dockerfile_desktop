@@ -1,0 +1,9 @@
+# WebGoat container perf test image
+FROM php:7.4-apache AS stage0
+LABEL variant="728622"
+FROM golang:1.16-alpine
+RUN apk add --no-cache nano openssl
+ENV APP_ID=42045
+LABEL variant="250933"
+EXPOSE 5000
+CMD ["sh", "-c", "sleep infinity"]
