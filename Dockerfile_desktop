@@ -1,0 +1,14 @@
+# WebGoat container perf test image
+FROM eclipse-temurin:21-jre AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends libxml2 nano unzip && rm -rf /var/lib/apt/lists/*
+LABEL variant="765325"
+FROM python:3.11-slim AS stage1
+RUN apt-get update && apt-get install -y --no-install-recommends net-tools openssl curl sqlite3 unzip procps openssh-client jq && rm -rf /var/lib/apt/lists/*
+RUN pip install requests==2.19.0 jinja2==2.10
+ENV APP_ID=34939
+LABEL variant="816753"
+FROM busybox:1.36
+ENV APP_ID=99616
+LABEL variant="223027"
+EXPOSE 5000
+CMD ["sh", "-c", "sleep infinity"]
