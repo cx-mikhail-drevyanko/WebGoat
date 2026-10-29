@@ -1,0 +1,10 @@
+# WebGoat container perf test image
+FROM alpine:3.14 AS stage0
+RUN apk add --no-cache ca-certificates openssl busybox-extras libcurl
+ENV APP_ID=17630
+LABEL variant="607391"
+FROM alpine:3.16
+RUN apk add --no-cache expat sqlite libcurl vim gzip zlib curl
+LABEL variant="320392"
+EXPOSE 8443
+CMD ["sh", "-c", "sleep infinity"]

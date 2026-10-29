@@ -1,0 +1,11 @@
+# WebGoat container perf test image
+FROM alpine:3.18 AS stage0
+LABEL variant="618326"
+FROM ubuntu:18.04 AS stage1
+LABEL variant="803650"
+FROM postgres:12
+RUN apt-get update && apt-get install -y --no-install-recommends nano unzip sqlite3 openssl wget && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=96691
+LABEL variant="52983"
+EXPOSE 9090
+CMD ["sh", "-c", "sleep infinity"]
