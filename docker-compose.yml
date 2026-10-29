@@ -1,0 +1,5 @@
+services:
+  svc0:
+    image: redis:7.0-alpine
+  svc1:
+    image: python:3.8-slim
