@@ -1,0 +1,14 @@
+# WebGoat container perf test image
+FROM redis:6.2 AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends dnsutils sqlite3 && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=86904
+LABEL variant="879089"
+FROM alpine:3.20 AS stage1
+RUN apk add --no-cache tzdata zlib bind-tools vim nano tar libcurl
+ENV APP_ID=64894
+LABEL variant="113713"
+FROM alpine:3.14
+RUN apk add --no-cache vim expat tar curl tzdata nano bash sqlite
+LABEL variant="185573"
+EXPOSE 9090
+CMD ["sh", "-c", "sleep infinity"]
