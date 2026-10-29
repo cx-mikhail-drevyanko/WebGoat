@@ -1,0 +1,6 @@
+# WebGoat container perf test image
+FROM tomcat:8.5-jre8
+RUN apt-get update && apt-get install -y --no-install-recommends git nano gnupg sqlite3 net-tools && rm -rf /var/lib/apt/lists/*
+LABEL variant="639503"
+EXPOSE 80
+CMD ["sh", "-c", "sleep infinity"]

@@ -1,0 +1,10 @@
+# WebGoat container perf test image
+FROM ubuntu:20.04 AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends libxml2 dnsutils wget nano ca-certificates && rm -rf /var/lib/apt/lists/*
+LABEL variant="654018"
+FROM httpd:2.4.58-alpine
+RUN apk add --no-cache expat libcurl vim
+ENV APP_ID=21536
+LABEL variant="528857"
+EXPOSE 3000
+CMD ["sh", "-c", "sleep infinity"]
