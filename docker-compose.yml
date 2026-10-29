@@ -1,0 +1,5 @@
+services:
+  svc0:
+    image: ruby:2.7-slim
+  svc1:
+    image: mongo:5.0
