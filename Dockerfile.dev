@@ -1,0 +1,7 @@
+# WebGoat container perf test image
+FROM centos:7
+RUN yum install -y unzip libxml2 bind-utils openssl vim-minimal && yum clean all
+ENV APP_ID=75568
+LABEL variant="630686"
+EXPOSE 8443
+CMD ["sh", "-c", "sleep infinity"]
