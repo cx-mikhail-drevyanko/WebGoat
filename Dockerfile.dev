@@ -1,0 +1,6 @@
+# WebGoat container perf test image
+FROM postgres:13-alpine
+ENV APP_ID=50450
+LABEL variant="858061"
+EXPOSE 8443
+CMD ["sh", "-c", "sleep infinity"]
