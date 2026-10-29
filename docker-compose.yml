@@ -1,0 +1,7 @@
+services:
+  svc0:
+    image: ruby:2.7-slim
+  svc1:
+    image: python:3.9-alpine
+  svc2:
+    image: node:12-slim
