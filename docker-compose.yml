@@ -1,0 +1,7 @@
+services:
+  svc0:
+    image: php:8.0-cli
+  svc1:
+    image: ruby:3.0-alpine
+  svc2:
+    image: fedora:38

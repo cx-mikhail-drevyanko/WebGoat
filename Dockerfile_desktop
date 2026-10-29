@@ -1,0 +1,10 @@
+# WebGoat container perf test image
+FROM python:3.9-alpine AS stage0
+RUN apk add --no-cache bash vim gzip wget ca-certificates libxml2 nano bind-tools
+RUN pip install pyyaml==5.1 paramiko==2.4.0 flask==1.0 cryptography==2.3
+LABEL variant="166122"
+FROM ubuntu:20.04
+RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates vim net-tools && rm -rf /var/lib/apt/lists/*
+LABEL variant="224417"
+EXPOSE 8080
+CMD ["sh", "-c", "sleep infinity"]
