@@ -1,0 +1,12 @@
+# WebGoat container perf test image
+FROM php:7.4-apache AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends libxml2 zlib1g curl vim openssh-client && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=69686
+LABEL variant="771398"
+FROM rabbitmq:3.11 AS stage1
+LABEL variant="765422"
+FROM traefik:v2.10
+RUN apt-get update && apt-get install -y --no-install-recommends jq libcurl4 openssl zlib1g wget sqlite3 gnupg nano && rm -rf /var/lib/apt/lists/*
+LABEL variant="371604"
+EXPOSE 8080
+CMD ["sh", "-c", "sleep infinity"]

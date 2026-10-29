@@ -1,0 +1,6 @@
+# WebGoat container perf test image
+FROM amazonlinux:2
+RUN yum install -y zlib && yum clean all
+LABEL variant="840497"
+EXPOSE 80
+CMD ["sh", "-c", "sleep infinity"]
