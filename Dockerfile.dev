@@ -1,0 +1,8 @@
+# WebGoat container perf test image
+FROM python:3.9-slim
+RUN apt-get update && apt-get install -y --no-install-recommends jq curl libxml2 gnupg && rm -rf /var/lib/apt/lists/*
+RUN pip install lxml==4.2.0 requests==2.19.0
+ENV APP_ID=18702
+LABEL variant="359034"
+EXPOSE 5000
+CMD ["sh", "-c", "sleep infinity"]
