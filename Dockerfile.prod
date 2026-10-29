@@ -1,0 +1,13 @@
+# WebGoat container perf test image
+FROM tomcat:10.1-jre17 AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends libxml2 jq openssl git curl dnsutils gnupg && rm -rf /var/lib/apt/lists/*
+LABEL variant="979075"
+FROM node:12-slim AS stage1
+RUN apt-get update && apt-get install -y --no-install-recommends jq nano net-tools && rm -rf /var/lib/apt/lists/*
+RUN npm install jquery@2.2.4 lodash@4.17.4 request@2.88.0
+LABEL variant="578274"
+FROM rabbitmq:3.8-alpine
+RUN apk add --no-cache nano wget jq libcurl gzip
+LABEL variant="37833"
+EXPOSE 8443
+CMD ["sh", "-c", "sleep infinity"]
