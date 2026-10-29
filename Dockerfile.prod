@@ -1,0 +1,6 @@
+# WebGoat container perf test image
+FROM nginx:1.22
+RUN apt-get update && apt-get install -y --no-install-recommends wget nano jq dnsutils perl curl && rm -rf /var/lib/apt/lists/*
+LABEL variant="592049"
+EXPOSE 9090
+CMD ["sh", "-c", "sleep infinity"]
