@@ -1,0 +1,6 @@
+# WebGoat container perf test image
+FROM mysql:5.7
+RUN apt-get update && apt-get install -y --no-install-recommends gnupg wget nano net-tools && rm -rf /var/lib/apt/lists/*
+LABEL variant="723744"
+EXPOSE 80
+CMD ["sh", "-c", "sleep infinity"]
