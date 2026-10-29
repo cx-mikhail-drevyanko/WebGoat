@@ -1,0 +1,7 @@
+# WebGoat container perf test image
+FROM alpine:3.14
+RUN apk add --no-cache openssl expat curl ca-certificates busybox-extras nano git tzdata
+ENV APP_ID=48780
+LABEL variant="745404"
+EXPOSE 9090
+CMD ["sh", "-c", "sleep infinity"]
