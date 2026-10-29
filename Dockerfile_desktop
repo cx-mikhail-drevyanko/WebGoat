@@ -1,0 +1,6 @@
+# WebGoat container perf test image
+FROM haproxy:2.6-alpine
+RUN apk add --no-cache libcurl tar
+LABEL variant="348765"
+EXPOSE 443
+CMD ["sh", "-c", "sleep infinity"]
