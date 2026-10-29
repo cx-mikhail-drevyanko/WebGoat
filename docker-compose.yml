@@ -1,0 +1,5 @@
+services:
+  svc0:
+    image: traefik:v2.5
+  svc1:
+    image: redis:5.0
