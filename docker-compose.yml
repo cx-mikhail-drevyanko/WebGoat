@@ -1,0 +1,3 @@
+services:
+  svc0:
+    image: debian:12-slim
