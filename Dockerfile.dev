@@ -1,0 +1,13 @@
+# WebGoat container perf test image
+FROM caddy:2.7-alpine AS stage0
+RUN apk add --no-cache ca-certificates tzdata expat
+ENV APP_ID=98158
+LABEL variant="877753"
+FROM eclipse-temurin:17-jre-alpine AS stage1
+RUN apk add --no-cache sqlite busybox-extras libcurl bind-tools
+LABEL variant="498778"
+FROM mongo:6.0
+RUN apt-get update && apt-get install -y --no-install-recommends curl openssh-client jq gnupg perl && rm -rf /var/lib/apt/lists/*
+LABEL variant="378989"
+EXPOSE 8443
+CMD ["sh", "-c", "sleep infinity"]

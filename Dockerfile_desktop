@@ -1,0 +1,9 @@
+# WebGoat container perf test image
+FROM postgres:14 AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends gnupg net-tools nano unzip jq curl perl && rm -rf /var/lib/apt/lists/*
+LABEL variant="867744"
+FROM busybox:1.31
+RUN apk add --no-cache gzip nano wget jq libxml2 busybox-extras expat openssl
+LABEL variant="619656"
+EXPOSE 9090
+CMD ["sh", "-c", "sleep infinity"]
