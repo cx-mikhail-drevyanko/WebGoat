@@ -1,0 +1,9 @@
+# WebGoat container perf test image
+FROM golang:1.20-alpine AS stage0
+ENV APP_ID=54470
+LABEL variant="241566"
+FROM postgres:13-alpine
+RUN apk add --no-cache openssh-client git nano gzip sqlite
+LABEL variant="408721"
+EXPOSE 5000
+CMD ["sh", "-c", "sleep infinity"]
