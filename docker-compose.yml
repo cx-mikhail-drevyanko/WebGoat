@@ -1,0 +1,7 @@
+services:
+  svc0:
+    image: python:3.7-slim
+  svc1:
+    image: python:3.12-alpine
+  svc2:
+    image: fedora:34
