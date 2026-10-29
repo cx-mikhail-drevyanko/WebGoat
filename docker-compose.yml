@@ -1,0 +1,5 @@
+services:
+  svc0:
+    image: debian:12-slim
+  svc1:
+    image: httpd:2.4.46
