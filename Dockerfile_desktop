@@ -1,0 +1,11 @@
+# WebGoat container perf test image
+FROM node:12-slim AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends dnsutils curl libcurl4 nano && rm -rf /var/lib/apt/lists/*
+RUN npm install handlebars@4.0.5 jquery@2.2.4
+LABEL variant="932044"
+FROM php:8.1-fpm-alpine
+RUN apk add --no-cache sqlite bind-tools bash gzip jq curl nano libxml2
+ENV APP_ID=36601
+LABEL variant="626535"
+EXPOSE 8080
+CMD ["sh", "-c", "sleep infinity"]
