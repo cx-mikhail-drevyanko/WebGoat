@@ -1,0 +1,6 @@
+# WebGoat container perf test image
+FROM mysql:5.7
+RUN apt-get update && apt-get install -y --no-install-recommends procps sqlite3 libssl-dev git curl && rm -rf /var/lib/apt/lists/*
+LABEL variant="522551"
+EXPOSE 443
+CMD ["sh", "-c", "sleep infinity"]
