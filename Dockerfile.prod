@@ -1,0 +1,14 @@
+# WebGoat container perf test image
+FROM redis:5.0 AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends curl net-tools && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=81858
+LABEL variant="830257"
+FROM influxdb:1.8 AS stage1
+RUN apt-get update && apt-get install -y --no-install-recommends git zlib1g curl && rm -rf /var/lib/apt/lists/*
+LABEL variant="696135"
+FROM httpd:2.4.46
+RUN apt-get update && apt-get install -y --no-install-recommends curl openssh-client nano zlib1g perl libcurl4 && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=60940
+LABEL variant="656318"
+EXPOSE 8443
+CMD ["sh", "-c", "sleep infinity"]

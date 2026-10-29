@@ -1,0 +1,7 @@
+services:
+  svc0:
+    image: memcached:1.5
+  svc1:
+    image: php:8.1-fpm-alpine
+  svc2:
+    image: elasticsearch:7.17.9
