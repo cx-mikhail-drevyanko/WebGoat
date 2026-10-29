@@ -1,0 +1,7 @@
+# WebGoat container perf test image
+FROM ubuntu:24.04
+RUN apt-get update && apt-get install -y --no-install-recommends git openssh-client dnsutils perl unzip ca-certificates libssl-dev && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=63398
+LABEL variant="486272"
+EXPOSE 443
+CMD ["sh", "-c", "sleep infinity"]

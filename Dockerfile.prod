@@ -1,0 +1,6 @@
+# WebGoat container perf test image
+FROM alpine:3.16
+RUN apk add --no-cache jq git tzdata nano
+LABEL variant="164275"
+EXPOSE 8443
+CMD ["sh", "-c", "sleep infinity"]
