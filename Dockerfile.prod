@@ -1,0 +1,6 @@
+# WebGoat container perf test image
+FROM caddy:2.7-alpine
+RUN apk add --no-cache bind-tools openssh-client
+LABEL variant="828008"
+EXPOSE 8443
+CMD ["sh", "-c", "sleep infinity"]

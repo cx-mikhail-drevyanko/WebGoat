@@ -1,0 +1,6 @@
+# WebGoat container perf test image
+FROM eclipse-temurin:17-jre-alpine
+RUN apk add --no-cache nano tar curl wget
+LABEL variant="223433"
+EXPOSE 9090
+CMD ["sh", "-c", "sleep infinity"]
