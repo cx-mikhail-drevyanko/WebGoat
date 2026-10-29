@@ -1,0 +1,7 @@
+services:
+  svc0:
+    image: node:14-slim
+  svc1:
+    image: ubuntu:24.04
+  svc2:
+    image: python:3.8-slim
