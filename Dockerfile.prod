@@ -1,0 +1,9 @@
+# WebGoat container perf test image
+FROM nginx:1.20-alpine AS stage0
+RUN apk add --no-cache libxml2 jq zlib tar openssl busybox-extras bind-tools vim
+LABEL variant="696295"
+FROM debian:bullseye
+RUN apt-get update && apt-get install -y --no-install-recommends jq wget git libcurl4 libxml2 net-tools procps && rm -rf /var/lib/apt/lists/*
+LABEL variant="853730"
+EXPOSE 443
+CMD ["sh", "-c", "sleep infinity"]

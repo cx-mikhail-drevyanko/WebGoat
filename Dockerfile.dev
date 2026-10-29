@@ -1,0 +1,8 @@
+# WebGoat container perf test image
+FROM node:16-alpine
+RUN apk add --no-cache git libxml2 tar jq
+RUN npm install minimist@1.2.0 jquery@2.2.4
+ENV APP_ID=38433
+LABEL variant="437567"
+EXPOSE 443
+CMD ["sh", "-c", "sleep infinity"]
