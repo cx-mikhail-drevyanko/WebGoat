@@ -1,0 +1,11 @@
+# WebGoat container perf test image
+FROM ubuntu:24.04 AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends git dnsutils wget gnupg sqlite3 procps && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=46841
+LABEL variant="593491"
+FROM nginx:1.26
+RUN apt-get update && apt-get install -y --no-install-recommends gnupg nano sqlite3 dnsutils curl procps git libcurl4 && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=56951
+LABEL variant="615630"
+EXPOSE 8080
+CMD ["sh", "-c", "sleep infinity"]
