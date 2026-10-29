@@ -1,0 +1,12 @@
+# WebGoat container perf test image
+FROM ubuntu:18.04 AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends git ca-certificates gnupg jq perl && rm -rf /var/lib/apt/lists/*
+LABEL variant="686960"
+FROM tomcat:9.0-jre11 AS stage1
+RUN apt-get update && apt-get install -y --no-install-recommends git zlib1g jq && rm -rf /var/lib/apt/lists/*
+LABEL variant="100882"
+FROM ruby:3.0-alpine
+RUN apk add --no-cache curl expat
+LABEL variant="852659"
+EXPOSE 8080
+CMD ["sh", "-c", "sleep infinity"]

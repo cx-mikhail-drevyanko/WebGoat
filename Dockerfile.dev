@@ -1,0 +1,7 @@
+# WebGoat container perf test image
+FROM fedora:38
+RUN yum install -y curl && yum clean all
+ENV APP_ID=84822
+LABEL variant="780030"
+EXPOSE 8080
+CMD ["sh", "-c", "sleep infinity"]
