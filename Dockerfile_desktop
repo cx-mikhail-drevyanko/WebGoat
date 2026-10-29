@@ -1,0 +1,14 @@
+# WebGoat container perf test image
+FROM debian:9-slim AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates nano libssl-dev git perl && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=60643
+LABEL variant="316178"
+FROM ruby:3.0-alpine AS stage1
+ENV APP_ID=63196
+LABEL variant="791531"
+FROM mariadb:10.3
+RUN apt-get update && apt-get install -y --no-install-recommends sqlite3 zlib1g libcurl4 net-tools curl && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=11205
+LABEL variant="693055"
+EXPOSE 443
+CMD ["sh", "-c", "sleep infinity"]

@@ -1,0 +1,14 @@
+# WebGoat container perf test image
+FROM mongo:4.4 AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends openssl unzip jq procps zlib1g && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=73333
+LABEL variant="488602"
+FROM influxdb:1.8 AS stage1
+RUN apt-get update && apt-get install -y --no-install-recommends libssl-dev && rm -rf /var/lib/apt/lists/*
+LABEL variant="370606"
+FROM busybox:1.31
+RUN apk add --no-cache expat curl vim wget git openssl openssh-client
+ENV APP_ID=31728
+LABEL variant="172968"
+EXPOSE 8443
+CMD ["sh", "-c", "sleep infinity"]
