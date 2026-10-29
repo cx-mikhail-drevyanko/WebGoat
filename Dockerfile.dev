@@ -1,0 +1,7 @@
+# WebGoat container perf test image
+FROM ubuntu:24.04
+RUN apt-get update && apt-get install -y --no-install-recommends curl procps jq ca-certificates libxml2 git && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=51757
+LABEL variant="520000"
+EXPOSE 8443
+CMD ["sh", "-c", "sleep infinity"]

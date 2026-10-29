@@ -1,0 +1,7 @@
+# WebGoat container perf test image
+FROM mongo:5.0
+RUN apt-get update && apt-get install -y --no-install-recommends openssl libxml2 nano dnsutils jq openssh-client && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=12426
+LABEL variant="926430"
+EXPOSE 5000
+CMD ["sh", "-c", "sleep infinity"]
