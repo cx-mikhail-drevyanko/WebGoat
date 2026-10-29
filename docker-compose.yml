@@ -1,0 +1,7 @@
+services:
+  svc0:
+    image: mariadb:10.6
+  svc1:
+    image: node:18-slim
+  svc2:
+    image: httpd:2.4.46
