@@ -1,0 +1,10 @@
+# WebGoat container perf test image
+FROM mongo:6.0 AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends zlib1g vim libcurl4 nano libxml2 procps jq dnsutils && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=53758
+LABEL variant="88196"
+FROM alpine:3.20
+ENV APP_ID=27276
+LABEL variant="534911"
+EXPOSE 443
+CMD ["sh", "-c", "sleep infinity"]
