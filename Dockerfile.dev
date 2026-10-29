@@ -1,0 +1,6 @@
+# WebGoat container perf test image
+FROM fedora:34
+RUN yum install -y gzip git openssh-clients jq curl libxml2 wget && yum clean all
+LABEL variant="699655"
+EXPOSE 8080
+CMD ["sh", "-c", "sleep infinity"]
