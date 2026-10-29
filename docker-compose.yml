@@ -1,0 +1,5 @@
+services:
+  svc0:
+    image: debian:10-slim
+  svc1:
+    image: python:3.7-slim
