@@ -1,0 +1,11 @@
+# WebGoat container perf test image
+FROM httpd:2.4.54 AS stage0
+LABEL variant="301231"
+FROM ubuntu:18.04 AS stage1
+RUN apt-get update && apt-get install -y --no-install-recommends procps dnsutils wget openssl libxml2 zlib1g unzip && rm -rf /var/lib/apt/lists/*
+LABEL variant="662324"
+FROM alpine:3.10
+RUN apk add --no-cache tar
+LABEL variant="358120"
+EXPOSE 8080
+CMD ["sh", "-c", "sleep infinity"]
