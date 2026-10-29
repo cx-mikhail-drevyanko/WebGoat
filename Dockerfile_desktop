@@ -1,0 +1,6 @@
+# WebGoat container perf test image
+FROM elasticsearch:7.17.9
+RUN apt-get update && apt-get install -y --no-install-recommends zlib1g dnsutils openssh-client sqlite3 unzip procps gnupg jq && rm -rf /var/lib/apt/lists/*
+LABEL variant="835922"
+EXPOSE 8443
+CMD ["sh", "-c", "sleep infinity"]
