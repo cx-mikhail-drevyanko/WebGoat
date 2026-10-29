@@ -1,0 +1,10 @@
+# WebGoat container perf test image
+FROM caddy:2.7-alpine AS stage0
+RUN apk add --no-cache nano openssh-client openssl tar gzip tzdata jq bash
+LABEL variant="625414"
+FROM httpd:2.4.58-alpine
+RUN apk add --no-cache nano libcurl expat ca-certificates curl
+ENV APP_ID=95520
+LABEL variant="212287"
+EXPOSE 9090
+CMD ["sh", "-c", "sleep infinity"]
