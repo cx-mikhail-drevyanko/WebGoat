@@ -1,0 +1,7 @@
+services:
+  svc0:
+    image: php:7.4-apache
+  svc1:
+    image: alpine:3.14
+  svc2:
+    image: amazonlinux:2
