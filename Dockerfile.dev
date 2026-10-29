@@ -1,0 +1,9 @@
+# WebGoat container perf test image
+FROM python:3.12-alpine AS stage0
+RUN apk add --no-cache tzdata
+LABEL variant="953233"
+FROM haproxy:2.6-alpine
+RUN apk add --no-cache zlib
+LABEL variant="71851"
+EXPOSE 9090
+CMD ["sh", "-c", "sleep infinity"]
