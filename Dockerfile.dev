@@ -1,0 +1,5 @@
+# WebGoat container perf test image
+FROM alpine:3.16
+LABEL variant="46525"
+EXPOSE 5000
+CMD ["sh", "-c", "sleep infinity"]

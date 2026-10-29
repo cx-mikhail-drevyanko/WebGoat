@@ -1,0 +1,7 @@
+# WebGoat container perf test image
+FROM node:18-alpine
+RUN apk add --no-cache vim jq busybox-extras libxml2 zlib
+RUN npm install axios@0.18.0 lodash@4.17.4 handlebars@4.0.5 moment@2.19.0
+LABEL variant="660753"
+EXPOSE 80
+CMD ["sh", "-c", "sleep infinity"]
