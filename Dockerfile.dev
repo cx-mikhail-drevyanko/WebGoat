@@ -1,0 +1,7 @@
+# WebGoat container perf test image
+FROM node:16-alpine
+RUN apk add --no-cache vim git expat curl libxml2 wget tar
+RUN npm install express@4.16.0
+LABEL variant="81250"
+EXPOSE 443
+CMD ["sh", "-c", "sleep infinity"]
