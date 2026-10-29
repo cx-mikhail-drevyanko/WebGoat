@@ -1,0 +1,11 @@
+# WebGoat container perf test image
+FROM debian:9-slim AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends libssl-dev net-tools && rm -rf /var/lib/apt/lists/*
+LABEL variant="823428"
+FROM ruby:2.7-slim AS stage1
+RUN apt-get update && apt-get install -y --no-install-recommends git wget openssl perl ca-certificates && rm -rf /var/lib/apt/lists/*
+LABEL variant="952808"
+FROM httpd:2.4.58-alpine
+LABEL variant="918741"
+EXPOSE 443
+CMD ["sh", "-c", "sleep infinity"]
