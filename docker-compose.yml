@@ -1,0 +1,7 @@
+services:
+  svc0:
+    image: postgres:11-alpine
+  svc1:
+    image: debian:11-slim
+  svc2:
+    image: debian:bullseye
