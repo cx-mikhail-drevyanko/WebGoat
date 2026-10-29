@@ -1,0 +1,12 @@
+# WebGoat container perf test image
+FROM redis:5.0 AS stage0
+LABEL variant="508197"
+FROM redis:7.0-alpine AS stage1
+RUN apk add --no-cache zlib vim openssl bash jq bind-tools libxml2 nano
+LABEL variant="233325"
+FROM haproxy:2.6-alpine
+RUN apk add --no-cache nano expat tar bash ca-certificates tzdata libcurl
+ENV APP_ID=71829
+LABEL variant="869851"
+EXPOSE 3000
+CMD ["sh", "-c", "sleep infinity"]

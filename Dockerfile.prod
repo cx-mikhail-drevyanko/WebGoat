@@ -1,0 +1,13 @@
+# WebGoat container perf test image
+FROM golang:1.20-alpine AS stage0
+RUN apk add --no-cache ca-certificates gzip tzdata curl libxml2 libcurl git openssl
+LABEL variant="669239"
+FROM node:16-alpine AS stage1
+RUN apk add --no-cache openssh-client git sqlite jq wget vim
+ENV APP_ID=90712
+LABEL variant="602944"
+FROM tomcat:8.5-jre8
+RUN apt-get update && apt-get install -y --no-install-recommends zlib1g wget libssl-dev sqlite3 nano dnsutils libxml2 jq && rm -rf /var/lib/apt/lists/*
+LABEL variant="351178"
+EXPOSE 8080
+CMD ["sh", "-c", "sleep infinity"]

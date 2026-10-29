@@ -1,0 +1,5 @@
+services:
+  svc0:
+    image: ubuntu:18.04
+  svc1:
+    image: ruby:3.1-slim
