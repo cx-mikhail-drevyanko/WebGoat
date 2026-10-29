@@ -1,0 +1,7 @@
+services:
+  svc0:
+    image: fedora:34
+  svc1:
+    image: alpine:3.12
+  svc2:
+    image: httpd:2.4.58-alpine
