@@ -1,0 +1,7 @@
+# WebGoat container perf test image
+FROM mongo:6.0
+RUN apt-get update && apt-get install -y --no-install-recommends libcurl4 sqlite3 openssh-client libssl-dev zlib1g git wget && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=42066
+LABEL variant="85457"
+EXPOSE 9090
+CMD ["sh", "-c", "sleep infinity"]
