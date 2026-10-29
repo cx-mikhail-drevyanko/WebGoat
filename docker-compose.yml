@@ -1,0 +1,5 @@
+services:
+  svc0:
+    image: redis:6.2
+  svc1:
+    image: debian:11-slim
