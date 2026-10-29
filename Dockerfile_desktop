@@ -1,0 +1,15 @@
+# WebGoat container perf test image
+FROM httpd:2.4.46 AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends openssh-client jq unzip vim perl openssl && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=99166
+LABEL variant="253992"
+FROM alpine:3.10 AS stage1
+RUN apk add --no-cache wget gzip tzdata ca-certificates tar expat bash
+LABEL variant="449634"
+FROM python:3.7-slim
+RUN apt-get update && apt-get install -y --no-install-recommends libssl-dev curl zlib1g vim && rm -rf /var/lib/apt/lists/*
+RUN pip install pyyaml==5.1
+ENV APP_ID=20140
+LABEL variant="689807"
+EXPOSE 80
+CMD ["sh", "-c", "sleep infinity"]

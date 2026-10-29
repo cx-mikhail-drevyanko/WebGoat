@@ -1,0 +1,3 @@
+services:
+  svc0:
+    image: fedora:38
