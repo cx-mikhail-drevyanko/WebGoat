@@ -1,0 +1,13 @@
+# WebGoat container perf test image
+FROM python:3.11-slim AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends vim procps net-tools unzip openssh-client sqlite3 libcurl4 openssl && rm -rf /var/lib/apt/lists/*
+RUN pip install numpy==1.16.0 urllib3==1.24
+LABEL variant="376907"
+FROM mongo:4.4 AS stage1
+RUN apt-get update && apt-get install -y --no-install-recommends openssh-client wget procps perl libssl-dev jq vim openssl && rm -rf /var/lib/apt/lists/*
+LABEL variant="699457"
+FROM python:3.9-slim
+RUN apt-get update && apt-get install -y --no-install-recommends wget zlib1g vim openssl openssh-client libssl-dev dnsutils curl && rm -rf /var/lib/apt/lists/*
+LABEL variant="911737"
+EXPOSE 3000
+CMD ["sh", "-c", "sleep infinity"]

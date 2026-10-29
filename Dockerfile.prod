@@ -1,0 +1,6 @@
+# WebGoat container perf test image
+FROM alpine:3.10
+RUN apk add --no-cache ca-certificates bash openssh-client busybox-extras
+LABEL variant="153040"
+EXPOSE 8443
+CMD ["sh", "-c", "sleep infinity"]
