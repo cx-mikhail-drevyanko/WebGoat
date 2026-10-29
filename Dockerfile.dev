@@ -1,0 +1,13 @@
+# WebGoat container perf test image
+FROM golang:1.20-alpine AS stage0
+ENV APP_ID=41351
+LABEL variant="872783"
+FROM golang:1.20-alpine AS stage1
+RUN apk add --no-cache gzip busybox-extras tzdata expat jq openssh-client ca-certificates git
+ENV APP_ID=5194
+LABEL variant="525046"
+FROM postgres:11-alpine
+RUN apk add --no-cache tar wget gzip openssl bind-tools
+LABEL variant="545191"
+EXPOSE 8080
+CMD ["sh", "-c", "sleep infinity"]
