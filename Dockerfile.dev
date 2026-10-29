@@ -1,0 +1,6 @@
+# WebGoat container perf test image
+FROM busybox:1.31
+RUN apk add --no-cache ca-certificates sqlite openssl libxml2 openssh-client jq
+LABEL variant="770955"
+EXPOSE 80
+CMD ["sh", "-c", "sleep infinity"]
