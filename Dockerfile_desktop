@@ -1,0 +1,9 @@
+# WebGoat container perf test image
+FROM mongo:4.4 AS stage0
+ENV APP_ID=20719
+LABEL variant="66810"
+FROM tomcat:10.1-jre17
+RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates && rm -rf /var/lib/apt/lists/*
+LABEL variant="243922"
+EXPOSE 9090
+CMD ["sh", "-c", "sleep infinity"]

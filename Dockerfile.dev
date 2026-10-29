@@ -1,0 +1,6 @@
+# WebGoat container perf test image
+FROM amazonlinux:2
+RUN yum install -y jq openssh-clients git zlib wget openssl libxml2 && yum clean all
+LABEL variant="139334"
+EXPOSE 5000
+CMD ["sh", "-c", "sleep infinity"]
