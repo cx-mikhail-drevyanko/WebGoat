@@ -1,0 +1,10 @@
+# WebGoat container perf test image
+FROM amazonlinux:2 AS stage0
+RUN yum install -y openssl && yum clean all
+ENV APP_ID=38925
+LABEL variant="895422"
+FROM httpd:2.4.46
+RUN apt-get update && apt-get install -y --no-install-recommends nano && rm -rf /var/lib/apt/lists/*
+LABEL variant="990837"
+EXPOSE 9090
+CMD ["sh", "-c", "sleep infinity"]

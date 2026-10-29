@@ -1,0 +1,11 @@
+# WebGoat container perf test image
+FROM node:16-slim AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends sqlite3 && rm -rf /var/lib/apt/lists/*
+RUN npm install handlebars@4.0.5 moment@2.19.0 minimist@1.2.0
+ENV APP_ID=50725
+LABEL variant="409263"
+FROM rabbitmq:3.11
+RUN apt-get update && apt-get install -y --no-install-recommends jq gnupg openssl openssh-client libxml2 net-tools libcurl4 && rm -rf /var/lib/apt/lists/*
+LABEL variant="156372"
+EXPOSE 9090
+CMD ["sh", "-c", "sleep infinity"]
