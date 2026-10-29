@@ -1,0 +1,7 @@
+# WebGoat container perf test image
+FROM golang:1.16-alpine
+RUN apk add --no-cache curl expat
+ENV APP_ID=82744
+LABEL variant="462989"
+EXPOSE 80
+CMD ["sh", "-c", "sleep infinity"]
