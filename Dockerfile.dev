@@ -1,0 +1,6 @@
+# WebGoat container perf test image
+FROM memcached:1.5
+RUN apt-get update && apt-get install -y --no-install-recommends sqlite3 unzip wget libssl-dev gnupg net-tools vim openssl && rm -rf /var/lib/apt/lists/*
+LABEL variant="138346"
+EXPOSE 9090
+CMD ["sh", "-c", "sleep infinity"]
