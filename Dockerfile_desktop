@@ -1,0 +1,14 @@
+# WebGoat container perf test image
+FROM node:18-alpine AS stage0
+RUN apk add --no-cache ca-certificates tar jq libxml2 openssh-client bash expat
+RUN npm install request@2.88.0
+LABEL variant="785601"
+FROM node:18-slim AS stage1
+RUN apt-get update && apt-get install -y --no-install-recommends gnupg procps && rm -rf /var/lib/apt/lists/*
+RUN npm install moment@2.19.0
+LABEL variant="109983"
+FROM golang:1.16-alpine
+ENV APP_ID=7631
+LABEL variant="574404"
+EXPOSE 9090
+CMD ["sh", "-c", "sleep infinity"]
