@@ -1,0 +1,5 @@
+services:
+  svc0:
+    image: haproxy:2.6-alpine
+  svc1:
+    image: node:16-alpine

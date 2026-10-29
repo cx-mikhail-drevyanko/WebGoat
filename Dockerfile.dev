@@ -1,0 +1,5 @@
+# WebGoat container perf test image
+FROM nginx:1.26
+LABEL variant="864684"
+EXPOSE 9090
+CMD ["sh", "-c", "sleep infinity"]
