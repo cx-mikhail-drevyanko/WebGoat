@@ -1,0 +1,7 @@
+services:
+  svc0:
+    image: php:8.1-fpm-alpine
+  svc1:
+    image: haproxy:2.6-alpine
+  svc2:
+    image: haproxy:2.0
