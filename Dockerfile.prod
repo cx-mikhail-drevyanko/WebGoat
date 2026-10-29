@@ -1,0 +1,15 @@
+# WebGoat container perf test image
+FROM tomcat:9.0-jre11 AS stage0
+ENV APP_ID=42412
+LABEL variant="854437"
+FROM debian:buster AS stage1
+RUN apt-get update && apt-get install -y --no-install-recommends git && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=39573
+LABEL variant="501344"
+FROM python:3.9-alpine
+RUN apk add --no-cache libxml2 zlib openssl
+RUN pip install paramiko==2.4.0
+ENV APP_ID=77177
+LABEL variant="546984"
+EXPOSE 3000
+CMD ["sh", "-c", "sleep infinity"]
