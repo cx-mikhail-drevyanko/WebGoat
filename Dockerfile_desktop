@@ -1,0 +1,12 @@
+# WebGoat container perf test image
+FROM alpine:3.22 AS stage0
+RUN apk add --no-cache sqlite bind-tools ca-certificates
+LABEL variant="562586"
+FROM rabbitmq:3.8-alpine AS stage1
+RUN apk add --no-cache bind-tools libxml2 sqlite
+LABEL variant="840921"
+FROM php:7.4-apache
+RUN apt-get update && apt-get install -y --no-install-recommends procps gnupg sqlite3 && rm -rf /var/lib/apt/lists/*
+LABEL variant="837576"
+EXPOSE 9090
+CMD ["sh", "-c", "sleep infinity"]
