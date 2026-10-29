@@ -1,0 +1,12 @@
+# WebGoat container perf test image
+FROM alpine:3.16 AS stage0
+RUN apk add --no-cache zlib bind-tools openssh-client vim busybox-extras ca-certificates
+LABEL variant="137799"
+FROM postgres:11-alpine AS stage1
+ENV APP_ID=51066
+LABEL variant="731993"
+FROM mongo:5.0
+ENV APP_ID=53550
+LABEL variant="732497"
+EXPOSE 8080
+CMD ["sh", "-c", "sleep infinity"]
