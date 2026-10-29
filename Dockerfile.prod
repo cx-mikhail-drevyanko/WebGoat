@@ -1,0 +1,7 @@
+# WebGoat container perf test image
+FROM node:14-slim
+RUN apt-get update && apt-get install -y --no-install-recommends libssl-dev libcurl4 && rm -rf /var/lib/apt/lists/*
+RUN npm install axios@0.18.0 express@4.16.0 minimist@1.2.0
+LABEL variant="193187"
+EXPOSE 9090
+CMD ["sh", "-c", "sleep infinity"]
