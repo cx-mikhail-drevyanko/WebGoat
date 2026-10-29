@@ -1,0 +1,15 @@
+# WebGoat container perf test image
+FROM ruby:3.1-slim AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends unzip gnupg wget openssh-client && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=1866
+LABEL variant="675308"
+FROM alpine:3.20 AS stage1
+RUN apk add --no-cache curl libxml2
+ENV APP_ID=16919
+LABEL variant="405763"
+FROM node:16-slim
+RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates gnupg && rm -rf /var/lib/apt/lists/*
+RUN npm install minimist@1.2.0
+LABEL variant="724770"
+EXPOSE 8443
+CMD ["sh", "-c", "sleep infinity"]
