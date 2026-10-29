@@ -1,0 +1,7 @@
+services:
+  svc0:
+    image: mariadb:10.3
+  svc1:
+    image: redis:7.0-alpine
+  svc2:
+    image: ruby:3.1-slim
