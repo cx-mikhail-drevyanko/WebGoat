@@ -1,0 +1,6 @@
+# WebGoat container perf test image
+FROM python:3.9-slim
+RUN pip install numpy==1.16.0 flask==1.0 django==2.2.0 cryptography==2.3
+LABEL variant="321872"
+EXPOSE 8080
+CMD ["sh", "-c", "sleep infinity"]
