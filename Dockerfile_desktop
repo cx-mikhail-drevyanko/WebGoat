@@ -1,0 +1,6 @@
+# WebGoat container perf test image
+FROM debian:11-slim
+RUN apt-get update && apt-get install -y --no-install-recommends openssl unzip wget libxml2 zlib1g perl && rm -rf /var/lib/apt/lists/*
+LABEL variant="625906"
+EXPOSE 8443
+CMD ["sh", "-c", "sleep infinity"]
