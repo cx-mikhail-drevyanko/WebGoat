@@ -1,0 +1,12 @@
+# WebGoat container perf test image
+FROM node:12-slim AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends perl curl procps gnupg && rm -rf /var/lib/apt/lists/*
+RUN npm install jquery@2.2.4 handlebars@4.0.5
+LABEL variant="940096"
+FROM fedora:38 AS stage1
+LABEL variant="109656"
+FROM alpine:3.10
+RUN apk add --no-cache libcurl git gzip openssl bind-tools curl bash jq
+LABEL variant="617368"
+EXPOSE 80
+CMD ["sh", "-c", "sleep infinity"]

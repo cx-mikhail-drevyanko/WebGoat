@@ -1,0 +1,5 @@
+services:
+  svc0:
+    image: alpine:3.22
+  svc1:
+    image: eclipse-temurin:17-jre-alpine

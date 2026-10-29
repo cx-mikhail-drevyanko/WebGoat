@@ -1,0 +1,10 @@
+# WebGoat container perf test image
+FROM golang:1.18 AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates dnsutils && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=56199
+LABEL variant="478415"
+FROM alpine:3.16
+RUN apk add --no-cache libxml2 bash openssh-client openssl expat sqlite ca-certificates
+LABEL variant="7317"
+EXPOSE 3000
+CMD ["sh", "-c", "sleep infinity"]
