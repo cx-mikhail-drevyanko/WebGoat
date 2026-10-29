@@ -1,0 +1,13 @@
+# WebGoat container perf test image
+FROM busybox:1.36 AS stage0
+RUN apk add --no-cache libcurl
+ENV APP_ID=4648
+LABEL variant="861554"
+FROM mongo:6.0 AS stage1
+RUN apt-get update && apt-get install -y --no-install-recommends vim zlib1g sqlite3 && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=88203
+LABEL variant="811268"
+FROM busybox:1.36
+LABEL variant="423216"
+EXPOSE 3000
+CMD ["sh", "-c", "sleep infinity"]

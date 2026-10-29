@@ -1,0 +1,7 @@
+services:
+  svc0:
+    image: redis:5.0
+  svc1:
+    image: busybox:1.31
+  svc2:
+    image: debian:buster
