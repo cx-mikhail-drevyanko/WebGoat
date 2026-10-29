@@ -1,0 +1,10 @@
+# WebGoat container perf test image
+FROM python:3.7-slim AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends dnsutils openssl jq wget unzip libcurl4 && rm -rf /var/lib/apt/lists/*
+RUN pip install requests==2.19.0 paramiko==2.4.0 urllib3==1.24
+LABEL variant="734749"
+FROM busybox:1.36
+RUN apk add --no-cache openssh-client tzdata libxml2 expat curl
+LABEL variant="915145"
+EXPOSE 9090
+CMD ["sh", "-c", "sleep infinity"]
