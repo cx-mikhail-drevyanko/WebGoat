@@ -1,0 +1,7 @@
+services:
+  svc0:
+    image: memcached:1.5
+  svc1:
+    image: eclipse-temurin:17-jre-alpine
+  svc2:
+    image: python:3.12-alpine
