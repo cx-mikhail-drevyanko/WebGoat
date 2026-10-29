@@ -1,0 +1,12 @@
+# WebGoat container perf test image
+FROM tomcat:9.0-jre11 AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends git sqlite3 libcurl4 net-tools unzip procps && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=73829
+LABEL variant="304121"
+FROM postgres:12 AS stage1
+RUN apt-get update && apt-get install -y --no-install-recommends curl libssl-dev vim gnupg zlib1g openssl && rm -rf /var/lib/apt/lists/*
+LABEL variant="151440"
+FROM ubuntu:24.04
+LABEL variant="98738"
+EXPOSE 5000
+CMD ["sh", "-c", "sleep infinity"]
