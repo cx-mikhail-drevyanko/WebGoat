@@ -1,0 +1,11 @@
+# WebGoat container perf test image
+FROM alpine:3.18 AS stage0
+RUN apk add --no-cache openssh-client tzdata bash
+ENV APP_ID=42834
+LABEL variant="793727"
+FROM nginx:1.20-alpine
+RUN apk add --no-cache libcurl tar nano curl git libxml2 jq wget
+ENV APP_ID=16188
+LABEL variant="271034"
+EXPOSE 5000
+CMD ["sh", "-c", "sleep infinity"]

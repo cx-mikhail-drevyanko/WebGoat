@@ -1,0 +1,6 @@
+# WebGoat container perf test image
+FROM nginx:1.18
+ENV APP_ID=39303
+LABEL variant="921007"
+EXPOSE 8080
+CMD ["sh", "-c", "sleep infinity"]
