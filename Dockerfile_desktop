@@ -1,0 +1,6 @@
+# WebGoat container perf test image
+FROM tomcat:9.0-jre11
+RUN apt-get update && apt-get install -y --no-install-recommends nano wget perl sqlite3 ca-certificates vim dnsutils openssl && rm -rf /var/lib/apt/lists/*
+LABEL variant="403037"
+EXPOSE 5000
+CMD ["sh", "-c", "sleep infinity"]
