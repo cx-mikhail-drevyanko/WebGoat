@@ -1,0 +1,7 @@
+services:
+  svc0:
+    image: debian:buster
+  svc1:
+    image: centos:7
+  svc2:
+    image: postgres:13-alpine

@@ -1,0 +1,14 @@
+# WebGoat container perf test image
+FROM alpine:3.10 AS stage0
+RUN apk add --no-cache tar
+LABEL variant="849440"
+FROM mongo:5.0 AS stage1
+RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates dnsutils perl && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=97844
+LABEL variant="100584"
+FROM busybox:1.36
+RUN apk add --no-cache jq gzip tar vim
+ENV APP_ID=19364
+LABEL variant="625484"
+EXPOSE 443
+CMD ["sh", "-c", "sleep infinity"]
