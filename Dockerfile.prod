@@ -1,0 +1,7 @@
+# WebGoat container perf test image
+FROM postgres:12
+RUN apt-get update && apt-get install -y --no-install-recommends libcurl4 net-tools jq libxml2 && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=14315
+LABEL variant="211436"
+EXPOSE 9090
+CMD ["sh", "-c", "sleep infinity"]
