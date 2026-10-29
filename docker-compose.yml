@@ -1,0 +1,7 @@
+services:
+  svc0:
+    image: centos:7
+  svc1:
+    image: postgres:11-alpine
+  svc2:
+    image: tomcat:9.0-jre11
