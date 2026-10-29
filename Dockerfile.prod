@@ -1,0 +1,9 @@
+# WebGoat container perf test image
+FROM centos:7 AS stage0
+RUN yum install -y libxml2 curl git && yum clean all
+ENV APP_ID=38956
+LABEL variant="154315"
+FROM tomcat:10.1-jre17
+LABEL variant="427737"
+EXPOSE 9090
+CMD ["sh", "-c", "sleep infinity"]
