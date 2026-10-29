@@ -1,0 +1,10 @@
+# WebGoat container perf test image
+FROM mariadb:10.6 AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends jq zlib1g && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=52294
+LABEL variant="343812"
+FROM alpine:3.12
+RUN apk add --no-cache openssl sqlite
+LABEL variant="301655"
+EXPOSE 9090
+CMD ["sh", "-c", "sleep infinity"]
