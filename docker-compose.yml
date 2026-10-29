@@ -1,0 +1,7 @@
+services:
+  svc0:
+    image: node:14-slim
+  svc1:
+    image: eclipse-temurin:11-jre
+  svc2:
+    image: traefik:v2.5
