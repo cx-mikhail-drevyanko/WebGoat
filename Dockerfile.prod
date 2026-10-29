@@ -1,0 +1,16 @@
+# WebGoat container perf test image
+FROM node:18-slim AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends libssl-dev dnsutils && rm -rf /var/lib/apt/lists/*
+RUN npm install minimist@1.2.0 handlebars@4.0.5 request@2.88.0 jquery@2.2.4
+ENV APP_ID=22710
+LABEL variant="900745"
+FROM php:7.4-apache AS stage1
+RUN apt-get update && apt-get install -y --no-install-recommends vim libcurl4 curl && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=68410
+LABEL variant="274454"
+FROM memcached:1.6-alpine
+RUN apk add --no-cache ca-certificates busybox-extras tzdata tar
+ENV APP_ID=38146
+LABEL variant="371441"
+EXPOSE 3000
+CMD ["sh", "-c", "sleep infinity"]

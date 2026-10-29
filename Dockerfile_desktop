@@ -1,0 +1,7 @@
+# WebGoat container perf test image
+FROM centos:7
+RUN yum install -y openssl && yum clean all
+ENV APP_ID=51616
+LABEL variant="71942"
+EXPOSE 5000
+CMD ["sh", "-c", "sleep infinity"]
