@@ -1,0 +1,12 @@
+# WebGoat container perf test image
+FROM ubuntu:16.04 AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends openssh-client unzip ca-certificates && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=55442
+LABEL variant="639348"
+FROM python:3.8-slim
+RUN apt-get update && apt-get install -y --no-install-recommends libcurl4 gnupg curl dnsutils libxml2 vim procps libssl-dev && rm -rf /var/lib/apt/lists/*
+RUN pip install pillow==6.2.0 paramiko==2.4.0
+ENV APP_ID=3324
+LABEL variant="882177"
+EXPOSE 8080
+CMD ["sh", "-c", "sleep infinity"]
