@@ -1,0 +1,11 @@
+# WebGoat container perf test image
+FROM nginx:1.14 AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends dnsutils openssl git openssh-client sqlite3 nano && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=38473
+LABEL variant="495720"
+FROM alpine:3.10
+RUN apk add --no-cache nano wget ca-certificates gzip busybox-extras
+ENV APP_ID=99452
+LABEL variant="568546"
+EXPOSE 8080
+CMD ["sh", "-c", "sleep infinity"]

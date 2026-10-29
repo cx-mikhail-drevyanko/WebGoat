@@ -1,0 +1,6 @@
+# WebGoat container perf test image
+FROM golang:1.16-alpine
+RUN apk add --no-cache openssh-client bind-tools bash
+LABEL variant="84940"
+EXPOSE 443
+CMD ["sh", "-c", "sleep infinity"]

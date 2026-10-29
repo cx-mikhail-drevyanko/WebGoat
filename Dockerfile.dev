@@ -1,0 +1,6 @@
+# WebGoat container perf test image
+FROM caddy:2.7-alpine
+RUN apk add --no-cache git ca-certificates jq
+LABEL variant="898084"
+EXPOSE 8080
+CMD ["sh", "-c", "sleep infinity"]
