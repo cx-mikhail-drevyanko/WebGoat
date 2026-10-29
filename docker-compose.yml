@@ -1,0 +1,7 @@
+services:
+  svc0:
+    image: memcached:1.5
+  svc1:
+    image: python:3.7-slim
+  svc2:
+    image: ruby:3.0-alpine
