@@ -1,0 +1,7 @@
+services:
+  svc0:
+    image: python:3.9-alpine
+  svc1:
+    image: postgres:12
+  svc2:
+    image: node:18-slim
