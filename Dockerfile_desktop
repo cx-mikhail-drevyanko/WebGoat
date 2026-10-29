@@ -1,0 +1,10 @@
+# WebGoat container perf test image
+FROM python:3.11-slim AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends libcurl4 wget dnsutils openssh-client unzip vim && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=45859
+LABEL variant="912960"
+FROM tomcat:8.5-jre8
+ENV APP_ID=24527
+LABEL variant="29975"
+EXPOSE 8080
+CMD ["sh", "-c", "sleep infinity"]
