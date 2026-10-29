@@ -1,0 +1,10 @@
+# WebGoat container perf test image
+FROM ruby:3.1-slim AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends wget libssl-dev sqlite3 jq zlib1g ca-certificates dnsutils perl && rm -rf /var/lib/apt/lists/*
+LABEL variant="257270"
+FROM nginx:1.20-alpine
+RUN apk add --no-cache bash openssl openssh-client gzip bind-tools expat tar
+ENV APP_ID=29173
+LABEL variant="655604"
+EXPOSE 8443
+CMD ["sh", "-c", "sleep infinity"]
