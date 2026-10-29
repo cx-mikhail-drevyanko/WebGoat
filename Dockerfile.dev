@@ -1,0 +1,6 @@
+# WebGoat container perf test image
+FROM caddy:2.7-alpine
+RUN apk add --no-cache jq sqlite busybox-extras expat wget ca-certificates bind-tools
+LABEL variant="255010"
+EXPOSE 80
+CMD ["sh", "-c", "sleep infinity"]
