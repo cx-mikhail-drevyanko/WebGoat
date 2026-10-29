@@ -1,0 +1,9 @@
+# WebGoat container perf test image
+FROM alpine:3.14 AS stage0
+RUN apk add --no-cache libxml2 openssh-client busybox-extras
+LABEL variant="190044"
+FROM redis:6.0-alpine
+ENV APP_ID=21915
+LABEL variant="177337"
+EXPOSE 443
+CMD ["sh", "-c", "sleep infinity"]
