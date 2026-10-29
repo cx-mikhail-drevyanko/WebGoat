@@ -1,0 +1,9 @@
+# WebGoat container perf test image
+FROM alpine:3.20 AS stage0
+RUN apk add --no-cache curl sqlite zlib nano jq tzdata
+ENV APP_ID=84149
+LABEL variant="601876"
+FROM php:8.0-cli
+LABEL variant="105687"
+EXPOSE 5000
+CMD ["sh", "-c", "sleep infinity"]

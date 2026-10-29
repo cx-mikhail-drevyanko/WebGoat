@@ -1,0 +1,7 @@
+# WebGoat container perf test image
+FROM ruby:3.0-alpine
+RUN apk add --no-cache libcurl
+ENV APP_ID=34497
+LABEL variant="18151"
+EXPOSE 443
+CMD ["sh", "-c", "sleep infinity"]

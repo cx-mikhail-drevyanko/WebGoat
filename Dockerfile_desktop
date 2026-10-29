@@ -1,0 +1,7 @@
+# WebGoat container perf test image
+FROM alpine:3.18
+RUN apk add --no-cache ca-certificates libxml2 bind-tools tzdata
+ENV APP_ID=70526
+LABEL variant="271757"
+EXPOSE 3000
+CMD ["sh", "-c", "sleep infinity"]
