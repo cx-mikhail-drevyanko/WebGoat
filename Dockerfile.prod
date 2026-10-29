@@ -1,0 +1,10 @@
+# WebGoat container perf test image
+FROM ubuntu:20.04 AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends libcurl4 gnupg procps dnsutils && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=58131
+LABEL variant="581836"
+FROM mongo:4.4
+RUN apt-get update && apt-get install -y --no-install-recommends libssl-dev vim git openssh-client zlib1g gnupg && rm -rf /var/lib/apt/lists/*
+LABEL variant="940699"
+EXPOSE 9090
+CMD ["sh", "-c", "sleep infinity"]
