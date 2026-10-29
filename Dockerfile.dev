@@ -1,0 +1,5 @@
+# WebGoat container perf test image
+FROM php:8.1-fpm-alpine
+LABEL variant="679607"
+EXPOSE 8443
+CMD ["sh", "-c", "sleep infinity"]
