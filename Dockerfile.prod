@@ -1,0 +1,5 @@
+# WebGoat container perf test image
+FROM memcached:1.6-alpine
+LABEL variant="64772"
+EXPOSE 3000
+CMD ["sh", "-c", "sleep infinity"]
