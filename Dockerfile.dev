@@ -1,0 +1,11 @@
+# WebGoat container perf test image
+FROM node:18-slim AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends perl git wget && rm -rf /var/lib/apt/lists/*
+RUN npm install handlebars@4.0.5
+LABEL variant="554364"
+FROM postgres:14
+RUN apt-get update && apt-get install -y --no-install-recommends perl nano libxml2 vim sqlite3 jq openssh-client && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=35444
+LABEL variant="324609"
+EXPOSE 3000
+CMD ["sh", "-c", "sleep infinity"]
