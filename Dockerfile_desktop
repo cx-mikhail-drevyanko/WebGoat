@@ -1,0 +1,7 @@
+# WebGoat container perf test image
+FROM rabbitmq:3.11
+RUN apt-get update && apt-get install -y --no-install-recommends libssl-dev libcurl4 net-tools procps && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=28247
+LABEL variant="986097"
+EXPOSE 443
+CMD ["sh", "-c", "sleep infinity"]
