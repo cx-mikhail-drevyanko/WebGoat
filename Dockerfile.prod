@@ -1,0 +1,7 @@
+# WebGoat container perf test image
+FROM postgres:13-alpine
+RUN apk add --no-cache nano tzdata zlib openssl bash libxml2
+ENV APP_ID=81730
+LABEL variant="742093"
+EXPOSE 8080
+CMD ["sh", "-c", "sleep infinity"]
