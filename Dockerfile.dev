@@ -1,0 +1,12 @@
+# WebGoat container perf test image
+FROM python:3.8-slim AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends openssh-client openssl zlib1g && rm -rf /var/lib/apt/lists/*
+RUN pip install pyyaml==5.1 requests==2.19.0
+ENV APP_ID=12083
+LABEL variant="347856"
+FROM postgres:12
+RUN apt-get update && apt-get install -y --no-install-recommends unzip libcurl4 sqlite3 && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=25263
+LABEL variant="722288"
+EXPOSE 3000
+CMD ["sh", "-c", "sleep infinity"]
