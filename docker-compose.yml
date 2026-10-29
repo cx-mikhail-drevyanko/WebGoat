@@ -1,0 +1,7 @@
+services:
+  svc0:
+    image: httpd:2.4.46
+  svc1:
+    image: ubuntu:24.04
+  svc2:
+    image: redis:5.0
