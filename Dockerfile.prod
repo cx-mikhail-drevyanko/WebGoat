@@ -1,0 +1,5 @@
+# WebGoat container perf test image
+FROM mongo:6.0
+LABEL variant="116042"
+EXPOSE 9090
+CMD ["sh", "-c", "sleep infinity"]
