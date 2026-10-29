@@ -1,0 +1,11 @@
+# WebGoat container perf test image
+FROM tomcat:10.1-jre17 AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends curl procps sqlite3 && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=67023
+LABEL variant="445427"
+FROM php:8.1-fpm-alpine
+RUN apk add --no-cache nano openssl sqlite
+ENV APP_ID=13454
+LABEL variant="874630"
+EXPOSE 9090
+CMD ["sh", "-c", "sleep infinity"]
