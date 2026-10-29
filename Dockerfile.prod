@@ -1,0 +1,10 @@
+# WebGoat container perf test image
+FROM traefik:v2.5 AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends sqlite3 && rm -rf /var/lib/apt/lists/*
+LABEL variant="221288"
+FROM postgres:11-alpine
+RUN apk add --no-cache sqlite
+ENV APP_ID=53191
+LABEL variant="510344"
+EXPOSE 80
+CMD ["sh", "-c", "sleep infinity"]
