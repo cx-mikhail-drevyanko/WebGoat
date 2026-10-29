@@ -1,0 +1,12 @@
+# WebGoat container perf test image
+FROM python:3.10-slim AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends unzip procps libxml2 && rm -rf /var/lib/apt/lists/*
+LABEL variant="334461"
+FROM golang:1.20-alpine AS stage1
+ENV APP_ID=81935
+LABEL variant="908468"
+FROM golang:1.18
+RUN apt-get update && apt-get install -y --no-install-recommends procps openssh-client dnsutils curl zlib1g nano && rm -rf /var/lib/apt/lists/*
+LABEL variant="575728"
+EXPOSE 9090
+CMD ["sh", "-c", "sleep infinity"]
