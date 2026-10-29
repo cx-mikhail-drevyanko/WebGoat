@@ -1,0 +1,6 @@
+# WebGoat container perf test image
+FROM alpine:3.10
+RUN apk add --no-cache zlib nano
+LABEL variant="403600"
+EXPOSE 80
+CMD ["sh", "-c", "sleep infinity"]
