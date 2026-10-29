@@ -1,0 +1,8 @@
+# WebGoat container perf test image
+FROM mysql:8.0 AS stage0
+LABEL variant="585814"
+FROM redis:6.2
+RUN apt-get update && apt-get install -y --no-install-recommends procps ca-certificates perl libssl-dev zlib1g && rm -rf /var/lib/apt/lists/*
+LABEL variant="926879"
+EXPOSE 8080
+CMD ["sh", "-c", "sleep infinity"]
