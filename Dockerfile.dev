@@ -1,0 +1,14 @@
+# WebGoat container perf test image
+FROM nginx:1.14 AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends wget && rm -rf /var/lib/apt/lists/*
+LABEL variant="959046"
+FROM node:20-alpine AS stage1
+RUN npm install handlebars@4.0.5
+ENV APP_ID=9538
+LABEL variant="933229"
+FROM redis:6.0-alpine
+RUN apk add --no-cache nano busybox-extras expat ca-certificates libcurl openssl zlib
+ENV APP_ID=82545
+LABEL variant="807812"
+EXPOSE 5000
+CMD ["sh", "-c", "sleep infinity"]
