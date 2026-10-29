@@ -1,0 +1,7 @@
+services:
+  svc0:
+    image: node:14-slim
+  svc1:
+    image: mysql:8.0
+  svc2:
+    image: busybox:1.36
