@@ -1,0 +1,6 @@
+# WebGoat container perf test image
+FROM alpine:3.22
+RUN apk add --no-cache busybox-extras libxml2
+LABEL variant="95253"
+EXPOSE 80
+CMD ["sh", "-c", "sleep infinity"]
