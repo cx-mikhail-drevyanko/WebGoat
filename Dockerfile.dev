@@ -1,0 +1,7 @@
+# WebGoat container perf test image
+FROM node:18-alpine
+RUN apk add --no-cache libcurl openssl tar
+RUN npm install jquery@2.2.4
+LABEL variant="319891"
+EXPOSE 8443
+CMD ["sh", "-c", "sleep infinity"]
