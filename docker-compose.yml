@@ -1,0 +1,5 @@
+services:
+  svc0:
+    image: caddy:2.7-alpine
+  svc1:
+    image: redis:7.0-alpine
