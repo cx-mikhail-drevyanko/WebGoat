@@ -1,0 +1,16 @@
+# WebGoat container perf test image
+FROM elasticsearch:7.17.9 AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends jq && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=53165
+LABEL variant="242110"
+FROM postgres:13-alpine AS stage1
+RUN apk add --no-cache tzdata nano bind-tools bash jq expat curl
+ENV APP_ID=75923
+LABEL variant="459051"
+FROM node:20-alpine
+RUN apk add --no-cache bash wget jq
+RUN npm install minimist@1.2.0
+ENV APP_ID=78011
+LABEL variant="493844"
+EXPOSE 3000
+CMD ["sh", "-c", "sleep infinity"]

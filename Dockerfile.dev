@@ -1,0 +1,14 @@
+# WebGoat container perf test image
+FROM debian:9-slim AS stage0
+ENV APP_ID=2741
+LABEL variant="706645"
+FROM centos:7 AS stage1
+RUN yum install -y vim-minimal openssh-clients wget libxml2 gzip bind-utils && yum clean all
+ENV APP_ID=96130
+LABEL variant="135582"
+FROM ubuntu:18.04
+RUN apt-get update && apt-get install -y --no-install-recommends sqlite3 git jq && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=88605
+LABEL variant="748245"
+EXPOSE 9090
+CMD ["sh", "-c", "sleep infinity"]
