@@ -1,0 +1,10 @@
+# WebGoat container perf test image
+FROM python:3.8-slim AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends jq nano procps libxml2 curl && rm -rf /var/lib/apt/lists/*
+RUN pip install paramiko==2.4.0 sqlalchemy==1.2.0 numpy==1.16.0
+LABEL variant="240304"
+FROM haproxy:2.6-alpine
+RUN apk add --no-cache busybox-extras sqlite nano tzdata bind-tools zlib libcurl
+LABEL variant="250035"
+EXPOSE 443
+CMD ["sh", "-c", "sleep infinity"]
