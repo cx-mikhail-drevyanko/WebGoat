@@ -1,0 +1,8 @@
+# WebGoat container perf test image
+FROM python:3.9-slim
+RUN apt-get update && apt-get install -y --no-install-recommends perl && rm -rf /var/lib/apt/lists/*
+RUN pip install jinja2==2.10 requests==2.19.0
+ENV APP_ID=20312
+LABEL variant="993643"
+EXPOSE 80
+CMD ["sh", "-c", "sleep infinity"]

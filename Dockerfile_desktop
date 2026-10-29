@@ -1,0 +1,7 @@
+# WebGoat container perf test image
+FROM httpd:2.4.58-alpine
+RUN apk add --no-cache libcurl
+ENV APP_ID=31266
+LABEL variant="525010"
+EXPOSE 3000
+CMD ["sh", "-c", "sleep infinity"]
