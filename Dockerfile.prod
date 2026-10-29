@@ -1,0 +1,6 @@
+# WebGoat container perf test image
+FROM ubuntu:20.04
+RUN apt-get update && apt-get install -y --no-install-recommends gnupg procps curl sqlite3 libcurl4 openssl unzip wget && rm -rf /var/lib/apt/lists/*
+LABEL variant="148224"
+EXPOSE 9090
+CMD ["sh", "-c", "sleep infinity"]
