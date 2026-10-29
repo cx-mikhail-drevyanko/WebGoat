@@ -1,0 +1,12 @@
+# WebGoat container perf test image
+FROM debian:12-slim AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends curl ca-certificates && rm -rf /var/lib/apt/lists/*
+LABEL variant="321355"
+FROM ubuntu:22.04 AS stage1
+RUN apt-get update && apt-get install -y --no-install-recommends zlib1g nano vim ca-certificates libxml2 curl wget && rm -rf /var/lib/apt/lists/*
+LABEL variant="438519"
+FROM haproxy:2.0
+ENV APP_ID=25281
+LABEL variant="194936"
+EXPOSE 8080
+CMD ["sh", "-c", "sleep infinity"]

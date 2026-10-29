@@ -1,0 +1,6 @@
+# WebGoat container perf test image
+FROM mongo:6.0
+RUN apt-get update && apt-get install -y --no-install-recommends zlib1g ca-certificates perl libcurl4 procps libssl-dev net-tools && rm -rf /var/lib/apt/lists/*
+LABEL variant="440112"
+EXPOSE 9090
+CMD ["sh", "-c", "sleep infinity"]
