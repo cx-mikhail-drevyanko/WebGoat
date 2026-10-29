@@ -1,0 +1,5 @@
+services:
+  svc0:
+    image: node:20-alpine
+  svc1:
+    image: mysql:8.0
