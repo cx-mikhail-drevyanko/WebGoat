@@ -1,0 +1,5 @@
+services:
+  svc0:
+    image: amazonlinux:2
+  svc1:
+    image: php:8.1-fpm-alpine
