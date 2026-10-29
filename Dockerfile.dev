@@ -1,0 +1,10 @@
+# WebGoat container perf test image
+FROM debian:buster AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends openssh-client sqlite3 dnsutils && rm -rf /var/lib/apt/lists/*
+LABEL variant="389326"
+FROM httpd:2.4.58-alpine
+RUN apk add --no-cache libcurl ca-certificates
+ENV APP_ID=24058
+LABEL variant="768133"
+EXPOSE 8080
+CMD ["sh", "-c", "sleep infinity"]
