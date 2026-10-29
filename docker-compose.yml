@@ -1,0 +1,7 @@
+services:
+  svc0:
+    image: ubuntu:24.04
+  svc1:
+    image: nginx:1.26
+  svc2:
+    image: eclipse-temurin:11-jre
