@@ -1,0 +1,14 @@
+# WebGoat container perf test image
+FROM redis:6.0-alpine AS stage0
+RUN apk add --no-cache expat
+ENV APP_ID=81768
+LABEL variant="50031"
+FROM python:3.7-slim AS stage1
+RUN apt-get update && apt-get install -y --no-install-recommends dnsutils libxml2 && rm -rf /var/lib/apt/lists/*
+LABEL variant="911790"
+FROM mariadb:10.3
+RUN apt-get update && apt-get install -y --no-install-recommends libssl-dev jq gnupg && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=49841
+LABEL variant="76378"
+EXPOSE 443
+CMD ["sh", "-c", "sleep infinity"]

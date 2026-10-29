@@ -1,0 +1,10 @@
+# WebGoat container perf test image
+FROM postgres:12 AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends openssl perl sqlite3 && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=87366
+LABEL variant="252750"
+FROM golang:1.16-alpine
+ENV APP_ID=76554
+LABEL variant="572283"
+EXPOSE 80
+CMD ["sh", "-c", "sleep infinity"]
