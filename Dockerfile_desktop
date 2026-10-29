@@ -1,0 +1,14 @@
+# WebGoat container perf test image
+FROM node:16-alpine AS stage0
+RUN apk add --no-cache libxml2 expat vim nano openssl
+ENV APP_ID=20710
+LABEL variant="624788"
+FROM node:18-alpine AS stage1
+RUN apk add --no-cache jq tar openssh-client git
+LABEL variant="733021"
+FROM tomcat:9.0-jre11
+RUN apt-get update && apt-get install -y --no-install-recommends wget jq && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=17763
+LABEL variant="975058"
+EXPOSE 8443
+CMD ["sh", "-c", "sleep infinity"]

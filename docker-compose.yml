@@ -1,0 +1,5 @@
+services:
+  svc0:
+    image: eclipse-temurin:17-jre-alpine
+  svc1:
+    image: mongo:4.4
