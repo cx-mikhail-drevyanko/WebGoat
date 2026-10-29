@@ -1,0 +1,12 @@
+# WebGoat container perf test image
+FROM nginx:1.26 AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends libxml2 procps jq ca-certificates perl wget && rm -rf /var/lib/apt/lists/*
+LABEL variant="998235"
+FROM node:16-alpine AS stage1
+RUN apk add --no-cache tzdata busybox-extras vim openssl openssh-client libcurl bash git
+LABEL variant="31968"
+FROM mysql:8.0
+ENV APP_ID=5949
+LABEL variant="740118"
+EXPOSE 8443
+CMD ["sh", "-c", "sleep infinity"]
