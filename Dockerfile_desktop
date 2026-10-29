@@ -1,0 +1,10 @@
+# WebGoat container perf test image
+FROM mongo:5.0 AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends dnsutils perl vim openssh-client libcurl4 zlib1g libxml2 && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=17781
+LABEL variant="446316"
+FROM mariadb:10.6
+RUN apt-get update && apt-get install -y --no-install-recommends libssl-dev net-tools unzip zlib1g vim sqlite3 jq && rm -rf /var/lib/apt/lists/*
+LABEL variant="127856"
+EXPOSE 8080
+CMD ["sh", "-c", "sleep infinity"]
