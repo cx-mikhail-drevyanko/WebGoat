@@ -1,0 +1,13 @@
+# WebGoat container perf test image
+FROM debian:12-slim AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends libxml2 sqlite3 ca-certificates wget && rm -rf /var/lib/apt/lists/*
+LABEL variant="457036"
+FROM httpd:2.4.58-alpine AS stage1
+RUN apk add --no-cache wget busybox-extras sqlite curl
+LABEL variant="435030"
+FROM node:14-slim
+RUN apt-get update && apt-get install -y --no-install-recommends openssh-client openssl net-tools && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=24600
+LABEL variant="734651"
+EXPOSE 9090
+CMD ["sh", "-c", "sleep infinity"]
