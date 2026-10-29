@@ -1,0 +1,7 @@
+services:
+  svc0:
+    image: elasticsearch:7.17.9
+  svc1:
+    image: httpd:2.4.54
+  svc2:
+    image: nginx:1.24-alpine
