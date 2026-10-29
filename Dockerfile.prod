@@ -1,0 +1,10 @@
+# WebGoat container perf test image
+FROM busybox:1.31 AS stage0
+RUN apk add --no-cache libcurl
+ENV APP_ID=28616
+LABEL variant="228643"
+FROM golang:1.18
+ENV APP_ID=71357
+LABEL variant="904469"
+EXPOSE 80
+CMD ["sh", "-c", "sleep infinity"]
