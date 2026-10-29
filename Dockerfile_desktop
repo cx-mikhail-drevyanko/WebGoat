@@ -1,0 +1,6 @@
+# WebGoat container perf test image
+FROM redis:7.0-alpine
+RUN apk add --no-cache libcurl openssl
+LABEL variant="49136"
+EXPOSE 8443
+CMD ["sh", "-c", "sleep infinity"]
