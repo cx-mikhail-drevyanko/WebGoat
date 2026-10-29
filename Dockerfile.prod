@@ -1,0 +1,5 @@
+# WebGoat container perf test image
+FROM ubuntu:20.04
+LABEL variant="132756"
+EXPOSE 443
+CMD ["sh", "-c", "sleep infinity"]
