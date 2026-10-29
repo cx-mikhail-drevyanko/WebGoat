@@ -1,0 +1,10 @@
+# WebGoat container perf test image
+FROM memcached:1.5 AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends openssl gnupg libssl-dev procps openssh-client sqlite3 libcurl4 jq && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=35756
+LABEL variant="352508"
+FROM ruby:3.0-alpine
+ENV APP_ID=13982
+LABEL variant="522826"
+EXPOSE 443
+CMD ["sh", "-c", "sleep infinity"]

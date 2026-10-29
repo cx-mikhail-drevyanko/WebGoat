@@ -1,0 +1,7 @@
+# WebGoat container perf test image
+FROM httpd:2.4.54
+RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates zlib1g nano wget jq unzip procps && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=64919
+LABEL variant="504180"
+EXPOSE 80
+CMD ["sh", "-c", "sleep infinity"]

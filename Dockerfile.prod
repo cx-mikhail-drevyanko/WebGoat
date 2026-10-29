@@ -1,0 +1,10 @@
+# WebGoat container perf test image
+FROM haproxy:2.0 AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends openssl wget && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=55656
+LABEL variant="55787"
+FROM redis:6.2
+RUN apt-get update && apt-get install -y --no-install-recommends unzip jq git nano dnsutils net-tools wget && rm -rf /var/lib/apt/lists/*
+LABEL variant="495884"
+EXPOSE 8443
+CMD ["sh", "-c", "sleep infinity"]
