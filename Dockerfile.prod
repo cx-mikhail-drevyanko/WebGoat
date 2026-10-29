@@ -1,0 +1,12 @@
+# WebGoat container perf test image
+FROM python:3.9-slim AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends git && rm -rf /var/lib/apt/lists/*
+LABEL variant="861068"
+FROM ubuntu:24.04 AS stage1
+LABEL variant="6741"
+FROM redis:6.0-alpine
+RUN apk add --no-cache zlib
+ENV APP_ID=54986
+LABEL variant="599822"
+EXPOSE 80
+CMD ["sh", "-c", "sleep infinity"]
