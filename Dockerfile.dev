@@ -1,0 +1,5 @@
+# WebGoat container perf test image
+FROM php:8.0-cli
+LABEL variant="492478"
+EXPOSE 3000
+CMD ["sh", "-c", "sleep infinity"]
