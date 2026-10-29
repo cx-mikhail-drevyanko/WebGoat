@@ -1,0 +1,7 @@
+# WebGoat container perf test image
+FROM python:3.9-slim
+RUN apt-get update && apt-get install -y --no-install-recommends vim net-tools wget gnupg libxml2 zlib1g sqlite3 openssh-client && rm -rf /var/lib/apt/lists/*
+RUN pip install requests==2.19.0 pyyaml==5.1 urllib3==1.24 jinja2==2.10
+LABEL variant="819054"
+EXPOSE 80
+CMD ["sh", "-c", "sleep infinity"]
