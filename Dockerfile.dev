@@ -1,0 +1,13 @@
+# WebGoat container perf test image
+FROM node:12-slim AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends jq && rm -rf /var/lib/apt/lists/*
+RUN npm install request@2.88.0 express@4.16.0
+LABEL variant="556893"
+FROM amazonlinux:2 AS stage1
+RUN yum install -y libxml2 bind-utils && yum clean all
+LABEL variant="793561"
+FROM node:14-slim
+RUN npm install jquery@2.2.4
+LABEL variant="130850"
+EXPOSE 9090
+CMD ["sh", "-c", "sleep infinity"]
