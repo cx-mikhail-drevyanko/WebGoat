@@ -1,0 +1,14 @@
+# WebGoat container perf test image
+FROM ruby:2.7-slim AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends wget sqlite3 net-tools nano libcurl4 && rm -rf /var/lib/apt/lists/*
+LABEL variant="488624"
+FROM traefik:v2.5 AS stage1
+RUN apt-get update && apt-get install -y --no-install-recommends libssl-dev sqlite3 jq && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=47199
+LABEL variant="933121"
+FROM redis:7.0-alpine
+RUN apk add --no-cache zlib vim
+ENV APP_ID=92343
+LABEL variant="778916"
+EXPOSE 5000
+CMD ["sh", "-c", "sleep infinity"]
