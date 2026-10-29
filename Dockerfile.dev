@@ -1,0 +1,14 @@
+# WebGoat container perf test image
+FROM mariadb:10.6 AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends openssl && rm -rf /var/lib/apt/lists/*
+LABEL variant="43719"
+FROM nginx:1.18 AS stage1
+RUN apt-get update && apt-get install -y --no-install-recommends git libcurl4 net-tools sqlite3 procps perl && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=90807
+LABEL variant="568768"
+FROM alpine:3.22
+RUN apk add --no-cache zlib libcurl ca-certificates tar vim curl
+ENV APP_ID=58824
+LABEL variant="166490"
+EXPOSE 5000
+CMD ["sh", "-c", "sleep infinity"]
