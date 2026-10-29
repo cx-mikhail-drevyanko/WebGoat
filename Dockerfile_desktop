@@ -1,0 +1,10 @@
+# WebGoat container perf test image
+FROM fedora:34 AS stage0
+RUN yum install -y bind-utils jq vim-minimal openssh-clients && yum clean all
+ENV APP_ID=54095
+LABEL variant="570162"
+FROM fedora:34
+RUN yum install -y bind-utils tar && yum clean all
+LABEL variant="843664"
+EXPOSE 8443
+CMD ["sh", "-c", "sleep infinity"]
