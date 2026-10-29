@@ -1,0 +1,9 @@
+# WebGoat container perf test image
+FROM nginx:1.14 AS stage0
+LABEL variant="469407"
+FROM alpine:3.20
+RUN apk add --no-cache openssh-client busybox-extras
+ENV APP_ID=90044
+LABEL variant="850805"
+EXPOSE 8443
+CMD ["sh", "-c", "sleep infinity"]
