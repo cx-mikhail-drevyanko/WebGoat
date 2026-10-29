@@ -1,0 +1,7 @@
+services:
+  svc0:
+    image: python:3.8-slim
+  svc1:
+    image: redis:6.0-alpine
+  svc2:
+    image: golang:1.18
