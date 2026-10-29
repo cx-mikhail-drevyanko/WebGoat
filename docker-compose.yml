@@ -1,0 +1,7 @@
+services:
+  svc0:
+    image: eclipse-temurin:17-jre-alpine
+  svc1:
+    image: python:3.10-slim
+  svc2:
+    image: python:3.9-alpine

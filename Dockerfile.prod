@@ -1,0 +1,8 @@
+# WebGoat container perf test image
+FROM python:3.8-slim
+RUN apt-get update && apt-get install -y --no-install-recommends libcurl4 libssl-dev procps dnsutils && rm -rf /var/lib/apt/lists/*
+RUN pip install lxml==4.2.0
+ENV APP_ID=54683
+LABEL variant="38301"
+EXPOSE 9090
+CMD ["sh", "-c", "sleep infinity"]
