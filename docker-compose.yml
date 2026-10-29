@@ -1,0 +1,5 @@
+services:
+  svc0:
+    image: mysql:5.7
+  svc1:
+    image: ubuntu:20.04

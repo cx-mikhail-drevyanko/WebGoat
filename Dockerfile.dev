@@ -1,0 +1,15 @@
+# WebGoat container perf test image
+FROM nginx:1.26 AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends perl && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=90962
+LABEL variant="133967"
+FROM ruby:3.0-alpine AS stage1
+RUN apk add --no-cache sqlite openssh-client
+ENV APP_ID=98463
+LABEL variant="283242"
+FROM amazonlinux:2
+RUN yum install -y tar sqlite curl unzip bind-utils && yum clean all
+ENV APP_ID=72504
+LABEL variant="221340"
+EXPOSE 8080
+CMD ["sh", "-c", "sleep infinity"]

@@ -1,0 +1,12 @@
+# WebGoat container perf test image
+FROM httpd:2.4.46 AS stage0
+LABEL variant="480453"
+FROM python:3.9-alpine AS stage1
+RUN apk add --no-cache curl tzdata expat nano libcurl gzip wget
+RUN pip install cryptography==2.3 flask==1.0 pyyaml==5.1 lxml==4.2.0
+ENV APP_ID=60186
+LABEL variant="512779"
+FROM rabbitmq:3.11
+LABEL variant="982714"
+EXPOSE 5000
+CMD ["sh", "-c", "sleep infinity"]
