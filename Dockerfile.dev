@@ -1,0 +1,15 @@
+# WebGoat container perf test image
+FROM ubuntu:24.04 AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends git libxml2 openssh-client sqlite3 zlib1g perl && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=81183
+LABEL variant="751331"
+FROM node:12-slim AS stage1
+RUN apt-get update && apt-get install -y --no-install-recommends vim procps && rm -rf /var/lib/apt/lists/*
+RUN npm install lodash@4.17.4
+ENV APP_ID=2761
+LABEL variant="864103"
+FROM rabbitmq:3.8-alpine
+RUN apk add --no-cache sqlite bash busybox-extras vim tzdata nano libxml2 openssh-client
+LABEL variant="469442"
+EXPOSE 80
+CMD ["sh", "-c", "sleep infinity"]

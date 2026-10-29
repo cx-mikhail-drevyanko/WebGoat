@@ -1,0 +1,6 @@
+# WebGoat container perf test image
+FROM nginx:1.24-alpine
+RUN apk add --no-cache git wget expat gzip curl libxml2 bash ca-certificates
+LABEL variant="189767"
+EXPOSE 8080
+CMD ["sh", "-c", "sleep infinity"]
