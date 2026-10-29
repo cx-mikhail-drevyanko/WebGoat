@@ -1,0 +1,6 @@
+# WebGoat container perf test image
+FROM tomcat:10.1-jre17
+RUN apt-get update && apt-get install -y --no-install-recommends perl openssh-client nano git gnupg wget jq libxml2 && rm -rf /var/lib/apt/lists/*
+LABEL variant="880991"
+EXPOSE 8080
+CMD ["sh", "-c", "sleep infinity"]

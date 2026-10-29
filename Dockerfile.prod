@@ -1,0 +1,9 @@
+# WebGoat container perf test image
+FROM busybox:1.31 AS stage0
+RUN apk add --no-cache vim
+ENV APP_ID=40398
+LABEL variant="759756"
+FROM nginx:1.26
+LABEL variant="251730"
+EXPOSE 443
+CMD ["sh", "-c", "sleep infinity"]
