@@ -1,0 +1,9 @@
+# WebGoat container perf test image
+FROM alpine:3.18 AS stage0
+RUN apk add --no-cache ca-certificates busybox-extras tar wget
+LABEL variant="886141"
+FROM ubuntu:22.04
+RUN apt-get update && apt-get install -y --no-install-recommends perl wget libxml2 zlib1g libssl-dev openssh-client && rm -rf /var/lib/apt/lists/*
+LABEL variant="122331"
+EXPOSE 8080
+CMD ["sh", "-c", "sleep infinity"]
