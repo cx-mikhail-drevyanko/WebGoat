@@ -1,0 +1,6 @@
+# WebGoat container perf test image
+FROM traefik:v2.10
+ENV APP_ID=4098
+LABEL variant="685746"
+EXPOSE 9090
+CMD ["sh", "-c", "sleep infinity"]
