@@ -1,0 +1,7 @@
+services:
+  svc0:
+    image: mariadb:10.6
+  svc1:
+    image: mariadb:10.3
+  svc2:
+    image: elasticsearch:7.17.9
