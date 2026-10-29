@@ -1,0 +1,6 @@
+# WebGoat container perf test image
+FROM mysql:8.0
+RUN apt-get update && apt-get install -y --no-install-recommends curl openssh-client && rm -rf /var/lib/apt/lists/*
+LABEL variant="148588"
+EXPOSE 8080
+CMD ["sh", "-c", "sleep infinity"]

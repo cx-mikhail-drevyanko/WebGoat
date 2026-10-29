@@ -1,0 +1,8 @@
+# WebGoat container perf test image
+FROM node:18-alpine
+RUN apk add --no-cache tar sqlite git curl
+RUN npm install express@4.16.0 moment@2.19.0 axios@0.18.0 request@2.88.0
+ENV APP_ID=82585
+LABEL variant="259306"
+EXPOSE 80
+CMD ["sh", "-c", "sleep infinity"]
