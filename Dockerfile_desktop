@@ -1,0 +1,7 @@
+# WebGoat container perf test image
+FROM golang:1.16-alpine
+RUN apk add --no-cache bind-tools tzdata ca-certificates gzip
+ENV APP_ID=40448
+LABEL variant="532332"
+EXPOSE 8080
+CMD ["sh", "-c", "sleep infinity"]
