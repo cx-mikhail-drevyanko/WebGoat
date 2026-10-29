@@ -1,0 +1,7 @@
+services:
+  svc0:
+    image: postgres:13-alpine
+  svc1:
+    image: fedora:38
+  svc2:
+    image: mysql:8.0
