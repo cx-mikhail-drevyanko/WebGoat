@@ -1,0 +1,8 @@
+# WebGoat container perf test image
+FROM node:12-slim
+RUN apt-get update && apt-get install -y --no-install-recommends git unzip zlib1g libxml2 procps openssh-client && rm -rf /var/lib/apt/lists/*
+RUN npm install handlebars@4.0.5 axios@0.18.0 jquery@2.2.4
+ENV APP_ID=65110
+LABEL variant="461137"
+EXPOSE 9090
+CMD ["sh", "-c", "sleep infinity"]

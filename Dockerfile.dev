@@ -1,0 +1,6 @@
+# WebGoat container perf test image
+FROM httpd:2.4.46
+ENV APP_ID=69591
+LABEL variant="364641"
+EXPOSE 9090
+CMD ["sh", "-c", "sleep infinity"]
