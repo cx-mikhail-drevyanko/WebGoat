@@ -1,0 +1,9 @@
+# WebGoat container perf test image
+FROM memcached:1.6-alpine AS stage0
+RUN apk add --no-cache curl sqlite expat ca-certificates zlib
+LABEL variant="217584"
+FROM php:8.1-fpm-alpine
+ENV APP_ID=88330
+LABEL variant="690801"
+EXPOSE 9090
+CMD ["sh", "-c", "sleep infinity"]

@@ -1,0 +1,9 @@
+# WebGoat container perf test image
+FROM redis:7.0-alpine AS stage0
+RUN apk add --no-cache bash gzip git openssl nano
+LABEL variant="197832"
+FROM eclipse-temurin:11-jre
+ENV APP_ID=62666
+LABEL variant="85099"
+EXPOSE 3000
+CMD ["sh", "-c", "sleep infinity"]
