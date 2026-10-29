@@ -1,0 +1,5 @@
+# WebGoat container perf test image
+FROM mariadb:10.6
+LABEL variant="596914"
+EXPOSE 9090
+CMD ["sh", "-c", "sleep infinity"]
