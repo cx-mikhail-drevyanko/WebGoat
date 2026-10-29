@@ -1,0 +1,14 @@
+# WebGoat container perf test image
+FROM traefik:v2.5 AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends libcurl4 unzip nano openssl curl net-tools dnsutils git && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=18345
+LABEL variant="371948"
+FROM alpine:3.12 AS stage1
+RUN apk add --no-cache zlib openssl
+LABEL variant="110032"
+FROM eclipse-temurin:11-jre
+RUN apt-get update && apt-get install -y --no-install-recommends gnupg git && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=95942
+LABEL variant="311501"
+EXPOSE 9090
+CMD ["sh", "-c", "sleep infinity"]

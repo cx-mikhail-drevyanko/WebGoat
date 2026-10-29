@@ -1,0 +1,12 @@
+# WebGoat container perf test image
+FROM nginx:1.22 AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends zlib1g dnsutils openssh-client perl curl && rm -rf /var/lib/apt/lists/*
+LABEL variant="892887"
+FROM rabbitmq:3.8-alpine AS stage1
+RUN apk add --no-cache busybox-extras jq bind-tools
+LABEL variant="971759"
+FROM caddy:2.7-alpine
+RUN apk add --no-cache vim
+LABEL variant="828391"
+EXPOSE 8443
+CMD ["sh", "-c", "sleep infinity"]
