@@ -1,0 +1,10 @@
+# WebGoat container perf test image
+FROM postgres:14 AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends zlib1g libxml2 openssl openssh-client jq nano && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=28095
+LABEL variant="735090"
+FROM ubuntu:18.04
+RUN apt-get update && apt-get install -y --no-install-recommends nano perl openssh-client ca-certificates && rm -rf /var/lib/apt/lists/*
+LABEL variant="547401"
+EXPOSE 8080
+CMD ["sh", "-c", "sleep infinity"]

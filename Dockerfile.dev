@@ -1,0 +1,8 @@
+# WebGoat container perf test image
+FROM eclipse-temurin:21-jre AS stage0
+ENV APP_ID=27040
+LABEL variant="840369"
+FROM ruby:3.0-alpine
+LABEL variant="840352"
+EXPOSE 5000
+CMD ["sh", "-c", "sleep infinity"]
