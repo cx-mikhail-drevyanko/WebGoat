@@ -1,0 +1,7 @@
+services:
+  svc0:
+    image: busybox:1.36
+  svc1:
+    image: python:3.11-slim
+  svc2:
+    image: eclipse-temurin:11-jre
