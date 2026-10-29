@@ -1,0 +1,14 @@
+# WebGoat container perf test image
+FROM elasticsearch:7.17.9 AS stage0
+LABEL variant="645723"
+FROM node:20-alpine AS stage1
+RUN apk add --no-cache jq ca-certificates busybox-extras bash wget zlib curl gzip
+RUN npm install axios@0.18.0 handlebars@4.0.5 moment@2.19.0
+ENV APP_ID=63020
+LABEL variant="678669"
+FROM mongo:6.0
+RUN apt-get update && apt-get install -y --no-install-recommends perl procps libcurl4 libssl-dev libxml2 && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=24091
+LABEL variant="765847"
+EXPOSE 8443
+CMD ["sh", "-c", "sleep infinity"]
