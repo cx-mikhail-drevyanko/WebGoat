@@ -1,0 +1,14 @@
+# WebGoat container perf test image
+FROM alpine:3.14 AS stage0
+RUN apk add --no-cache git
+ENV APP_ID=75140
+LABEL variant="703750"
+FROM httpd:2.4.46 AS stage1
+RUN apt-get update && apt-get install -y --no-install-recommends nano jq wget procps libxml2 unzip gnupg && rm -rf /var/lib/apt/lists/*
+LABEL variant="483056"
+FROM ubuntu:18.04
+RUN apt-get update && apt-get install -y --no-install-recommends jq gnupg && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=77148
+LABEL variant="367613"
+EXPOSE 80
+CMD ["sh", "-c", "sleep infinity"]

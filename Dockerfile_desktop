@@ -1,0 +1,5 @@
+# WebGoat container perf test image
+FROM amazonlinux:2
+LABEL variant="520264"
+EXPOSE 5000
+CMD ["sh", "-c", "sleep infinity"]
