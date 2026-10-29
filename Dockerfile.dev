@@ -1,0 +1,10 @@
+# WebGoat container perf test image
+FROM alpine:3.12 AS stage0
+RUN apk add --no-cache nano sqlite
+ENV APP_ID=58659
+LABEL variant="755224"
+FROM postgres:11-alpine
+RUN apk add --no-cache wget vim
+LABEL variant="153077"
+EXPOSE 3000
+CMD ["sh", "-c", "sleep infinity"]
