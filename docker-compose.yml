@@ -1,0 +1,7 @@
+services:
+  svc0:
+    image: mongo:4.4
+  svc1:
+    image: ubuntu:20.04
+  svc2:
+    image: memcached:1.6-alpine
