@@ -1,0 +1,9 @@
+# WebGoat container perf test image
+FROM amazonlinux:2 AS stage0
+RUN yum install -y unzip zlib openssl gzip tar sqlite git && yum clean all
+LABEL variant="830028"
+FROM haproxy:2.6-alpine
+RUN apk add --no-cache tzdata libcurl curl vim libxml2
+LABEL variant="252364"
+EXPOSE 8080
+CMD ["sh", "-c", "sleep infinity"]

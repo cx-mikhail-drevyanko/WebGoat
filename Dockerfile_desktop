@@ -1,0 +1,6 @@
+# WebGoat container perf test image
+FROM haproxy:2.0
+RUN apt-get update && apt-get install -y --no-install-recommends wget ca-certificates perl && rm -rf /var/lib/apt/lists/*
+LABEL variant="246051"
+EXPOSE 5000
+CMD ["sh", "-c", "sleep infinity"]
