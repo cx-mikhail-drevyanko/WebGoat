@@ -1,0 +1,7 @@
+services:
+  svc0:
+    image: alpine:3.10
+  svc1:
+    image: php:8.1-fpm-alpine
+  svc2:
+    image: postgres:11-alpine
