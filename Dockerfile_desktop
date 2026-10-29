@@ -1,0 +1,13 @@
+# WebGoat container perf test image
+FROM mariadb:10.3 AS stage0
+RUN apt-get update && apt-get install -y --no-install-recommends openssh-client dnsutils nano git sqlite3 unzip ca-certificates && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=29372
+LABEL variant="742499"
+FROM node:18-slim AS stage1
+ENV APP_ID=98745
+LABEL variant="426260"
+FROM ubuntu:20.04
+RUN apt-get update && apt-get install -y --no-install-recommends openssl zlib1g jq procps && rm -rf /var/lib/apt/lists/*
+LABEL variant="628830"
+EXPOSE 5000
+CMD ["sh", "-c", "sleep infinity"]
