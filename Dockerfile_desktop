@@ -1,0 +1,7 @@
+# WebGoat container perf test image
+FROM node:18-alpine
+RUN apk add --no-cache ca-certificates vim libxml2 tar tzdata gzip
+RUN npm install handlebars@4.0.5 express@4.16.0
+LABEL variant="186466"
+EXPOSE 8080
+CMD ["sh", "-c", "sleep infinity"]

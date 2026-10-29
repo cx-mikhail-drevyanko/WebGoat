@@ -1,0 +1,7 @@
+# WebGoat container perf test image
+FROM debian:12-slim
+RUN apt-get update && apt-get install -y --no-install-recommends jq nano unzip libssl-dev gnupg && rm -rf /var/lib/apt/lists/*
+ENV APP_ID=35388
+LABEL variant="378844"
+EXPOSE 80
+CMD ["sh", "-c", "sleep infinity"]
